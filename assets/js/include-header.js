@@ -109,6 +109,7 @@
                     <a href="' + R + 'technical/prescription-01.html" class="text-base max-xl:text-sm font-semibold text-gray-400 whitespace-nowrap hover:text-[#0C5625]" data-page="prescription-01.html" data-i18n="nav.prescription01">수도작 핵심처방</a>\
                     <a href="' + R + 'technical/prescription-02.html" class="text-base max-xl:text-sm font-semibold text-gray-400 whitespace-nowrap hover:text-[#0C5625]" data-page="prescription-02.html" data-i18n="nav.prescription02">밭작물 맞춤 처방</a>\
                     <a href="' + R + 'technical/prescription-03.html" class="text-base max-xl:text-sm font-semibold text-gray-400 whitespace-nowrap hover:text-[#0C5625]" data-page="prescription-03.html" data-i18n="nav.prescription03">과수·시설재배 전용</a>\
+                    <a href="' + R + 'technical/government.html" class="text-base max-xl:text-sm font-semibold text-gray-400 whitespace-nowrap hover:text-[#0C5625]" data-page="government.html" data-i18n="nav.government">정부지원</a>\
             </div>\
         </div>\
         <div class="group flex items-center" data-menu="export">\
@@ -224,7 +225,8 @@
                 { href: R + 'technical/guide.html', page: 'guide.html', i18n: 'nav.guide', label: '사용 가이드' },
                 { href: R + 'technical/prescription-01.html', page: 'prescription-01.html', i18n: 'nav.prescription01', label: '수도작 핵심처방' },
                 { href: R + 'technical/prescription-02.html', page: 'prescription-02.html', i18n: 'nav.prescription02', label: '밭작물 맞춤 처방' },
-                { href: R + 'technical/prescription-03.html', page: 'prescription-03.html', i18n: 'nav.prescription03', label: '과수·시설재배 전용' }
+                { href: R + 'technical/prescription-03.html', page: 'prescription-03.html', i18n: 'nav.prescription03', label: '과수·시설재배 전용' },
+                { href: R + 'technical/government.html', page: 'government.html', i18n: 'nav.government', label: '정부지원' }
             ]
         },
         business: {
@@ -458,12 +460,18 @@
         'technical/prescription-01.html',
         'technical/prescription-02.html',
         'technical/prescription-03.html',
+        'technical/government.html',
         'export/global-exprot.html',
         'contactus/contact-us.html'
     ];
 
+    function withHtml(p) {
+        var last = p.split('/').pop();
+        return (last && last.indexOf('.') === -1) ? p + '.html' : p;
+    }
+
     function currentPageKey() {
-        var p = decodeURIComponent((window.location.pathname || '').replace(/\\/g, '/')).toLowerCase();
+        var p = withHtml(decodeURIComponent((window.location.pathname || '').replace(/\\/g, '/')).toLowerCase());
         var i;
         for (i = 0; i < PAGE_ORDER.length; i++) {
             if (p.indexOf('/' + PAGE_ORDER[i].toLowerCase()) !== -1 || p.endsWith(PAGE_ORDER[i].toLowerCase())) {
@@ -624,6 +632,7 @@
     /* ── Active desktop menu detection ─────────────────────────────────── */
     var path = decodeURIComponent(window.location.pathname || '').replace(/\\/g, '/').toLowerCase();
     var currentPage = (path.split('/').pop() || '');
+    if (currentPage && currentPage.indexOf('.') === -1) currentPage += '.html';
     var inPlant = currentPage === 'certification.html' || currentPage === 'facility.html';
     var inCompany = /\/company\//.test(path) && !inPlant;
     var inProducts = /\/products\//.test(path);

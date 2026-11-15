@@ -1867,6 +1867,7 @@
             ensureMaterialSymbols();
         }
         bodyEl.innerHTML = bodyHtml;
+        if (data.wide) decorateProductModal(id);
         bodyEl.classList.toggle('catalog-modal__body--product', !!data.wide);
         bodyEl.classList.toggle('pb-6', !data.wide);
         bodyEl.classList.toggle('pb-0', !!data.wide);
@@ -1890,6 +1891,72 @@
         lockScroll();
 
         if (closeBtn) closeBtn.focus();
+    }
+
+    /* Product popups: share bar on top, "not a pesticide" note at the bottom */
+    function shareUrlFor(id) {
+        return window.location.origin + window.location.pathname + '#' + encodeURIComponent(id);
+    }
+
+    function copyText(text, onDone, onFail) {
+        try {
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(text).then(onDone, onFail);
+                return;
+            }
+        } catch (e) { /* fall through */ }
+        onFail();
+    }
+
+    function decorateProductModal(id) {
+        if (!bodyEl) return;
+        var bar = document.createElement('div');
+        bar.className = 'catalog-share-bar';
+        var url = shareUrlFor(id);
+        var msg = document.createElement('span');
+        msg.className = 'catalog-share-bar__msg';
+        msg.setAttribute('aria-live', 'polite');
+
+        var copyBtn = document.createElement('button');
+        copyBtn.type = 'button';
+        copyBtn.textContent = tUi('shareCopy');
+        copyBtn.addEventListener('click', function () {
+            copyText(url, function () { msg.textContent = tUi('shareCopied'); }, function () { msg.textContent = tUi('shareFailed'); });
+        });
+        bar.appendChild(copyBtn);
+
+        if (navigator.share) {
+            var shareBtn = document.createElement('button');
+            shareBtn.type = 'button';
+            shareBtn.textContent = tUi('shareShare');
+            shareBtn.addEventListener('click', function () {
+                var title = (titleEl && titleEl.textContent) || document.title;
+                navigator.share({ title: title, url: url }).catch(function () { /* user cancelled */ });
+            });
+            bar.appendChild(shareBtn);
+        }
+        bar.appendChild(msg);
+        bodyEl.insertBefore(bar, bodyEl.firstChild);
+
+        var note = document.createElement('p');
+        note.className = 'catalog-legal-note';
+        note.textContent = tUi('legalNotice');
+        var end = bodyEl.querySelector('.vita-product-modal-end');
+        if (end && end.parentNode) end.parentNode.insertBefore(note, end);
+        else bodyEl.appendChild(note);
+    }
+
+    /* Open a popup from the address, e.g. products-line.html#silicate-fertilizer */
+    function openFromHash() {
+        var id = '';
+        try { id = decodeURIComponent((window.location.hash || '').slice(1)); } catch (e) { id = ''; }
+        if (!id || !MODALS[id]) return;
+        var tries = 0;
+        (function wait() {
+            if ((window.CatalogLang && window.CatalogModalI18n) || tries > 40) { openModal(id); return; }
+            tries++;
+            setTimeout(wait, 50);
+        })();
     }
 
     function closeModal() {
@@ -2081,6 +2148,8 @@
         document.addEventListener('click', onDocClick);
         document.addEventListener('keydown', onKeydown);
         document.addEventListener('catalog:langchange', onCatalogLangChange);
+        window.addEventListener('hashchange', openFromHash);
+        openFromHash();
         window.addEventListener('resize', function () {
             if (soilFloatingTipPill) positionSoilFloatingTip(soilFloatingTipPill);
         });
