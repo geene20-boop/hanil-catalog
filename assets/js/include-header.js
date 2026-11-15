@@ -122,6 +122,7 @@
             <a href="' + R + 'contactus/contact-us.html" class="text-base max-xl:text-sm font-semibold text-gray-400 h-full flex items-center px-[10px] max-xl:px-[6px] text-center mx-auto w-full group-hover:text-[#0C5625] "><span data-i18n="nav.contact">상담문의</span><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block ml-[4px] group-hover:rotate-180"><polyline points="6 9 12 15 18 9"></polyline></svg></a>\
             <div class="catalog-top-subnav absolute top-full left-0 w-full flex flex-row flex-nowrap gap-[20px] max-xl:gap-[12px] justify-center bg-[#F0F5ED] py-[10px] px-[15px] rounded-b-[25px] rounded-t-none z-[9999] opacity-0 invisible group-hover:opacity-100 group-hover:visible">\
                                     <a href="' + R + 'contactus/contact-us.html" class="text-base max-xl:text-sm font-semibold text-gray-400 whitespace-nowrap hover:text-[#0C5625]" data-page="contact-us.html" data-i18n="nav.contact">상담문의</a>\
+                    <a href="' + R + 'contactus/qna.html" class="text-base max-xl:text-sm font-semibold text-gray-400 whitespace-nowrap hover:text-[#0C5625]" data-page="qna.html" data-i18n="nav.qna">Q&amp;A 재배상담</a>\
             </div>\
         </div>\
     </div>\
@@ -238,7 +239,8 @@
         contact: {
             titleKey: 'nav.contact',
             links: [
-                { href: R + 'contactus/contact-us.html', page: 'contact-us.html', i18n: 'nav.contact', label: '상담문의' }
+                { href: R + 'contactus/contact-us.html', page: 'contact-us.html', i18n: 'nav.contact', label: '상담문의' },
+                { href: R + 'contactus/qna.html', page: 'qna.html', i18n: 'nav.qna', label: 'Q&A 재배상담' }
             ]
         }
     };
@@ -462,7 +464,8 @@
         'technical/prescription-03.html',
         'technical/government.html',
         'export/global-exprot.html',
-        'contactus/contact-us.html'
+        'contactus/contact-us.html',
+        'contactus/qna.html'
     ];
 
     function withHtml(p) {

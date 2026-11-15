@@ -1,0 +1,211 @@
+/* Q&A 재배상담 (contactus/qna.html, admin/index.html) */
+.qna {
+    --q-bg: #E6E6DC; --q-paper: #FBFAF5; --q-field: #F1EFE6; --q-line: #D6D3C4; --q-line2: #C9C5B2;
+    --q-ink: #18211A; --q-muted: #5C6459; --q-green: #0C5625; --q-green2: #208E45; --q-soft: #E1ECDC;
+    --q-soil1: #3B2A1C; --q-wait: #8A5A1C; --q-wait-soft: #F3E6CF; --q-warn: #9A2B1E; --q-warn-soft: #F6DFD9; --q-stamp: #A7341F;
+    color: var(--q-ink);
+    font-family: 'Pretendard Variable', 'Segoe UI', Arial, sans-serif;
+    font-size: 15px;
+    line-height: 1.65;
+    width: 92%;
+    min-width: 0;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+.qna *, .qna *::before, .qna *::after { box-sizing: border-box; }
+.qna h1, .qna h2, .qna h3, .qna h4 { margin: 0; text-wrap: balance; }
+.qna button { font: inherit; }
+.qna :focus-visible { outline: 2px solid var(--q-green2); outline-offset: 2px; }
+.qna [hidden] { display: none !important; }
+
+/* 히어로 */
+.qna-hero { position: relative; background: var(--q-green); color: #fff; border-radius: 28px 28px 0 0; overflow: hidden; }
+.qna-hero__in { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); gap: 24px; align-items: end; padding: 44px clamp(20px, 4vw, 52px) 0; }
+.qna-hero__ey { font-size: 13px; font-weight: 800; letter-spacing: .16em; color: #B9E3C3; }
+.qna-hero h1 { font-weight: 800; font-size: clamp(28px, 4.2vw, 48px); line-height: 1.2; margin-top: 10px; color: #fff; letter-spacing: -0.02em; }
+.qna-hero h1 em { font-style: normal; color: #CFEFC9; }
+.qna-hero p { color: rgba(255, 255, 255, .84); margin: 14px 0 0; max-width: 44ch; font-size: 16px; }
+.qna-tabs { display: flex; gap: 6px; margin-top: 26px; flex-wrap: wrap; }
+.qna-tabs a { font-size: 14px; font-weight: 700; color: rgba(255, 255, 255, .78); text-decoration: none; padding: 10px 18px; border-radius: 16px 16px 0 0; background: rgba(255, 255, 255, .1); }
+.qna-tabs a:hover { background: rgba(255, 255, 255, .18); }
+.qna-tabs a.is-on { background: var(--q-bg); color: var(--q-ink); }
+.qna-hero__art { display: flex; justify-content: flex-end; align-items: flex-end; min-width: 0; }
+.qna-hero__art svg { width: 100%; max-width: 440px; height: auto; display: block; }
+.qna-staff { position: absolute; right: 20px; top: 18px; display: inline-flex; gap: 6px; align-items: center; font-size: 12px; color: rgba(255, 255, 255, .7); text-decoration: none; border: 1px solid rgba(255, 255, 255, .28); border-radius: 999px; padding: 5px 12px; }
+.qna-staff svg { width: 13px; height: 13px; }
+.qna-intl { margin: 18px 0 0; background: var(--q-wait-soft); color: var(--q-wait); border-radius: 14px; padding: 12px 16px; font-size: 14px; font-weight: 600; }
+
+/* 본문 */
+.qna-body > * { min-width: 0; }
+.qna-body { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); gap: 24px; align-items: start; padding-top: 28px; }
+.qna-rail { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 6px; margin-bottom: 12px; scrollbar-width: thin; }
+.qna-crop { flex: none; display: grid; justify-items: center; gap: 4px; width: 66px; padding: 9px 4px; border: 1px solid var(--q-line); border-radius: 14px; background: var(--q-paper); color: var(--q-ink); cursor: pointer; font-size: 12px; font-weight: 700; }
+.qna-crop svg { width: 28px; height: 28px; color: var(--q-green); }
+.qna-crop[aria-pressed="true"] { background: var(--q-green); border-color: var(--q-green); color: #fff; }
+.qna-crop[aria-pressed="true"] svg { color: #fff; }
+.qna-tools { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin-bottom: 10px; }
+.qna-search { position: relative; flex: 1 1 220px; min-width: 0; }
+.qna-search input { padding-left: 38px !important; }
+.qna-search svg { position: absolute; left: 13px; top: 50%; transform: translateY(-50%); width: 16px; height: 16px; color: var(--q-muted); }
+.qna-seg { display: flex; background: var(--q-field); border: 1px solid var(--q-line); border-radius: 999px; padding: 3px; }
+.qna-seg button { font-size: 13px; border: 0; background: transparent; color: var(--q-muted); padding: 6px 13px; border-radius: 999px; cursor: pointer; }
+.qna-seg button[aria-pressed="true"] { background: var(--q-paper); color: var(--q-ink); font-weight: 800; box-shadow: 0 1px 2px rgba(0, 0, 0, .1); }
+.qna-count { font-size: 13px; color: var(--q-muted); margin: 0 0 8px; }
+
+.qna input[type=text], .qna input[type=tel], .qna input[type=password], .qna select, .qna textarea {
+    width: 100%; font: inherit; color: var(--q-ink); background: var(--q-field); border: 1px solid var(--q-line); border-radius: 12px; padding: 11px 13px;
+}
+.qna textarea { min-height: 108px; resize: vertical; }
+
+/* 질문 카드 */
+.qna-list { display: grid; gap: 10px; }
+.qna-q { background: var(--q-paper); border: 1px solid var(--q-line); border-radius: 18px; overflow: hidden; }
+.qna-q.is-open { border-color: var(--q-line2); }
+.qna-q__head { all: unset; box-sizing: border-box; display: grid; grid-template-columns: 44px minmax(0, 1fr) auto; gap: 12px; align-items: start; width: 100%; padding: 16px 18px; cursor: pointer; }
+.qna-q__head:focus-visible { outline: 2px solid var(--q-green2); outline-offset: -2px; }
+.qna-q__ic { width: 44px; height: 44px; border-radius: 12px; background: var(--q-soft); display: grid; place-items: center; color: var(--q-green); }
+.qna-q__ic svg { width: 26px; height: 26px; }
+.qna-q__t { font-weight: 700; line-height: 1.5; font-size: 15px; display: block; overflow-wrap: anywhere; }
+.qna-q__m { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; font-size: 12px; color: var(--q-muted); margin-top: 6px; }
+.qna-pill { font-size: 11px; font-weight: 800; border-radius: 999px; padding: 2px 9px; white-space: nowrap; }
+.qna-pill--done { background: var(--q-soft); color: var(--q-green); }
+.qna-pill--wait { background: var(--q-wait-soft); color: var(--q-wait); }
+.qna-pill--lock { background: var(--q-field); color: var(--q-muted); border: 1px solid var(--q-line); }
+.qna-pill--hide { background: var(--q-warn-soft); color: var(--q-warn); }
+.qna-chev { width: 28px; height: 28px; border-radius: 50%; border: 1px solid var(--q-line); display: grid; place-items: center; color: var(--q-muted); transition: transform .25s; }
+.qna-chev svg { width: 14px; height: 14px; }
+.qna-q.is-open .qna-chev { transform: rotate(180deg); }
+.qna-q__body { padding: 0 18px 18px 74px; display: grid; gap: 14px; }
+.qna-q__ask { font-size: 14px; color: var(--q-muted); margin: 0; white-space: pre-wrap; overflow-wrap: anywhere; }
+.qna-soiltag { display: inline-flex; gap: 10px; font-size: 12px; color: var(--q-ink); background: var(--q-field); border: 1px dashed var(--q-line2); border-radius: 8px; padding: 3px 10px; width: max-content; max-width: 100%; }
+.qna-track { display: flex; align-items: center; font-size: 12px; color: var(--q-muted); }
+.qna-track span { display: flex; align-items: center; gap: 6px; white-space: nowrap; }
+.qna-track span::before { content: ""; width: 9px; height: 9px; border-radius: 50%; border: 2px solid var(--q-line2); background: var(--q-paper); }
+.qna-track span.is-on { color: var(--q-ink); font-weight: 700; }
+.qna-track span.is-on::before { border-color: var(--q-green2); background: var(--q-green2); }
+.qna-track b { flex: 1; height: 2px; background: var(--q-line); margin: 0 8px; min-width: 14px; }
+.qna-track b.is-on { background: var(--q-green2); }
+
+/* 재배 처방 카드 */
+.qna-rx { position: relative; background: var(--q-field); border: 1px solid var(--q-line); border-radius: 16px; padding: 18px 18px 16px; }
+.qna-rx__h { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; flex-wrap: wrap; border-bottom: 1px dashed var(--q-line2); padding-bottom: 10px; margin-bottom: 12px; }
+.qna-rx__h strong { font-size: 16px; font-weight: 800; }
+.qna-rx__h small { color: var(--q-muted); font-size: 12px; }
+.qna-rx dl { margin: 0; display: grid; grid-template-columns: 76px minmax(0, 1fr); gap: 10px 12px; font-size: 14px; padding-right: 70px; }
+.qna-rx dt { font-size: 12px; font-weight: 800; color: var(--q-green); padding-top: 2px; letter-spacing: .04em; }
+.qna-rx dd { margin: 0; white-space: pre-wrap; overflow-wrap: anywhere; }
+.qna-prod { display: inline-flex; align-items: center; gap: 8px; text-decoration: none; color: var(--q-ink); background: var(--q-paper); border: 1px solid var(--q-line); border-radius: 12px; padding: 8px 12px; font-weight: 700; font-size: 13px; }
+.qna-prod i { width: 26px; height: 26px; border-radius: 8px; background: var(--q-green); display: grid; place-items: center; color: #fff; font-style: normal; font-size: 11px; }
+.qna-prod span { color: var(--q-green); }
+.qna-photos { display: flex; gap: 8px; flex-wrap: wrap; }
+.qna-photos a { display: block; width: 92px; height: 92px; border-radius: 10px; overflow: hidden; border: 1px solid var(--q-line); background: var(--q-field); }
+.qna-photos img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.qna-rx__fine { font-size: 12px; color: var(--q-muted); margin-top: 12px; }
+.qna-stamp { position: absolute; right: 14px; top: 46px; width: 72px; height: 72px; border: 2px solid var(--q-stamp); border-radius: 50%; color: var(--q-stamp); display: grid; place-items: center; text-align: center; font-weight: 900; font-size: 11px; line-height: 1.25; transform: rotate(-12deg); opacity: .8; pointer-events: none; }
+.qna-stamp::after { content: ""; position: absolute; inset: 4px; border: 1px solid var(--q-stamp); border-radius: 50%; }
+.qna-pending { font-size: 13px; color: var(--q-wait); margin: 0; }
+.qna-empty { background: var(--q-paper); border: 1px dashed var(--q-line2); border-radius: 18px; padding: 26px; text-align: center; color: var(--q-muted); font-size: 14px; }
+.qna-more { justify-self: center; border: 1px solid var(--q-line2); background: var(--q-paper); color: var(--q-ink); border-radius: 999px; padding: 8px 18px; cursor: pointer; font-size: 13px; font-weight: 700; }
+
+/* 접수증 */
+.qna-ask { position: sticky; top: 110px; background: var(--q-paper); border: 1px solid var(--q-line); border-radius: 20px; overflow: hidden; }
+.qna-ask__h { background: var(--q-soil1); color: #F4EBDD; padding: 16px 20px; display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+.qna-ask__h h2 { font-size: 18px; font-weight: 800; color: #F4EBDD; }
+.qna-ask__h small { font-size: 12px; color: #CDBBA2; }
+.qna-ask form { padding: 18px 20px 20px; display: grid; gap: 16px; }
+.qna-st { display: grid; gap: 8px; }
+.qna-st__l { display: flex; gap: 8px; align-items: center; font-size: 13px; font-weight: 800; }
+.qna-st__l i { font-style: normal; width: 20px; height: 20px; border-radius: 50%; background: var(--q-green); color: #fff; display: grid; place-items: center; font-size: 11px; flex: none; }
+.qna-st__l small { font-weight: 400; color: var(--q-muted); }
+.qna-mini { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; }
+.qna-mini button { display: grid; justify-items: center; gap: 2px; padding: 7px 2px; border: 1px solid var(--q-line); border-radius: 12px; background: var(--q-field); color: var(--q-ink); font-size: 12px; cursor: pointer; }
+.qna-mini svg { width: 22px; height: 22px; color: var(--q-green); }
+.qna-mini button[aria-pressed="true"] { background: var(--q-green); border-color: var(--q-green); color: #fff; font-weight: 700; }
+.qna-mini button[aria-pressed="true"] svg { color: #fff; }
+.qna-two { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.qna-soil { border: 1px dashed var(--q-line2); border-radius: 12px; padding: 10px 12px; background: var(--q-field); }
+.qna-soil summary { cursor: pointer; font-size: 13px; font-weight: 700; color: var(--q-green); }
+.qna-soil .qna-two { margin-top: 10px; }
+.qna-soil input, .qna-soil select { background: var(--q-paper) !important; }
+.qna-photo-pick { display: grid; gap: 8px; }
+.qna-photo-btn { display: inline-flex; align-items: center; gap: 8px; justify-content: center; border: 1px dashed var(--q-line2); border-radius: 12px; padding: 11px; background: var(--q-field); color: var(--q-green); font-size: 13px; font-weight: 700; cursor: pointer; }
+.qna-photo-btn svg { width: 18px; height: 18px; }
+.qna-thumbs { display: flex; gap: 8px; flex-wrap: wrap; }
+.qna-thumb { position: relative; width: 72px; height: 72px; border-radius: 10px; overflow: hidden; border: 1px solid var(--q-line); }
+.qna-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.qna-thumb button { position: absolute; top: 3px; right: 3px; width: 22px; height: 22px; border-radius: 50%; border: 0; background: rgba(0, 0, 0, .6); color: #fff; font-size: 13px; line-height: 1; cursor: pointer; }
+.qna-hint { font-size: 12px; color: var(--q-muted); margin: 0; }
+.qna-vis { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+.qna-vis label { display: flex; gap: 8px; align-items: flex-start; border: 1px solid var(--q-line); border-radius: 12px; padding: 9px 11px; background: var(--q-field); cursor: pointer; }
+.qna-vis label:has(input:checked) { border-color: var(--q-green); background: var(--q-soft); }
+.qna-vis b { display: block; font-size: 13px; }
+.qna-vis small { display: block; color: var(--q-muted); font-size: 11.5px; line-height: 1.45; }
+.qna-vis input, .qna-agree input { accent-color: var(--q-green); margin-top: 4px; }
+.qna-agree { display: flex; gap: 8px; font-size: 12.5px; align-items: flex-start; color: var(--q-muted); }
+.qna-agree button { all: unset; color: var(--q-green); font-weight: 700; cursor: pointer; text-decoration: underline; }
+.qna-privacy { font-size: 12px; color: var(--q-muted); background: var(--q-field); border-radius: 10px; padding: 10px 12px; margin: 0; line-height: 1.6; }
+.qna-privacy b { color: var(--q-ink); }
+.qna-note { font-size: 12.5px; line-height: 1.55; color: var(--q-ink); background: var(--q-soft); border-radius: 12px; padding: 10px 12px; }
+.qna-btn { font-weight: 800; border: 0; border-radius: 14px; padding: 13px 22px; background: var(--q-green); color: #fff; cursor: pointer; width: 100%; font-size: 15px; }
+.qna-btn:disabled { opacity: .4; cursor: not-allowed; }
+.qna-btn--sm { width: auto; padding: 9px 16px; font-size: 13px; border-radius: 10px; }
+.qna-btn--ghost { background: transparent; color: var(--q-green); border: 1px solid var(--q-green); }
+.qna-btn--warn { background: transparent; color: var(--q-warn); border: 1px solid var(--q-warn); }
+.qna-msg { font-size: 13px; font-weight: 700; min-height: 1.2em; margin: -6px 0 0; color: var(--q-green); }
+.qna-msg.is-err { color: var(--q-warn); }
+.qna-hp { position: absolute !important; left: -9999px !important; width: 1px; height: 1px; overflow: hidden; }
+
+/* 담당자 화면 */
+.qna-admin { padding-top: 40px; padding-bottom: 60px; }
+.qna-admin__bar { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 18px; }
+.qna-admin__bar h1 { font-size: 26px; font-weight: 800; }
+.qna-login { max-width: 380px; margin: 60px auto; background: var(--q-paper); border: 1px solid var(--q-line); border-radius: 20px; padding: 26px; display: grid; gap: 12px; }
+.qna-login h1 { font-size: 22px; font-weight: 800; }
+.qna-login p { margin: 0; color: var(--q-muted); font-size: 14px; }
+.qna-ad { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.4fr); gap: 16px; align-items: start; }
+.qna-ad__list { display: grid; gap: 8px; max-height: 75vh; overflow: auto; padding-right: 4px; }
+.qna-ad__item { all: unset; box-sizing: border-box; border: 1px solid var(--q-line); border-radius: 12px; padding: 10px 12px; font-size: 13px; background: var(--q-paper); cursor: pointer; display: grid; gap: 4px; }
+.qna-ad__item.is-on { border-color: var(--q-green); box-shadow: 0 0 0 1px var(--q-green); }
+.qna-ad__item b { line-height: 1.45; overflow-wrap: anywhere; }
+.qna-ad__item small { color: var(--q-muted); display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
+.qna-ad__main { background: var(--q-paper); border: 1px solid var(--q-line); border-radius: 18px; padding: 20px; display: grid; gap: 12px; }
+.qna-ad__q { border-left: 3px solid #7A5A3A; padding: 2px 0 2px 12px; font-size: 14px; white-space: pre-wrap; overflow-wrap: anywhere; }
+.qna-ad__meta { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 4px 12px; font-size: 13px; background: var(--q-field); border-radius: 12px; padding: 12px 14px; }
+.qna-ad__meta dt { color: var(--q-muted); }
+.qna-ad__meta dd { margin: 0; overflow-wrap: anywhere; }
+.qna-ad__edit { display: grid; gap: 8px; }
+.qna-ad__edit label { font-size: 12px; font-weight: 800; color: var(--q-green); }
+.qna-ad__edit textarea { min-height: 70px; }
+.qna-tmpl { display: flex; gap: 6px; flex-wrap: wrap; }
+.qna-tmpl button { font-size: 12px; border: 1px dashed var(--q-line2); background: transparent; color: var(--q-ink); border-radius: 8px; padding: 4px 10px; cursor: pointer; }
+.qna-checker { border-radius: 12px; padding: 10px 14px; font-size: 13px; }
+.qna-checker.is-bad { background: var(--q-warn-soft); color: var(--q-warn); }
+.qna-checker.is-ok { background: var(--q-soft); color: var(--q-green); }
+.qna-actions { display: flex; gap: 8px; flex-wrap: wrap; justify-content: flex-end; }
+.qna-check-row { display: flex; gap: 8px; align-items: center; font-size: 13px; }
+.qna-check-row input { accent-color: var(--q-green); }
+
+@media (max-width: 1023px) {
+    .qna-body, .qna-ad { grid-template-columns: minmax(0, 1fr); }
+    .qna-ask { position: static; }
+    .qna-hero__in { grid-template-columns: 1fr; }
+    .qna-hero__art { justify-content: center; }
+    .qna-hero__art svg { max-width: 380px; }
+    .qna-ad__list { max-height: none; }
+}
+@media (max-width: 520px) {
+    .qna { width: calc(100% - 32px); margin: 0 auto; }
+    .qna-hero { border-radius: 20px 20px 0 0; }
+    .qna-q__head { grid-template-columns: 38px minmax(0, 1fr) auto; gap: 10px; padding: 14px; }
+    .qna-q__ic { width: 38px; height: 38px; }
+    .qna-q__body { padding: 0 14px 16px; }
+    .qna-rx dl { grid-template-columns: 1fr; gap: 2px 0; padding-right: 0; }
+    .qna-rx dd { margin-bottom: 8px; }
+    .qna-stamp { width: 58px; height: 58px; font-size: 9.5px; top: 8px; right: 8px; }
+    .qna-rx__h { padding-right: 60px; }
+    .qna-vis, .qna-two { grid-template-columns: 1fr; }
+    .qna-staff { display: none; }
+    .qna-hero__in { padding-top: 32px; }
+    .qna-hero__art svg { max-width: 280px; }
+}
+@media (prefers-reduced-motion: reduce) { .qna * { transition: none !important; } }

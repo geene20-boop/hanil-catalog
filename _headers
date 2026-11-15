@@ -16,3 +16,9 @@
   Cache-Control: public, max-age=2592000
 /assets/font/*
   Cache-Control: public, max-age=2592000
+
+# 담당자 화면: 검색 노출 막기, 저장하지 않기
+/admin/*
+  X-Robots-Tag: noindex, nofollow
+  Cache-Control: no-store
+  X-Frame-Options: DENY

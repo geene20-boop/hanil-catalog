@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="robots" content="noindex, nofollow">
+        <title>재배상담 담당자 | (주)한일씨앤에스</title>
+        <link rel="icon" href="../assets/img/favicon.ico" type="image/x-icon">
+        <link rel="stylesheet" href="../assets/css/pretendardvariable.css">
+        <link rel="stylesheet" href="../assets/css/qna.css">
+        <style>body{margin:0;background:#E6E6DC;}</style>
+    </head>
+    <body>
+        <div class="qna qna-admin" data-admin>
+            <form class="qna-login" data-login hidden>
+                <h1>재배상담 담당자</h1>
+                <p>담당자 비밀번호를 입력해 주세요.</p>
+                <input type="password" id="ad-pw" autocomplete="current-password" aria-label="비밀번호" required>
+                <button class="qna-btn" type="submit">들어가기</button>
+                <p class="qna-msg is-err" data-login-msg role="alert"></p>
+            </form>
+
+            <div data-app hidden>
+                <div class="qna-admin__bar">
+                    <h1>재배상담 답변</h1>
+                    <div class="qna-actions">
+                        <div class="qna-seg" role="group" aria-label="상태" data-ad-seg>
+                            <button type="button" data-f="wait" aria-pressed="true">답변 대기</button>
+                            <button type="button" data-f="done" aria-pressed="false">답변 완료</button>
+                            <button type="button" data-f="all" aria-pressed="false">전체</button>
+                        </div>
+                        <a class="qna-btn qna-btn--sm qna-btn--ghost" href="../contactus/qna.html" target="_blank" rel="noopener" style="text-decoration:none">공개 화면 보기</a>
+                        <button class="qna-btn qna-btn--sm qna-btn--ghost" type="button" data-logout>나가기</button>
+                    </div>
+                </div>
+                <div class="qna-ad">
+                    <div class="qna-ad__list" data-ad-list></div>
+                    <div class="qna-ad__main" data-ad-main><p class="qna-hint">왼쪽에서 상담을 골라 주세요.</p></div>
+                </div>
+            </div>
+        </div>
+        <script src="../assets/js/qna-admin.js"></script>
+    </body>
+</html>

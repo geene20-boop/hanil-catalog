@@ -49,3 +49,23 @@ python3 -m http.server 8000
 ### 응답 헤더
 
 `_headers` 파일은 Cloudflare가 배포할 때 읽는 설정 파일입니다(공개되지 않음). 보안 헤더와 이미지·영상·글꼴의 브라우저 저장 기간(30일)을 정합니다. JS, CSS, HTML은 저장 기간을 두지 않아 수정 사항이 배포 직후 바로 보입니다.
+
+## Q&A 재배상담 (contactus/qna.html)
+
+농가가 질문을 남기고 담당자가 '재배 처방 카드' 형식으로 답하는 게시판입니다. 사이트 파일은 그대로 정적 파일로 배포되고, `/api/` 주소만 `worker/index.js`가 처리합니다.
+
+| 파일 | 내용 |
+|---|---|
+| `contactus/qna.html`, `assets/js/catalog-qna.js` | 농가가 보는 화면(목록, 작물 필터, 접수, 사진 3장) |
+| `admin/index.html`, `assets/js/qna-admin.js` | 담당자 화면(답변 작성, 광고 표현 점검, 숨기기, 삭제, 전화번호 지우기) |
+| `assets/css/qna.css` | 두 화면의 디자인 |
+| `worker/index.js` | 저장·조회 API |
+| `wrangler.jsonc`, `.assetsignore` | Cloudflare 배포 설정(서버 코드와 설정 파일은 공개되지 않음) |
+
+- 저장소: Cloudflare D1 데이터베이스 `hanil-qna`. 처음 배포할 때 자동으로 만들어지고, 표는 첫 요청 때 자동으로 생성됩니다.
+- 담당자 비밀번호: Cloudflare → Workers & Pages → `hanil-catalog` → Settings → Variables and Secrets → Add → Type `Secret`, 이름 `ADMIN_PASSWORD`. 비밀번호는 저장소에 넣지 않습니다.
+- 담당자 화면 주소: `/admin/`
+- 게시판은 한국어로만 운영합니다. 영어·중국어 화면에서는 안내 문구만 바뀝니다.
+- 비료관리법상 쓸 수 없는 표현(방제·예방·치료·살균·살충·특효·완치·100%)이 답변에 있으면 서버에서 게시를 막습니다.
+- 사진은 담당자만 보고, 담당자가 '사진 공개'를 고른 공개 상담의 답변에서만 보입니다.
+- 로컬 시험: `npx wrangler dev --var ADMIN_PASSWORD:시험용비밀번호`
