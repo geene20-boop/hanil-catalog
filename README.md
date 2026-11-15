@@ -18,8 +18,9 @@
 
 ## 문구 수정 위치
 
-- 화면 문구(한국어·영어): `assets/js/catalog-lang.js`
+- 화면 문구(한국어·영어·중국어·베트남어): `assets/js/catalog-lang.js`
 - 제품 상세 창과 계산기 문구: `assets/js/catalog-modals-i18n.js`
+- '이달의 흙 관리'와 정부지원 대상 확인 문구: `assets/js/catalog-extras.js`
 - 한국어 화면은 일부 문구가 HTML 파일에 직접 들어 있으므로, 한국어 문구를 고칠 때는 해당 HTML 파일도 함께 확인합니다.
 
 ## 미리보기
@@ -65,7 +66,7 @@ python3 -m http.server 8000
 - 저장소: Cloudflare D1 데이터베이스 `hanil-qna`. 처음 배포할 때 자동으로 만들어지고, 표는 첫 요청 때 자동으로 생성됩니다.
 - 담당자 비밀번호: Cloudflare → Workers & Pages → `hanil-catalog` → Settings → Variables and Secrets → Add → Type `Secret`, 이름 `ADMIN_PASSWORD`. 비밀번호는 저장소에 넣지 않습니다.
 - 담당자 화면 주소: `/admin/`
-- 게시판은 한국어로만 운영합니다. 영어·중국어 화면에서는 안내 문구만 바뀝니다.
+- 게시판은 한국어로만 운영합니다. 영어·중국어·베트남어 화면에서는 안내 문구만 바뀝니다.
 - 비료관리법상 쓸 수 없는 표현(방제·예방·치료·살균·살충·특효·완치·100%)이 답변에 있으면 서버에서 게시를 막습니다.
 - 사진은 담당자만 보고, 담당자가 '사진 공개'를 고른 공개 상담의 답변에서만 보입니다.
 - 로컬 시험: `npx wrangler dev --var ADMIN_PASSWORD:시험용비밀번호`
