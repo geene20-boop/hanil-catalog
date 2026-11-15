@@ -469,7 +469,7 @@
 
             /* ── Contact us ─────────────────────────────────────────── */
             'contactUs.eyebrow': '상담문의',
-            'contactUs.title': '지속가능한 미래 농업과 <br> 글로벌 시장을 함께 여는 파트너',
+            'contactUs.title': '지속가능한 미래 농업과 <br> 글로벌 시장을 함께 여는 <span style="white-space:nowrap">파트너</span>',
             'contactUs.subtitle': '<span class="text-[#B0C45F]">(주)한일씨앤에스</span>가 함께하겠습니다.',
             'contactUs.company': '㈜한일씨앤에스',
             'contactUs.address': '경상북도 경주시 안강읍 두류길 76',
