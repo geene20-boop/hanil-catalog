@@ -213,7 +213,7 @@
             })
             .catch(function () {
                 $('[data-qna-count]').textContent = '';
-                $('[data-qna-list]').innerHTML = '<div class="qna-empty">상담 목록을 불러오지 못했습니다. 잠시 후 다시 열어 주세요.<br>급하시면 TEL (054) 762-9691~2 로 전화 주십시오.</div>';
+                $('[data-qna-list]').innerHTML = '<div class="qna-empty">상담 목록을 불러오지 못했습니다. 잠시 후 다시 열어 주세요.<br>급하시면 <a href="tel:+82547629691">TEL (054) 762-9691~2</a> 로 전화 주십시오.</div>';
             });
     }
 

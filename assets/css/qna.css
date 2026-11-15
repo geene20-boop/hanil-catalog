@@ -111,7 +111,10 @@
 .qna-ask { position: sticky; top: 110px; background: var(--q-paper); border: 1px solid var(--q-line); border-radius: 20px; overflow: hidden; }
 .qna-ask__h { background: var(--q-soil1); color: #F4EBDD; padding: 16px 20px; display: flex; justify-content: space-between; align-items: center; gap: 10px; }
 .qna-ask__h h2 { font-size: 18px; font-weight: 800; color: #F4EBDD; }
-.qna-ask__h small { font-size: 12px; color: #CDBBA2; }
+.qna-ask__call { display: inline-flex; align-items: center; gap: 6px; min-height: 36px; padding: 0 14px; border-radius: 999px; background: #F4EBDD; color: var(--q-soil1); font-size: 13px; font-weight: 800; text-decoration: none; white-space: nowrap; }
+.qna-ask__call:hover { background: #fff; }
+.qna-ask__call svg { width: 15px; height: 15px; }
+.qna-privacy a, .qna-empty a { color: var(--q-green); font-weight: 700; }
 .qna-ask form { padding: 18px 20px 20px; display: grid; gap: 16px; }
 .qna-st { display: grid; gap: 8px; }
 .qna-st__l { display: flex; gap: 8px; align-items: center; font-size: 13px; font-weight: 800; }
