@@ -1,7 +1,7 @@
 /* 홍보영상: 처음에는 대표 사진만 보여주고, 누를 때 YouTube(쿠키 최소화 주소)를 불러옵니다. */
 (function () {
     'use strict';
-    var HL = { ko: 'ko', en: 'en', zh: 'zh-CN' };
+    var HL = { ko: 'ko', en: 'en', zh: 'zh-CN', vi: 'vi' };
 
     function lang() {
         return (window.CatalogLang && window.CatalogLang.get) ? window.CatalogLang.get() : 'ko';

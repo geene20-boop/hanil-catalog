@@ -28,11 +28,13 @@
         return val;
     }
 
-    function isCatalogEn() {
-        return (window.CatalogLang && CatalogLang.get && CatalogLang.get()) === 'en';
+    /* English and Vietnamese: longer Latin-script text, so use the wider Vita Gold layout */
+    function isCatalogLatin() {
+        var lang = (window.CatalogLang && CatalogLang.get && CatalogLang.get()) || 'ko';
+        return lang === 'en' || lang === 'vi';
     }
 
-    /* Any non-Korean view (English, Chinese): m², USD, English MSDS */
+    /* Any non-Korean view (English, Chinese, Vietnamese): m², USD, English MSDS */
     function isCatalogIntl() {
         var lang = (window.CatalogLang && CatalogLang.get && CatalogLang.get()) || 'ko';
         return lang !== 'ko';
@@ -53,7 +55,7 @@
 
     function localeTag() {
         var lang = (window.CatalogLang && CatalogLang.get && CatalogLang.get()) || 'ko';
-        return lang === 'en' ? 'en-US' : (lang === 'zh' ? 'zh-CN' : 'ko-KR');
+        return lang === 'en' ? 'en-US' : (lang === 'zh' ? 'zh-CN' : (lang === 'vi' ? 'vi-VN' : 'ko-KR'));
     }
 
     var CROP_CARD_BASE = 'relative flex flex-col items-center gap-1 min-h-[118px] px-2 pt-[14px] pb-3 rounded-[16px] bg-white cursor-pointer text-center transition-all duration-200 hover:border-[#B7D4BE]';
@@ -820,7 +822,7 @@
         key3Lines.forEach(function (line, idx) {
             key3Html += '<p class="m-0' + (idx ? ' mt-2' : '') + '">' + escapeHtml(line) + '</p>';
         });
-        var keyGridClass = isCatalogEn()
+        var keyGridClass = isCatalogLatin()
             ? 'vita-gold-key-grid vita-gold-key-grid--en grid grid-cols-1 md:grid-cols-2'
             : 'vita-gold-key-grid grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4';
         return '' +
@@ -930,7 +932,7 @@
         var meta = VITA_PRODUCT_META.vitaGold;
         var productName = tUi(meta.nameKey);
         var msdsHref = encodeAssetUrl(isCatalogIntl() && meta.msdsEn ? meta.msdsEn : meta.msds);
-        var rootClass = 'space-y-9 vita-gold-detail' + (isCatalogEn() ? ' vita-gold-detail--en' : '');
+        var rootClass = 'space-y-9 vita-gold-detail' + (isCatalogLatin() ? ' vita-gold-detail--en' : '');
         return '' +
             '<div class="' + rootClass + '">' +
                 '<section class="flex flex-col sm:flex-row gap-5 sm:gap-8 items-start">' +

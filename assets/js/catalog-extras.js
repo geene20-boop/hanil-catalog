@@ -1,5 +1,5 @@
 /**
- * Catalog extras (KO / EN / ZH)
+ * Catalog extras (KO / EN / ZH / VI)
  * - "This month's soil care" band:  <div data-season-card></div>   (switches by the visitor's month)
  * - Link to it on the intro page:   <a data-season-link></a>
  * - Government program self-check:  <div data-gov-check></div>       (pH / available silica → likely eligible?)
@@ -44,13 +44,26 @@
             govSi: '有效硅 {v}mg/kg：低于157mg/kg → 可能符合硅肥补贴条件。',
             govPhField: 'pH {v}：低于6.5的酸性旱地 → 可能符合石灰质肥料补贴条件。',
             govPhPaddy: 'pH {v}：水田如经土壤检测需要石灰，也可获得供应。'
+        },
+        vi: {
+            seasonEyebrow: 'Chăm sóc đất tháng này',
+            seasonLink: 'Chăm sóc đất {m} →',
+            seasonFoot: 'Chất cải tạo đất là phân bón, không phải thuốc bảo vệ thực vật · Căn cứ: hướng dẫn sử dụng của HANIL C&S, tài liệu quản lý đất của Cục Phát triển Nông thôn Hàn Quốc',
+            seasonCtaCalc: 'Tính lượng phân cho ruộng của tôi',
+            seasonCtaGov: 'Kiểm tra điều kiện hỗ trợ',
+            govEmpty: 'Hãy nhập pH hoặc silic hữu hiệu trong phiếu kết quả phân tích đất. Có thể phân tích đất tại trung tâm kỹ thuật nông nghiệp địa phương.',
+            govNo: 'Với các chỉ số đã nhập, nhiều khả năng ruộng không thuộc diện hỗ trợ. Vui lòng xem thông báo của chính quyền địa phương.',
+            govSi: 'Silic hữu hiệu {v} mg/kg: dưới 157 mg/kg → có thể thuộc diện được hỗ trợ phân silic.',
+            govPhField: 'pH {v}: đất cạn chua dưới 6,5 → có thể thuộc diện được hỗ trợ phân vôi.',
+            govPhPaddy: 'pH {v}: ruộng lúa cũng có thể được cấp vôi nếu kết quả phân tích đất cho thấy cần bón vôi.'
         }
     };
 
     var MONTH_NAMES = {
         ko: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
         en: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-        zh: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月']
+        zh: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
+        vi: ['tháng 1', 'tháng 2', 'tháng 3', 'tháng 4', 'tháng 5', 'tháng 6', 'tháng 7', 'tháng 8', 'tháng 9', 'tháng 10', 'tháng 11', 'tháng 12']
     };
 
     /* Each month: title + three tasks [who, what, products]. */
@@ -96,6 +109,20 @@
             10: ['收获后秋耕时恢复地力', [['水稻', '收获后秋季耕地时施用硅肥', '颗粒硅肥'], ['大蒜·洋葱', '完成秋季旋耕前的施用', '颗粒硅肥 · 颗粒石灰镁肥'], ['所有农户', '收获后的田块准备土壤检测', '当地农业技术中心']]],
             11: ['收获后的田地，现在就为明年准备地力', [['水稻', '收获后立即在施堆肥前进行土壤检测', '当地农业技术中心'], ['果树', '落叶后休眠期施用石灰镁肥、钙硫肥', '颗粒石灰镁肥 · 钙硫肥'], ['设施栽培', '下一茬定植前3~4周先施土壤改良剂', '颗粒石灰镁肥 · 颗粒硅肥']]],
             12: ['免费土壤改良剂，现在开始申请', [['所有农户', '韩国政府土壤改良剂开始申请（通常12月~2月）', '邑·面·洞办事处'], ['果树', '落叶后休眠期施用', '颗粒石灰镁肥 · 钙硫肥'], ['设施栽培', '下一茬定植前3~4周先施土壤改良剂', '颗粒石灰镁肥 · 颗粒硅肥']]]
+        },
+        vi: {
+            1:  ['Mùa đông là mùa phân tích đất', [['Cây ăn quả', 'Bón vôi magie · canxi lưu huỳnh vào thời kỳ ngủ nghỉ sau rụng lá', 'Vôi magie dạng hạt · Canxi lưu huỳnh'], ['Mọi nông trại', 'Đăng ký phân tích đất trước khi bón phân ủ hoặc phân bón', 'Trung tâm kỹ thuật nông nghiệp địa phương'], ['Mọi nông trại', 'Đăng ký chương trình chất cải tạo đất của Chính phủ Hàn Quốc (thường đến cuối tháng 2)', 'Văn phòng hành chính eup·myeon·dong']]],
+            2:  ['Trước hạn đăng ký, chuẩn bị cho vụ bón mùa xuân', [['Mọi nông trại', 'Kiểm tra hạn đăng ký chương trình chất cải tạo đất của Chính phủ', 'Văn phòng hành chính eup·myeon·dong'], ['Cây ăn quả', 'Hoàn tất bón trong thời kỳ ngủ nghỉ', 'Vôi magie dạng hạt · Canxi lưu huỳnh'], ['Cây vụ xuân', 'Xác nhận lượng bón theo phiếu khuyến nghị phân tích đất (cấp trong khoảng 2 tuần)', 'Trung tâm kỹ thuật nông nghiệp địa phương']]],
+            3:  ['Đất tan băng, hãy bón chất cải tạo đất trước', [['Lúa nước', 'Bón phân silic 1 tháng trước khi cấy', 'Phân silic dạng hạt'], ['Nhà kính', 'Bón chất cải tạo đất trước 3–4 tuần trước khi trồng', 'Vôi magie dạng hạt · Phân silic dạng hạt'], ['Mọi cây trồng', 'Bón phân đạm, phân NPK sau chất cải tạo đất 1–2 tuần', 'Hướng dẫn sử dụng']]],
+            4:  ['Trước khi cấy và trồng, hãy chuẩn bị đất', [['Lúa nước', 'Hoàn tất bón phân silic 1 tháng trước khi cấy', 'Phân silic dạng hạt'], ['Rau ăn quả', 'Vôi magie + phân silic 3–4 tuần trước khi trồng', 'Vôi magie dạng hạt · Phân silic dạng hạt'], ['Mọi cây trồng', 'Không để trên mặt đất, trộn đều vào toàn bộ tầng canh tác', 'Cày trộn']]],
+            5:  ['Chăm sóc sau khi cấy và vụ trồng muộn', [['Lúa nước', 'Bón phân silic trong 15 ngày sau khi cấy', 'Phân silic dạng hạt'], ['Rau ăn quả', 'Vụ muộn: bón chất cải tạo đất 3–4 tuần trước khi trồng', 'Vôi magie dạng hạt · Phân silic dạng hạt'], ['Nhà kính', 'Bổ sung bằng phun lá trong thời kỳ sinh trưởng', 'Saengsaeng Vita']]],
+            6:  ['Kiểm tra mương thoát nước và đất trước mùa mưa', [['Lúa nước', 'Hoàn tất bón trong 15 ngày sau khi cấy', 'Phân silic dạng hạt'], ['Mọi nông trại', 'Khơi thông mương thoát nước trước mùa mưa để chống xói mòn đất', 'Kiểm tra đồng ruộng'], ['Tỏi · Hành tây', 'Sau thu hoạch, bón 2–3 tháng trước vụ trồng tiếp theo', 'Phân silic dạng hạt · Vôi magie dạng hạt']]],
+            7:  ['Bổ sung silic trước khi trổ bông', [['Lúa nước', 'Bón phân silic 30 ngày trước trổ bông', 'Phân silic dạng hạt'], ['Mọi nông trại', 'Kiểm tra thoát nước và xói mòn đất sau mùa mưa', 'Kiểm tra đồng ruộng'], ['Rau ăn củ · Cây thân hành', 'Bón 2–3 tháng trước khi trồng', 'Phân silic dạng hạt · Vôi magie dạng hạt']]],
+            8:  ['Chuẩn bị đất sớm cho vụ thu', [['Lúa nước', 'Hoàn tất bón 30 ngày trước trổ bông', 'Phân silic dạng hạt'], ['Rau ăn lá (cải thảo · củ cải)', 'Vôi magie + phân silic 3–4 tuần trước khi trồng', 'Vôi magie dạng hạt · Phân silic dạng hạt'], ['Tỏi · Hành tây', 'Bón 2–3 tháng trước khi trồng', 'Phân silic dạng hạt · Vôi magie dạng hạt']]],
+            9:  ['Bón trước khi xới đất mùa thu', [['Tỏi · Hành tây', 'Bón chủ yếu phân silic trước khi xới đất mùa thu', 'Phân silic dạng hạt · Vôi magie dạng hạt'], ['Nhà kính', 'Bón chất cải tạo đất 3–4 tuần trước khi trồng vụ thu', 'Vôi magie dạng hạt · Phân silic dạng hạt'], ['Mọi cây trồng', 'Phân đạm, phân NPK bón sau 1–2 tuần', 'Hướng dẫn sử dụng']]],
+            10: ['Phục hồi độ phì của đất khi cày đất mùa thu sau thu hoạch', [['Lúa nước', 'Bón phân silic khi cày đất mùa thu sau thu hoạch', 'Phân silic dạng hạt'], ['Tỏi · Hành tây', 'Hoàn tất bón trước khi xới đất mùa thu', 'Phân silic dạng hạt · Vôi magie dạng hạt'], ['Mọi nông trại', 'Chuẩn bị phân tích đất cho ruộng đã thu hoạch', 'Trung tâm kỹ thuật nông nghiệp địa phương']]],
+            11: ['Ruộng đã thu hoạch: chuẩn bị độ phì cho năm sau ngay từ bây giờ', [['Lúa nước', 'Ngay sau thu hoạch, gửi mẫu phân tích đất trước khi bón phân ủ', 'Trung tâm kỹ thuật nông nghiệp địa phương'], ['Cây ăn quả', 'Bón vôi magie · canxi lưu huỳnh vào thời kỳ ngủ nghỉ sau rụng lá', 'Vôi magie dạng hạt · Canxi lưu huỳnh'], ['Nhà kính', 'Bón chất cải tạo đất trước, 3–4 tuần trước vụ trồng tiếp theo', 'Vôi magie dạng hạt · Phân silic dạng hạt']]],
+            12: ['Chất cải tạo đất miễn phí: bắt đầu nhận đăng ký', [['Mọi nông trại', 'Bắt đầu đăng ký chương trình chất cải tạo đất của Chính phủ Hàn Quốc (thường từ tháng 12 đến tháng 2)', 'Văn phòng hành chính eup·myeon·dong'], ['Cây ăn quả', 'Bón vào thời kỳ ngủ nghỉ sau rụng lá', 'Vôi magie dạng hạt · Canxi lưu huỳnh'], ['Nhà kính', 'Bón chất cải tạo đất trước, 3–4 tuần trước vụ trồng tiếp theo', 'Vôi magie dạng hạt · Phân silic dạng hạt']]]
         }
     };
 

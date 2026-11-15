@@ -1985,8 +1985,862 @@
         if (products[id]) products[id].zh = productsZh[id];
     });
 
+    var uiVi = {
+        "closeAria": "Đóng",
+        "farmTitle": "<span class=\"text-2xl max-lg:text-xl max-md:text-lg font-extrabold\">Máy tính lượng phân bón cho nông trại</span>",
+        "farmCropPrompt": "Chọn nhóm cây trồng.",
+        "cropFoodName": "Cây lương thực",
+        "cropFoodDesc": "Lúa / lúa mạch / ngô",
+        "cropVegName": "Rau màu",
+        "cropVegDesc": "Ớt / xà lách / cải thảo / tỏi",
+        "cropFruitName": "Cây ăn quả",
+        "cropFruitDesc": "Táo / lê / đào / cà chua",
+        "cropGreenName": "Khác",
+        "cropGreenDesc": "Cỏ / sân golf / đồng cỏ",
+        "farmAreaPrompt": "Nhập diện tích canh tác.",
+        "farmAreaPlaceholder": "Nhập diện tích",
+        "farmAreaAria": "Diện tích canh tác",
+        "farmAreaResetAria": "Xóa diện tích",
+        "farmUnitAria": "Đơn vị diện tích",
+        "unitPyeong": "pyeong",
+        "unitM2": "㎡",
+        "unitHa": "ha",
+        "farmAreaLimit": "Chỉ tính được tối đa 100.000.",
+        "resultTitle": "Kết quả",
+        "farmBagsProductLine": "Phân silic dạng hạt · 20 kg/bao",
+        "farmBagsUnit": "bao",
+        "farmBagsImgAlt": "Phân silic dạng hạt",
+        "farmVitaLine": "Saengsaeng Vita 40 · pha loãng tưới gốc / phun lá",
+        "farmVitaDilutionTip": "Pha loãng khuyến nghị 500–1.000 lần",
+        "farmVitaImgAlt": "Saengsaeng Vita 40",
+        "orchardTitle": "<span class=\"text-2xl max-lg:text-xl max-md:text-lg font-extrabold\">Ước tính lợi nhuận vườn cây theo mô hình <span class=\"text-[#2D8A3E]\">Nông trại Inhoe</span></span>",
+        "orchardAreaPrompt": "Nhập diện tích vườn. <span class=\"text-base max-md:text-sm font-semibold text-[#9CA3AF]\">(㎡)</span>",
+        "orchardAreaPlaceholder": "Nhập diện tích",
+        "orchardAreaAria": "Diện tích vườn (㎡)",
+        "orchardAreaResetAria": "Xóa diện tích",
+        "orchardAreaLimit": "Chỉ tính được tối đa {n}.",
+        "orchardPricePrompt": "Nhập giá thông thường mỗi thùng. <span class=\"text-base max-md:text-sm font-semibold text-[#9CA3AF]\">(4 kg / USD)</span>",
+        "orchardPricePlaceholder": "Nhập giá",
+        "orchardPriceAria": "Giá mỗi thùng (USD)",
+        "orchardPriceResetAria": "Xóa giá",
+        "orchardPriceLimit": "Chỉ tính được tối đa 1.000.",
+        "orchardQuick1man": "+10 USD",
+        "orchardQuick10man": "+100 USD",
+        "orchardBoxesLabel": "Số thùng dự kiến giữ được nhờ giảm rụng quả",
+        "orchardNote": "Đây là ước tính tham khảo dựa trên số liệu suy ra từ phỏng vấn Nông trại Inhoe (khoảng 0,27 thùng/pyeong; 1 pyeong ≈ 3,3㎡), không đảm bảo kết quả thực tế.",
+        "orchardBoxesUnit": "thùng",
+        "orchardProfitLabel": "Lợi nhuận dự kiến từ giá trị độ ngọt + sản lượng",
+        "orchardWonUnit": "USD",
+        "vitaCalcTitle": "<span class=\"text-2xl max-lg:text-xl max-md:text-lg font-extrabold\">Máy tính pha loãng <span class=\"text-[#2D8A3E]\">Saengsaeng Vita 40</span> tại ruộng</span>",
+        "vitaWaterPrompt": "Nhập lượng nước. <span class=\"text-base max-md:text-sm font-semibold text-[#9CA3AF]\">(lít)</span>",
+        "vitaWaterPlaceholder": "Nhập lượng nước",
+        "vitaWaterAria": "Lượng nước",
+        "vitaWaterResetAria": "Xóa lượng nước",
+        "vitaWaterLimit": "Chỉ tính được tối đa 100.000.",
+        "vitaQuickLiter": "L",
+        "vitaDilutionPrompt": "Chọn tỷ lệ pha loãng mong muốn.",
+        "vitaDilutionAria": "Tỷ lệ pha loãng mong muốn",
+        "vitaOpt500": "500 lần (cây ăn quả, nồng độ cao)",
+        "vitaOpt700": "700 lần",
+        "vitaOpt1000": "1.000 lần (khuyến nghị chung)",
+        "vitaResultLabel": "Lượng Saengsaeng Vita 40 cần pha",
+        "hintEmpty": "Nhập lượng nước và tỷ lệ pha loãng để tính lượng cần pha.",
+        "hintWithLiters": "Khoảng {l} L · theo tỷ lệ pha loãng {n} lần",
+        "hintDilutionOnly": "Theo tỷ lệ pha loãng {n} lần",
+        "vitaResultImgAlt": "Saengsaeng Vita 40",
+        "msdsDownload": "Tải MSDS",
+        "shareCopy": "Sao chép liên kết",
+        "shareShare": "Chia sẻ",
+        "shareCopied": "Đã sao chép liên kết. Hãy dán vào khung chat.",
+        "shareFailed": "Không sao chép được. Vui lòng sao chép địa chỉ trên thanh địa chỉ.",
+        "legalNotice": "Sản phẩm này là phân bón hoặc vật tư cải tạo đất, không phải thuốc bảo vệ thực vật. Để phòng trừ sâu bệnh, hãy dùng thuốc đã đăng ký cho cây trồng của bạn và hỏi trung tâm khuyến nông địa phương để được chẩn đoán chính xác.",
+        "sectionSpec": "Quy cách",
+        "sectionUsage": "Đối tượng sử dụng chính",
+        "sectionBenefits": "Công dụng",
+        "sectionTiming": "Thời điểm bón",
+        "sectionTimingDef": "Thời điểm bón · Triệu chứng thiếu hụt",
+        "sectionMethod": "Cách bón",
+        "sectionFeatures": "Đặc điểm sản phẩm",
+        "sectionPrecautionStorage": "Lưu ý khi sử dụng và bảo quản",
+        "sectionOrganicListing": "Thông tin ghi nhãn vật tư hữu cơ",
+        "sectionStdDose": "Liều khuyến nghị cho 1.000㎡ (0,1 ha)",
+        "sectionRecommend": "Đối tượng khuyến nghị",
+        "sectionFaq": "Hỏi đáp",
+        "warning": "Lưu ý",
+        "imageSoon": "Hình ảnh sản phẩm sẽ sớm cập nhật",
+        "ctaFarmCalc": "Tính lượng phân cho ruộng của tôi",
+        "ctaHeukdoram": "Heuktoram (hệ thống thông tin đất Hàn Quốc)",
+        "ctaVitaDilution": "Tính lượng pha loãng tại ruộng",
+        "sampleAltSuffix": " (mẫu)",
+        "vita40Name": "Saengsaeng Vita 40",
+        "vitaGoldName": "Saengsaeng Vita Gold",
+        "vita40SpecLine": "N-P-K 3-1-1 · Axit amin 20% · Chất hữu cơ 25%",
+        "vita40Desc": "Chứa đậm đặc 17 loại axit amin thực vật, chất hữu cơ và vi lượng thiết yếu, dùng để bổ sung dinh dưỡng trong thời kỳ sinh trưởng và giai đoạn lớn quả · lên màu.",
+        "vitaGoldSpecLine": "N-P-K 2-1-2 · Axit amin thực vật 15% · Chất hữu cơ 25%",
+        "vitaGoldDesc": "Sản phẩm sản xuất bằng công nghệ lên men, cung cấp dinh dưỡng cân đối qua tưới gốc và phun lá, hỗ trợ sức sống của rễ và hoạt động của vi sinh vật đất.",
+        "vitaGoldWhyTitle": "Vì sao các nông trại tiên tiến chọn Saengsaeng Vita?",
+        "vitaGoldWhyItems": [
+            "Được phát triển bằng công nghệ lên men thúc đẩy sinh trưởng và sức sống của rễ. Tưới gốc và phun lá giúp cây hấp thu dinh dưỡng cân đối và tăng khả năng tự phát triển khỏe mạnh.",
+            "Thúc đẩy phát triển rễ và sinh trưởng của cây, kích hoạt vi sinh vật đất để tăng hấp thu dinh dưỡng."
+        ],
+        "vitaGoldKeysTitle": "Thế mạnh cốt lõi của Saengsaeng Vita",
+        "vitaGoldKey1Title": "Axit amin cao cấp",
+        "vitaGoldKey1Items": [
+            "Hấp thu nhanh, phát huy tối đa hiệu quả",
+            "Giảm stress do môi trường",
+            "Cải thiện chất lượng (độ ngọt, màu sắc, hương vị)",
+            "Tăng độ phì của đất",
+            "Tối đa hóa hiệu quả cung cấp vi lượng"
+        ],
+        "vitaGoldKey2Title": "Giàu protein và chất hữu cơ",
+        "vitaGoldKey2Parts": [
+            {
+                "label": "Protein:",
+                "text": "Cung cấp đạm, hỗ trợ tế bào phát triển và hình thành mô."
+            },
+            {
+                "label": "Chất hữu cơ:",
+                "text": "Kích hoạt vi sinh vật đất, cải thiện tính chất đất và hỗ trợ hấp thu dinh dưỡng."
+            }
+        ],
+        "vitaGoldKey3Title": "17 loại axit amin thực vật",
+        "vitaGoldKey3Lines": [
+            "Axit amin tự do cây dễ hấp thu, giúp cây sinh trưởng mạnh.",
+            "Đặc biệt tăng cường phát triển rễ, quang hợp, lên màu và tích lũy độ ngọt."
+        ],
+        "vitaGoldKey4Title": "Kích hoạt vi sinh vật",
+        "vitaGoldKey4Items": [
+            "Thúc đẩy phân giải chất hữu cơ, tăng hấp thu dinh dưỡng.",
+            "Tạo đất khỏe để cây phát triển trong môi trường tốt hơn."
+        ],
+        "vitaGoldCompositionTitle": "Saengsaeng Vita – Thành phần chính (%)",
+        "vitaGoldCompColNpk": "N-P-K",
+        "vitaGoldCompColAmino": "Axit amin thực vật",
+        "vitaGoldCompColOrganic": "Chất hữu cơ",
+        "vitaGoldCompColMicro": "Vi lượng",
+        "vitaGoldCompNpk": "2-1-2",
+        "vitaGoldCompAmino": "15",
+        "vitaGoldCompOrganic": "25",
+        "vitaGoldCompMicro": "Bo, molypden, kẽm, lưu huỳnh hòa tan, magie hòa tan",
+        "vitaGoldCompColFunc": "Hoạt chất chức năng",
+        "vitaGoldCompFunc": "Axit humic, axit fulvic, axit phytic",
+        "vitaGoldCompGuarantee": "Thành phần bảo đảm: Bo hòa tan (B) ≥ 0,05%, molypden hòa tan (Mo) ≥ 0,0005%",
+        "vitaGoldDoseTitle": "Saengsaeng Vita Gold – Liều khuyến nghị (ví dụ)",
+        "vitaGoldDoseH1": "Cây trồng",
+        "vitaGoldDoseH2": "Thời điểm",
+        "vitaGoldDoseH3": "Cách dùng",
+        "vitaGoldDoseH4": "Tỷ lệ pha",
+        "vitaGoldDoseH5": "Lượng pha",
+        "vitaGoldDoseH6": "Cho 500㎡",
+        "vitaGoldDoseCrop": "Mọi loại cây",
+        "vitaGoldDoseSeason": "Thời kỳ sinh trưởng",
+        "vitaGoldDoseMethodDrench": "Tưới gốc",
+        "vitaGoldDoseMethodFoliar": "Phun lá",
+        "vitaGoldDoseRatio500Mid": "500 lần (giữa – cuối vụ)",
+        "vitaGoldDoseRatio1000Early": "1.000 lần (đầu vụ)",
+        "vitaGoldDoseMix500DrenchMid": "2 L cho 1 tấn nước, 4 L cho 2 tấn nước",
+        "vitaGoldDoseMix1000DrenchEarly": "1 L cho 1 tấn nước, 2 L cho 2 tấn nước",
+        "vitaGoldDoseArea500DrenchMid": "2–4 L / 500㎡",
+        "vitaGoldDoseArea1000DrenchEarly": "1–2 L / 500㎡",
+        "vitaGoldDoseMix500FoliarMid": "2 L cho 1 tấn nước, 1 L cho 500 L nước",
+        "vitaGoldDoseMix1000FoliarEarly": "1 L cho 1 tấn nước, 0,5 L cho 500 L nước",
+        "vitaGoldDoseNote": "Điều chỉnh liều lượng theo loại cây và giai đoạn sinh trưởng.",
+        "vitaGoldDoseHaNote": "Liều tưới gốc tham khảo cho 1 ha: 40–80 L ở tỷ lệ 500 lần, 20–40 L ở tỷ lệ 1.000 lần",
+        "vitaGoldTipsTitle": "Saengsaeng Vita Gold – Mẹo sử dụng giúp tăng hấp thu",
+        "vitaGoldTipsItems": [
+            "Thời gian phun: phun vào sáng sớm hoặc chiều mát, khi khí khổng hấp thu tốt.",
+            "Vị trí phun: phun kỹ để dung dịch phủ đều cả mặt dưới lá, nơi có nhiều khí khổng.",
+            "Khoảng cách phun: vào thời kỳ sinh trưởng mạnh, tưới gốc hoặc phun liên tục 2–3 lần, cách nhau 7–10 ngày."
+        ],
+        "vitaGoldCropTableTitle": "Saengsaeng Vita Gold – Cây trồng và cách dùng",
+        "vitaGoldCropColCrop": "Cây trồng",
+        "vitaGoldCropColTiming": "Thời điểm",
+        "vitaGoldCropColFreq": "Số lần",
+        "vitaGoldCropColEffect": "Hiệu quả",
+        "vitaGoldCropGroups": [
+            {
+                "crop": "Cây ăn quả (táo, lê, nho, cam quýt, đào)",
+                "entries": [
+                    {
+                        "timing": "Trước khi ra hoa, 2 tuần sau khi rụng cánh hoa",
+                        "freq": "1–2 lần",
+                        "effect": "Giảm hại do lạnh, hạn chế quả dị dạng"
+                    },
+                    {
+                        "timing": "Giai đoạn quả non lớn",
+                        "freq": "2–3 lần (cách 7 ngày)",
+                        "effect": "Quả non lớn nhanh"
+                    },
+                    {
+                        "timing": "Bắt đầu lên màu",
+                        "freq": "3–4 lần, cách 7 ngày",
+                        "effect": "Nâng cao chất lượng, tăng sản lượng"
+                    }
+                ]
+            },
+            {
+                "crop": "Rau màu (dưa lưới, ớt, dưa hấu, cà chua, bí, dâu tây, cải thảo, củ cải)",
+                "entries": [
+                    {
+                        "timing": "Giai đoạn cây con",
+                        "freq": "Tưới gốc, phun 7–10 ngày một lần",
+                        "effect": "Cây con khỏe, đậu quả và lớn quả, tăng sản lượng"
+                    },
+                    {
+                        "timing": "Từ đầu vụ đến sinh trưởng mạnh",
+                        "freq": "2–3 lần/tháng, cách 10 ngày (tưới gốc, phun)",
+                        "effect": "Nâng cao chất lượng, chịu lạnh, tăng sản lượng"
+                    }
+                ]
+            },
+            {
+                "crop": "Lúa",
+                "entries": [
+                    {
+                        "timing": "Cả vụ",
+                        "freq": "Phun 3–4 lần",
+                        "effect": "Nâng cao chất lượng, tăng sản lượng"
+                    }
+                ]
+            },
+            {
+                "crop": "Cây đặc sản (nhân sâm, đẳng sâm)",
+                "entries": [
+                    {
+                        "timing": "Đầu đến giữa vụ",
+                        "freq": "2–3 lần/tháng, phun cách 7 ngày",
+                        "effect": "Nâng cao chất lượng, tăng sản lượng"
+                    }
+                ]
+            },
+            {
+                "crop": "Khoai tây, khoai lang",
+                "entries": [
+                    {
+                        "timing": "Đầu đến giữa vụ",
+                        "freq": "Phun 3–4 lần",
+                        "effect": "Nâng cao chất lượng, tăng sản lượng"
+                    }
+                ]
+            }
+        ],
+        "magSulfurTabOverview": "Tổng quan",
+        "magSulfurTabFeatures": "Đặc điểm chính",
+        "magSulfurTabUsage": "Cách dùng",
+        "magSulfurTabRecommend": "Khuyến nghị · Hỏi đáp",
+        "magSulfurTabPrecaution": "Lưu ý",
+        "magSulfurLabelListing": "Số công bố",
+        "magSulfurLabelNetWeight": "Quy cách",
+        "magSulfurOverviewIntroTitle": "Giới thiệu ngắn",
+        "magSulfurRawTitle": "Nguyên liệu chính",
+        "magSulfurUsageTitle": "Đối tượng sử dụng chính",
+        "magSulfurCompPctTitle": "Thành phần chính (%)",
+        "magSulfurFeatureColTitle": "Hạng mục",
+        "magSulfurFeatureColDesc": "Nội dung",
+        "magSulfurCropTableTitle": "Liều khuyến nghị theo cây trồng (ví dụ, cho 1.000㎡)",
+        "magSulfurCropColCrop": "Cây trồng",
+        "magSulfurCropColBags": "Số bao",
+        "magSulfurCropColAmount": "Khối lượng",
+        "magSulfurCropColMethod": "Cách bón",
+        "magSulfurRecommendTitle": "Khuyến nghị cho",
+        "magSulfurFaqTitle": "Hỏi đáp",
+        "magSulfurListingTitle": "Thông tin ghi nhãn vật tư hữu cơ",
+        "magSulfurListingColItem": "Hạng mục",
+        "magSulfurListingColDetail": "Nội dung",
+        "vitaGoldPrecautionTitle": "Lưu ý khi sử dụng và bảo quản Saengsaeng Vita Gold",
+        "vitaGoldPrecautionItems": [
+            "Bón quá liều có thể gây hại cho cây, hãy tuân thủ liều khuyến nghị.",
+            "Sản phẩm chứa chất hữu cơ nên vi sinh vật có thể phát triển tự nhiên và sinh ra một ít khí, làm phồng bình chứa. Đây là hiện tượng bình thường, không ảnh hưởng đáng kể đến chất lượng và hiệu quả.",
+            "Không dùng nguyên chất, luôn pha loãng với nước theo đúng tỷ lệ.",
+            "Không trộn với các chất có tính kiềm mạnh (như lưu huỳnh vôi, dung dịch Bordeaux, silicat lỏng).",
+            "Khi trời nóng, tránh phun vào giữa trưa và pha loãng hơn khoảng 20% so với nồng độ tiêu chuẩn.",
+            "Tránh sử dụng khi đất khô do nắng nóng hoặc hạn hán.",
+            "Có thể xuất hiện cặn do nhiệt độ thấp trong quá trình lưu thông; lắc đều trước khi dùng, hiệu quả không thay đổi.",
+            "Khi pha chung với thuốc bảo vệ thực vật, hãy kiểm tra khả năng tương thích trước khi phun.",
+            "Sau khi mở nắp hãy dùng sớm; phần còn lại đậy kín và bảo quản nơi thoáng mát."
+        ],
+        "compareTitleTpl": "Trường hợp nông dân sử dụng {name}: trước và sau",
+        "compareBefore": "Trước khi dùng",
+        "compareAfter": "Sau khi dùng",
+        "sugarRate": "Mức tăng độ ngọt (nông dân tự đo)",
+        "sugarNote": "14,0 → 18,0 Brix · đo tại 1 nông trại",
+        "dropRate": "Mức giảm rụng quả (ước tính từ phỏng vấn)",
+        "dropNote": "Khoảng 1/3 so với năm bình thường · ước tính từ phỏng vấn nông dân",
+        "aiImageBadge": "Ảnh do AI tạo",
+        "compareAiNote": "Ảnh minh họa do AI tạo để dễ hình dung. Số liệu độ ngọt (14,0 Brix trước → 18,0 Brix sau khi dùng) do nông dân đo thực tế.",
+        "caseNote": "Đây là trải nghiệm của 1 nông dân, không phải cam kết về hiệu quả. Kết quả có thể khác nhau tùy thời tiết, đất và cách chăm sóc.",
+        "featuresTitle": "Đặc điểm sản phẩm",
+        "feature1Title": "Thành phần cốt lõi",
+        "feature1Desc": "17 loại axit amin thực vật + vi lượng thiết yếu",
+        "feature2Title": "Cách sử dụng",
+        "feature2Desc": "Dùng được cả phun lá và tưới gốc",
+        "feature3Title": "Kiểm tra trước khi pha chung",
+        "feature3Desc": "Khi pha với thuốc bảo vệ thực vật, hãy thử trộn một lượng nhỏ trước",
+        "feature4Title": "Trường hợp thực tế",
+        "feature4Desc": "Trường hợp sử dụng tại vườn đào (Nông trại Inhoe)",
+        "feature5Title": "Dinh dưỡng thời kỳ sinh trưởng",
+        "feature5Desc": "Bổ sung axit amin và vi lượng trong thời kỳ sinh trưởng",
+        "feature6Title": "Thời kỳ lạnh · nóng",
+        "feature6Desc": "Dùng để quản lý dinh dưỡng khi điều kiện sinh trưởng bất lợi",
+        "feature7Title": "Lần đầu sử dụng",
+        "feature7Desc": "Phun thử trên một diện tích nhỏ, kiểm tra phản ứng của cây rồi mới mở rộng",
+        "methodTitleTpl": "Cách sử dụng khuyến nghị {name}",
+        "method1Title": "Bón lên vỏ cây (thân chính · cành chính)",
+        "method1Dose": "500 ml cho 500 L nước",
+        "method1Note": "1–2 lần trước khi ra hoa",
+        "method2Title": "Phun lá",
+        "method2Dose": "500–600 ml cho 500 L nước",
+        "method2Note": "Cách 10–14 ngày · kiểm tra trước khi pha chung thuốc",
+        "method3Title": "Tưới gốc",
+        "method3Dose": "700 ml – 1 L cho 1.000㎡ (0,1 ha)",
+        "method3Note": "1–2 lần mỗi tháng",
+        "interviewTitle": "Tóm tắt phỏng vấn chủ Nông trại Inhoe",
+        "interviewFarmName": "Nông trại Inhoe",
+        "interviewFarmMeta": "Vườn đào · Phản hồi từ thực tế",
+        "interviewStarAria": "Đánh giá 5 sao",
+        "interviewQ1": "Gần như không còn rụng quả!",
+        "interviewA1": "Rụng quả giảm còn <span class=\"font-bold text-[#2D8A3E]\">khoảng 1/3 so với năm bình thường</span>, nỗi lo về sản lượng giảm đi rất nhiều.",
+        "interviewQ2": "Độ ngọt đạt <span class=\"text-[#2D8A3E]\">18 Brix</span>",
+        "interviewA2": "Độ ngọt đạt 18 Brix, giá trị thương phẩm tăng rõ rệt.",
+        "interviewNote": "Đây là tóm tắt trải nghiệm cá nhân của 1 nông dân, không đảm bảo hiệu quả.",
+        "interviewQ3": "Cũng không bị ngộ độc",
+        "interviewA3": "Ngay cả khi phun chung với thuốc khác cũng không thấy cháy lá vàng xanh, lá vẫn khỏe."
+    };
+
+    var productsVi = {
+        "silicate": {
+            "제품명": "Phân silic dạng hạt",
+            "카테고리": "SOIL CONDITIONER 01",
+            "서브타이틀": "Tăng cường thành tế bào thân và lá, giảm đổ ngã, giúp cây sinh trưởng khỏe mạnh.",
+            "규격": [
+                {
+                    "label": "Silic hòa tan (SiO₂)",
+                    "value": "25%"
+                },
+                {
+                    "label": "Độ kiềm",
+                    "value": "40%"
+                },
+                {
+                    "label": "MgO tan trong citrate (C-MgO)",
+                    "value": "2%"
+                }
+            ],
+            "규격_보충설명": "Thúc đẩy hoạt động phân giải của vi sinh vật trong đất.",
+            "주요사용처": [
+                {
+                    "label": "Lúa",
+                    "detail": "Cây ưa silic điển hình",
+                    "icon": "grass"
+                },
+                {
+                    "label": "Lúa mạch",
+                    "detail": "Hấp thu silic, chống đổ ngã, thúc đẩy sinh trưởng",
+                    "icon": "agriculture"
+                },
+                {
+                    "label": "Ngô",
+                    "detail": "Tăng cường mô thân và lá",
+                    "icon": "nutrition"
+                },
+                {
+                    "label": "Cỏ sân",
+                    "detail": "Lá đứng và cứng cáp",
+                    "icon": "yard"
+                },
+                {
+                    "label": "Cỏ chăn nuôi",
+                    "detail": "Tăng khả năng chịu hạn và chống chịu",
+                    "icon": "eco"
+                },
+                {
+                    "label": "Tre",
+                    "detail": "Cây hút nhiều silic",
+                    "icon": "forest"
+                },
+                {
+                    "label": "Măng",
+                    "detail": "Cây hút nhiều silic",
+                    "icon": "spa"
+                }
+            ],
+            "효능": [
+                {
+                    "headline": "Hấp thu dinh dưỡng cân đối",
+                    "desc": "Chứa 25% silic hòa tan, 40% độ kiềm và 2% MgO tan trong citrate, giúp hạn chế hấp thu đạm quá mức và hỗ trợ hấp thu lân."
+                },
+                {
+                    "headline": "Giữ ẩm cho đất",
+                    "desc": "Giảm bốc hơi nước từ đất."
+                },
+                {
+                    "headline": "Chống chịu stress môi trường",
+                    "desc": "Giúp lá đứng thẳng và cứng cáp, tăng khả năng chống chịu hạn hán và các stress môi trường khác."
+                },
+                {
+                    "headline": "Quang hợp · Đổ ngã · Sương giá",
+                    "desc": "Tăng quang hợp, chống đổ ngã và giảm hại do sương giá."
+                },
+                {
+                    "headline": "Tăng cường mô",
+                    "desc": "Silic làm mô biểu bì của lá và thân chắc hơn, giúp cây phát triển khỏe mạnh."
+                },
+                {
+                    "headline": "Chống đổ ngã · Đồng hóa",
+                    "desc": "Lá và thân cứng cáp giúp chống đổ ngã; lá bên dưới cũng nhận được ánh sáng, thúc đẩy quá trình đồng hóa carbon."
+                }
+            ],
+            "사용시기": [
+                "Thời điểm bón ít ảnh hưởng đến hiệu quả: có thể bón khi cày đất mùa xuân hoặc mùa thu, bón thúc trong 15 ngày sau khi cấy, hoặc bón đón đòng 30 ngày trước trổ bông.",
+                "Silic không tan trong nước mà tan trong axit do rễ cây, vi sinh vật và quá trình phân giải chất hữu cơ tạo ra."
+            ],
+            "사용방법": [
+                "Thông thường bón 200–300 kg (10–15 bao) cho 1.000㎡ (0,1 ha).",
+                "Cứ thiếu 1 ppm silic hữu hiệu thì cần khoảng 3,8 kg phân silic (khối lượng sản phẩm) cho 1.000㎡.",
+                "Đặc biệt phù hợp với cây hút nhiều silic như lúa, lúa mạch, ngô, cỏ sân, cỏ chăn nuôi, tre và măng."
+            ]
+        },
+        "limestone": {
+            "제품명": "Vôi magie dạng hạt",
+            "카테고리": "SOIL CONDITIONER 02",
+            "서브타이틀": "Cải tạo đất chua về trung tính, bổ sung canxi và magie, hỗ trợ hình thành diệp lục và tăng sức sống của rễ.",
+            "규격": [
+                {
+                    "label": "Độ kiềm",
+                    "value": "51%"
+                },
+                {
+                    "label": "MgO hòa tan (MgO)",
+                    "value": "14%"
+                }
+            ],
+            "주요사용처": [
+                {
+                    "label": "Vườn cây ăn quả",
+                    "detail": "Cải tạo đất chua, nâng cao chất lượng quả",
+                    "icon": "park"
+                },
+                {
+                    "label": "Cây trồng cạn",
+                    "detail": "Điều chỉnh pH đất cho rau, đậu…",
+                    "icon": "spa"
+                }
+            ],
+            "효능": [
+                {
+                    "headline": "Trung hòa độ chua của đất",
+                    "desc": "Cải tạo đất chua về trung tính, thúc đẩy hoạt động của vi sinh vật có ích."
+                },
+                {
+                    "headline": "Hỗ trợ tổng hợp diệp lục và protein",
+                    "desc": "Magie (Mg) hỗ trợ trao đổi chất và hấp thu protein, lân."
+                },
+                {
+                    "headline": "Độ ngọt và bảo quản",
+                    "desc": "Tăng độ ngọt của quả và kéo dài thời gian bảo quản."
+                },
+                {
+                    "headline": "Cải thiện cấu trúc đất",
+                    "desc": "Tỷ lệ hòa tan cao, hiệu quả hơn sản phẩm dạng bột thông thường, cải thiện khả năng thấm nước và thông khí của đất."
+                },
+                {
+                    "headline": "Hạn chế hấp thu kim loại nặng",
+                    "desc": "Đưa đất về gần trung tính, giúp hạn chế cây hấp thu kim loại nặng."
+                }
+            ],
+            "사용시기_결핍진단": [
+                "Thiếu magie: bón khi lá bạc màu, vàng, toàn cây vàng úa và sinh trưởng suy yếu rõ rệt.",
+                "Thiếu canxi: bón khi rau họ cải và cần tây bị thối nõn, ớt · cà chua bị thối đít quả, dưa chuột · cam quýt bị rối loạn vỏ quả.",
+                "Lượng bón thay đổi theo loại đất, cây trồng và khí hậu."
+            ],
+            "사용방법": [
+                "Dùng cho đất có pH dưới 6,5. Hiệu quả đặc biệt rõ với rau và cây ăn quả như lúa mạch, đậu tương, rau chân vịt, cải thảo, ớt, hành tây, tỏi, dưa lê.",
+                "Một lần bón có tác dụng khoảng 3 năm. (5–10 bao / 100–200 kg cho 10.000㎡)",
+                "Đây là phân có tính kiềm, tránh bón cùng lúc với các chất có tính axit như amoni sunfat, hỗn hợp amoni nitrat · supe lân, phân lân nung chảy, phân bắc, phân gà; nên bón trước các sản phẩm này khoảng 2 tuần.",
+                "Tốt nhất bón 1–2 tuần trước khi gieo hạt hoặc trồng cây.",
+                "Bón kết hợp với phân hữu cơ giúp chất hữu cơ phân giải nhanh hơn."
+            ],
+            "주의사항_경고배지": "Không bón cùng lúc với phân ủ chưa hoai hoặc phân đạm, phân lân. Để giảm thất thoát dinh dưỡng và hại do khí, hãy rải sản phẩm này và xới đất trước, ít nhất 2 tuần sau mới bón phân ủ hoặc phân khác."
+        },
+        "calciumSulfur": {
+            "제품명": "Phân canxi lưu huỳnh",
+            "카테고리": "SOIL CONDITIONER 03",
+            "서브타이틀": "Bổ sung canxi và lưu huỳnh khi bón lót hoặc bón thúc, ít ảnh hưởng đến pH đất.",
+            "규격": [
+                {
+                    "label": "Canxi (vôi, CaO)",
+                    "value": "26%"
+                },
+                {
+                    "label": "Lưu huỳnh (SO₃)",
+                    "value": "32%"
+                }
+            ],
+            "주요사용처": [
+                {
+                    "label": "Phòng thiếu canxi",
+                    "detail": "Dưa hấu, cà chua, ớt…",
+                    "icon": "health_and_safety"
+                },
+                {
+                    "label": "Tăng độ ngọt",
+                    "detail": "Dưa hấu, dưa lưới, táo, cà chua, dâu tây, cam quýt…",
+                    "icon": "nutrition"
+                },
+                {
+                    "label": "Củ cải và cải thảo",
+                    "detail": "Cuốn bắp chắc, tăng sản lượng thương phẩm",
+                    "icon": "spa"
+                },
+                {
+                    "label": "Cây gia vị",
+                    "detail": "Tỏi, hành tây, ớt…",
+                    "icon": "local_florist"
+                },
+                {
+                    "label": "Cây lấy củ",
+                    "detail": "Lạc, khoai mỡ, ngưu bàng, cà rốt…",
+                    "icon": "park"
+                },
+                {
+                    "label": "Hỗ trợ tăng sản lượng",
+                    "detail": "Khoai tây, ngô, hành lá, cải bẹ…",
+                    "icon": "trending_up"
+                },
+                {
+                    "label": "Đất dốc",
+                    "detail": "Ruộng, vườn cây và đất rừng dễ bị xói mòn",
+                    "icon": "landscape"
+                },
+                {
+                    "label": "Đất lấn biển",
+                    "detail": "Đất lấn biển nhiễm mặn và đất nhà kính chua",
+                    "icon": "water_drop"
+                }
+            ],
+            "효능": [
+                {
+                    "headline": "Bổ sung đồng thời canxi · lưu huỳnh",
+                    "desc": "Phù hợp với cây trồng cạn, vườn cây ăn quả và cây làm vườn."
+                },
+                {
+                    "headline": "Cây sinh trưởng khỏe",
+                    "desc": "Bổ sung đồng thời canxi và lưu huỳnh, giúp khoai tây, ngô… sinh trưởng khỏe mạnh."
+                },
+                {
+                    "headline": "Độ ngọt · Mùi thơm · Màu sắc",
+                    "desc": "Tăng độ ngọt, mùi thơm và màu sắc, góp phần tăng sản lượng cây làm vườn."
+                },
+                {
+                    "headline": "Cải tạo đất lấn biển",
+                    "desc": "Canxi trong sản phẩm giúp cải tạo đất lấn biển có hàm lượng natri cao."
+                },
+                {
+                    "headline": "Cải thiện cấu trúc đất",
+                    "desc": "Cải thiện độ thông khí và khả năng thấm, giúp giảm thất thoát dinh dưỡng và xói mòn đất."
+                }
+            ],
+            "표준시비량": "Bón 100–200 kg (5–10 bao) cho 1.000㎡ (0,1 ha), điều chỉnh theo tình trạng đất và cây trồng.",
+            "주의사항_경고배지": "Sau khi bón, hãy trộn kỹ với đất để sản phẩm hòa đều vào đất."
+        },
+        "organicSilicate": {
+            "제품명": "Phân silic dạng hạt Saengsaengnara (hữu cơ)",
+            "공시번호": "Số công bố 2-3-453",
+            "서브타이틀": "Vật tư hữu cơ dành cho nông trại có chứng nhận thân thiện môi trường – tăng cường thành tế bào thân và lá, giảm đổ ngã, giúp cây sinh trưởng khỏe mạnh.",
+            "규격": [
+                {
+                    "label": "Silic hòa tan (SiO₂)",
+                    "value": "25%"
+                },
+                {
+                    "label": "Độ kiềm",
+                    "value": "40%"
+                },
+                {
+                    "label": "MgO tan trong citrate (C-MgO)",
+                    "value": "2%"
+                }
+            ],
+            "주요사용처": [
+                {
+                    "label": "Nông trại chứng nhận thân thiện môi trường",
+                    "detail": "Lúa, lúa mì, ớt…",
+                    "icon": "eco"
+                },
+                {
+                    "label": "Lúa",
+                    "detail": "Chống đổ ngã, nâng cao chất lượng gạo",
+                    "icon": "grass"
+                },
+                {
+                    "label": "Lúa mì",
+                    "detail": "Phù hợp sản xuất có chứng nhận thân thiện môi trường",
+                    "icon": "agriculture"
+                },
+                {
+                    "label": "Ớt",
+                    "detail": "Phù hợp sản xuất có chứng nhận thân thiện môi trường",
+                    "icon": "local_florist"
+                }
+            ],
+            "효능": [
+                {
+                    "headline": "Chống chịu stress môi trường",
+                    "desc": "Giúp lá đứng thẳng và cứng cáp, tăng khả năng chống chịu hạn hán và các stress môi trường khác."
+                },
+                {
+                    "headline": "Quang hợp · Đổ ngã · Sương giá",
+                    "desc": "Tăng quang hợp, chống đổ ngã và giảm hại do sương giá."
+                },
+                {
+                    "headline": "Trung hòa đất chua",
+                    "desc": "Giúp trung hòa đất chua và có thể giảm lượng phân đạm."
+                },
+                {
+                    "headline": "Sản lượng và chất lượng gạo",
+                    "desc": "Giúp tăng năng suất lúa, cải thiện chất lượng và vị ngon của gạo."
+                },
+                {
+                    "headline": "Tăng cường mô",
+                    "desc": "Silic làm mô biểu bì của lá và thân chắc hơn, giúp cây phát triển khỏe mạnh."
+                },
+                {
+                    "headline": "Vật tư hữu cơ thân thiện môi trường",
+                    "desc": "Vật tư hữu cơ ít rủi ro bón thừa; các thành phần kiềm (silic, vôi, magie) cũng giúp tăng hiệu quả của phân lân."
+                }
+            ],
+            "사용시기": [
+                "Thời điểm bón ít ảnh hưởng đến hiệu quả: có thể bón khi cày đất mùa xuân hoặc mùa thu, bón thúc trong 15 ngày sau khi cấy, hoặc bón đón đòng 30 ngày trước trổ bông.",
+                "Silic không tan trong nước mà tan trong axit do rễ cây, vi sinh vật và quá trình phân giải chất hữu cơ tạo ra."
+            ],
+            "사용방법": [
+                "Thông thường bón 200–300 kg (10–15 bao) cho 1.000㎡ (0,1 ha).",
+                "Cứ thiếu 1 ppm silic hữu hiệu thì cần khoảng 3,8 kg phân silic (khối lượng sản phẩm) cho 1.000㎡.",
+                "Đặc biệt phù hợp với cây hút nhiều silic như lúa, lúa mạch, ngô, cỏ sân, cỏ chăn nuôi, tre và măng."
+            ]
+        },
+        "organicLimestone": {
+            "제품명": "Vôi magie Saengsaengnara",
+            "공시번호": "Số công bố 2-3-454",
+            "카테고리": "ORGANIC INPUT 02",
+            "서브타이틀": "Vật tư hữu cơ dành cho nông trại có chứng nhận thân thiện môi trường – cải tạo đất chua về trung tính, bổ sung canxi và magie, hỗ trợ hình thành diệp lục và tăng sức sống của rễ.",
+            "규격": [
+                {
+                    "label": "Độ kiềm",
+                    "value": "51%"
+                },
+                {
+                    "label": "MgO hòa tan (MgO)",
+                    "value": "14%"
+                }
+            ],
+            "주요사용처": [
+                {
+                    "label": "Nông trại chứng nhận thân thiện môi trường",
+                    "detail": "Vườn cây ăn quả và cây trồng cạn",
+                    "icon": "eco"
+                },
+                {
+                    "label": "Vườn cây ăn quả",
+                    "detail": "Cải tạo đất chua, nâng cao chất lượng quả",
+                    "icon": "park"
+                },
+                {
+                    "label": "Cây trồng cạn",
+                    "detail": "Lúa mạch, đậu tương, rau chân vịt, cải thảo, ớt, hành tây, tỏi, dưa lê…",
+                    "icon": "spa"
+                }
+            ],
+            "효능": [
+                {
+                    "headline": "Trung hòa đất chua",
+                    "desc": "Cải tạo đất chua về trung tính, hỗ trợ hấp thu dinh dưỡng và hạn chế hấp thu kim loại nặng."
+                },
+                {
+                    "headline": "Rễ và thân khỏe hơn",
+                    "desc": "Thúc đẩy vận chuyển carbohydrate, giúp rễ và thân chắc khỏe hơn."
+                },
+                {
+                    "headline": "Vi sinh vật đất",
+                    "desc": "Hỗ trợ hoạt động của vi sinh vật đất, tạo môi trường đất khỏe hơn."
+                },
+                {
+                    "headline": "Cải thiện cấu trúc đất",
+                    "desc": "Cải thiện độ thông khí và thấm nước, đồng thời giúp điều tiết hấp thu lân."
+                },
+                {
+                    "headline": "Bổ sung dinh dưỡng toàn diện",
+                    "desc": "Phân bón đất tổng hợp có thể bổ sung nhiều thành phần như canxi, vôi, magie, lưu huỳnh."
+                },
+                {
+                    "headline": "Sản lượng và chất lượng",
+                    "desc": "Giúp tăng hàm lượng dầu và sản lượng của đậu tương, cải dầu và quả; cải thiện độ ngọt, màu sắc và hình thức quả."
+                },
+                {
+                    "headline": "Diệp lục và hấp thu đạm",
+                    "desc": "Magie là thành phần của diệp lục, đồng thời hỗ trợ hấp thu đạm nitrat và hình thành cấu trúc viên của đất."
+                },
+                {
+                    "headline": "Chất hữu cơ và hiệu quả phân đạm",
+                    "desc": "Là vật tư hữu cơ thân thiện môi trường, giúp tăng chất hữu cơ, thúc đẩy vi sinh vật phân giải và nâng cao hiệu quả phân đạm."
+                }
+            ],
+            "사용시기": [
+                "Bón khi xuất hiện triệu chứng thiếu magie (lá bạc màu · xoăn hoặc toàn cây vàng úa, sinh trưởng suy yếu rõ rệt).",
+                "Hiệu quả rõ khi bón lúc có triệu chứng thiếu canxi (rau họ cải và cần tây thối nõn, vảy hành tây úng nước, ớt · cà chua thối đít quả, dưa chuột rối loạn vỏ quả…).",
+                "Lượng bón thay đổi theo loại đất, cây trồng và khí hậu.",
+                "Khi thừa đạm, bón vôi giúp hạn chế cây hấp thu đạm."
+            ],
+            "사용방법": [
+                "Dùng cho đất có pH dưới 6,5. Hiệu quả đặc biệt rõ với rau và cây ăn quả như lúa mạch, đậu tương, rau chân vịt, cải thảo, ớt, hành tây, tỏi, dưa lê.",
+                "Một lần bón có tác dụng khoảng 3 năm. (5–10 bao / 100–200 kg cho 10.000㎡)",
+                "Đây là phân có tính kiềm; tiếp xúc với các chất có tính axit như amoni sunfat, hỗn hợp amoni nitrat · supe lân, phân lân nung chảy, phân bắc, phân gà sẽ làm giảm hiệu quả, nên bón trước các sản phẩm này khoảng 2 tuần.",
+                "Tốt nhất trộn vào tầng canh tác 1–2 tuần trước khi gieo hạt hoặc trồng cây.",
+                "Bón kết hợp với phân hữu cơ giúp chất hữu cơ phân giải nhanh hơn."
+            ]
+        },
+        "organicMagSulfur": {
+            "제품명": "Saengsaenghwang Magie-Lưu huỳnh-Canxi",
+            "공시번호": "Số công bố 3-379",
+            "카테고리": "ORGANIC INPUT 03",
+            "서브타이틀": "Vật tư hữu cơ cao cấp kết hợp canxi, magie, lưu huỳnh và bentonite, giúp cải tạo đất và hỗ trợ cây sinh trưởng, đồng thời giảm lo ngại chua hóa đất. Đã được Cơ quan Quản lý Chất lượng Nông sản Quốc gia Hàn Quốc thẩm định và công bố (số công bố 3-379).",
+            "규격": [
+                {
+                    "label": "Độ kiềm",
+                    "value": "45,3%"
+                },
+                {
+                    "label": "Lưu huỳnh tổng số (S)",
+                    "value": "16%"
+                },
+                {
+                    "label": "CaO",
+                    "value": "22%"
+                },
+                {
+                    "label": "MgO hòa tan (MgO)",
+                    "value": "9,8%"
+                }
+            ],
+            "규격_보충설명": "Nguyên liệu chính: lưu huỳnh siêu tinh khiết (từ 99,5% trở lên), quặng magie đá vôi, bentonite · Tỷ lệ nguyên liệu: dolomite 76%, rỉ đường 4%, bentonite 2%, lưu huỳnh 18% · Khối lượng tịnh 20 kg · Hạn sử dụng 3 năm",
+            "주요사용처": [
+                {
+                    "label": "Vật tư hữu cơ đã công bố",
+                    "detail": "Rau ăn củ, cây lương thực, rau ăn lá, rau ăn quả, vườn cây ăn quả, hoa",
+                    "icon": "eco"
+                },
+                {
+                    "label": "Rau ăn lá",
+                    "detail": "Ví dụ: 2 bao (40 kg) cho 1.000㎡",
+                    "icon": "spa"
+                },
+                {
+                    "label": "Rau ăn củ · Cây lương thực",
+                    "detail": "Ví dụ: 3 bao (60 kg) cho 1.000㎡",
+                    "icon": "grass"
+                },
+                {
+                    "label": "Rau ăn quả · Cây họ đậu",
+                    "detail": "Ví dụ: 2 bao (40 kg) cho 1.000㎡",
+                    "icon": "local_florist"
+                },
+                {
+                    "label": "Vườn cây ăn quả",
+                    "detail": "Rải đều quanh tán cây",
+                    "icon": "park"
+                },
+                {
+                    "label": "Hoa · Nhà kính",
+                    "detail": "Bón riêng, cách phân ủ hoặc phân NPK từ 2 tuần trở lên",
+                    "icon": "nutrition"
+                }
+            ],
+            "효능": [
+                {
+                    "headline": "Vật tư hữu cơ đã công bố",
+                    "desc": "Vật tư hữu cơ đã được công bố, nông trại có chứng nhận thân thiện môi trường có thể yên tâm sử dụng."
+                },
+                {
+                    "headline": "Cấu trúc đất và hấp thu",
+                    "desc": "Bentonite và dolomite giúp cải thiện cấu trúc đất, giúp các dưỡng chất phức hợp được hấp thu hiệu quả hơn."
+                },
+                {
+                    "headline": "Cân bằng canxi · magie · lưu huỳnh",
+                    "desc": "Giúp rễ và thân chắc khỏe hơn, tăng tỷ lệ đậu quả và khả năng bảo quản."
+                },
+                {
+                    "headline": "Hương vị và độ giòn",
+                    "desc": "Phù hợp với sản xuất hướng tới độ ngọt, độ giòn và chất lượng ăn uống cao hơn."
+                },
+                {
+                    "headline": "Giảm áp lực chua hóa",
+                    "desc": "Giúp pH đất duy trì trong khoảng thuận lợi cho việc sử dụng dinh dưỡng."
+                },
+                {
+                    "headline": "Nền tảng sinh trưởng",
+                    "desc": "Hỗ trợ sức sống của rễ và hoạt động của vi sinh vật đất, thúc đẩy cây sinh trưởng khỏe mạnh."
+                }
+            ],
+            "사용시기": [
+                "Thời điểm bón tốt nhất là từ mùa thu đến đầu xuân; nếu lỡ thời điểm này vẫn có thể dùng quanh năm.",
+                "Liều lượng cụ thể hãy tham khảo khuyến nghị phân tích đất tại địa phương.",
+                "Với nhà kính, hãy bón trước phân NPK hoặc phân ủ ít nhất 2 tuần."
+            ],
+            "사용방법": [
+                "Rau ăn lá: 2 bao (40 kg) cho 1.000㎡; bón lót 7–10 ngày trước khi trồng, cày sâu trộn vào đất.",
+                "Rau ăn củ: 3 bao (60 kg) cho 1.000㎡; bón đều trong vùng rễ phân bố.",
+                "Cây lương thực (lúa, lúa mạch, đậu tương…): 3 bao (60 kg) cho 1.000㎡; bón lót trước khi gieo hoặc trồng, cày sâu trộn vào đất.",
+                "Rau ăn quả: 2 bao (40 kg) cho 1.000㎡; bón lót 7–10 ngày trước khi trồng, cày sâu trộn vào đất.",
+                "Vườn cây ăn quả · Cây họ đậu: 2 bao (40 kg) cho 1.000㎡; điều chỉnh theo tình trạng đất, rải đều quanh tán cây.",
+                "Liều ghi trên nhãn: 60 kg cho 1.000㎡, trộn vào đất trước khi trồng. Tránh tùy ý trộn chung với sản phẩm khác."
+            ],
+            "표준시비량": [
+                "Ví dụ cho 1.000㎡ (0,1 ha): rau ăn lá · rau ăn quả 2 bao (40 kg), rau ăn củ · cây lương thực 3 bao (60 kg), vườn cây ăn quả · cây họ đậu 2 bao (40 kg).",
+                "Theo cây trồng: rau ăn lá 2 bao/40 kg · rau ăn củ · cây lương thực 3 bao/60 kg · rau ăn quả · vườn cây 2 bao/40 kg, trộn vào đất 7–10 ngày trước khi trồng hoặc gieo.",
+                "Điều chỉnh theo đất, cây trồng và khí hậu; ưu tiên tham khảo kết quả phân tích đất."
+            ],
+            "추천_목록": [
+                "Nông trại hữu cơ hoặc thân thiện môi trường cần bổ sung cân đối canxi, magie, lưu huỳnh",
+                "Ruộng, vườn cây hoặc luống nhà kính lo ngại đất bị chua hóa",
+                "Sản xuất chú trọng hương vị, độ ngọt và khả năng bảo quản của rau quả",
+                "Khi muốn bón lót riêng, tách biệt với phân NPK"
+            ],
+            "FAQ_목록": [
+                {
+                    "q": "Bón khi nào? Có thể trộn với phân NPK không?",
+                    "a": "Hãy bón trước khi trồng hoặc gieo. Có thể trộn với phân ủ; phân NPK nên bón cách 1–2 tuần."
+                },
+                {
+                    "q": "Có thể phun lá hoặc bón qua hệ thống tưới nhỏ giọt không?",
+                    "a": "Nên trộn vào đất hoặc bón lót. Đây là sản phẩm dạng hạt, phun lá và tưới nhỏ giọt kém hiệu quả và có thể làm tắc đầu nhỏ giọt, nên không khuyến nghị."
+                }
+            ],
+            "주의사항_목록": [
+                "Sử dụng ở nơi thoáng khí, tránh hít bụi và tiếp xúc với da.",
+                "Sau khi mở bao hãy dùng sớm, phần còn lại đóng kín để bảo quản.",
+                "Khi sử dụng hãy đeo găng tay, khẩu trang và đồ bảo hộ; rửa sạch sau khi dùng.",
+                "Trong nhà kính, trộn chung với phân NPK hoặc phân ủ chưa hoai có thể sinh khí; hãy bón lót trước khi trồng hoặc gieo.",
+                "Bảo quản nơi khô ráo, thoáng mát, tránh ánh nắng trực tiếp và ẩm ướt. Đậy kín khi không sử dụng."
+            ],
+            "유기농업자재표시사항": [
+                "Số công bố 3-379 · Tên · nhãn hiệu: Vôi magie + khoáng sét + lưu huỳnh (Saengsaenghwang Magie-Lưu huỳnh-Canxi)",
+                "Phân loại: dùng cải tạo đất và hỗ trợ sinh trưởng cây trồng · Khối lượng tịnh 20 kg",
+                "Thành phần chính: lưu huỳnh tổng số 16%, độ kiềm 45,3%, CaO 22%, MgO hòa tan 9,8%",
+                "Nguyên liệu: dolomite 76%, rỉ đường 4%, bentonite 2%, lưu huỳnh 18%",
+                "Ngày sản xuất: ghi riêng ở mặt trước bao bì · Hạn sử dụng 3 năm",
+                "Cách dùng: 60 kg cho 1.000㎡ trước khi trồng · HANIL C&S, 76 Duryu-gil, Angang-eup, Gyeongju, Hàn Quốc · +82-54-762-9691~2",
+                "Việc công bố chỉ xác nhận sản phẩm có thể dùng trong sản xuất nông sản hữu cơ, không bảo đảm hiệu quả và hàm lượng dinh dưỡng.",
+                "Cây trồng thử nghiệm: ớt, cải thảo, xà lách, dưa chuột, cà chua"
+            ]
+        }
+    };
+
+    Object.keys(productsVi).forEach(function (id) {
+        if (products[id]) products[id].vi = productsVi[id];
+    });
+
     window.CatalogModalI18n = {
-        ui: { ko: uiKo, en: uiEn, zh: uiZh },
+        ui: { ko: uiKo, en: uiEn, zh: uiZh, vi: uiVi },
         products: products
     };
 })();
