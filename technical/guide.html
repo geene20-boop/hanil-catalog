@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title data-i18n="meta.page.guide">사용 가이드 | (주)한일씨앤에스</title>
+        <meta name="description" data-i18n-content="meta.description" content="1999년 설립 이래 26년간 토양개량제를 전문 제조해온 한일씨앤에스(HANIL C&S)의 전자카탈로그입니다. 입상규산질·석회고토·칼슘유황 등 토양개량제부터 유기농업자재, 고농축 액상비료 생생비타, 베트남·가나·중국 수출 제품까지 작물별 맞춤 처방을 확인하고 내 농가 시비량을 직접 계산해보세요.">
+        <meta name="keywords" content="한일씨앤에스, HANIL C&S, 토양개량제, 입상규산질비료, 입상석회고토비료, 입상칼슘유황비료, 생생나라, 생생비타, 유기농업자재, 정부지원 토양개량제, 비료 전자카탈로그, 시비량 계산기, 비료 수출, OEM ODM 비료, 경주 비료회사">
+        <meta name="author" content="한일씨앤에스">
+        <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+        <link rel="canonical" href="/company/brandstory.html">
+
+        <meta property="og:type" content="website">
+        <meta property="og:site_name" data-i18n-content="meta.ogSiteName" content="한일씨앤에스">
+        <meta property="og:title" data-i18n-content="meta.ogTitle" content="(주)한일씨앤에스 | 친환경 인증으로 시작해, 작물에 맞게 완성합니다.">
+        <meta property="og:description" data-i18n-content="meta.description" content="1999년 설립 이래 26년간 토양개량제를 전문 제조해온 한일씨앤에스(HANIL C&S)의 전자카탈로그입니다. 입상규산질·석회고토·칼슘유황 등 토양개량제부터 유기농업자재, 고농축 액상비료 생생비타, 베트남·가나·중국 수출 제품까지 작물별 맞춤 처방을 확인하고 내 농가 시비량을 직접 계산해보세요.">
+        <meta property="og:url" content="/company/brandstory.html">
+        <meta property="og:image" content="../assets/img/intro.jpg">
+        <link rel="icon" href="../assets/img/favicon.ico" type="image/x-icon">
+
+        <script src="../assets/js/tailwindcss.local.js"></script>
+        <link rel="stylesheet" href="../assets/css/pretendardvariable.css">
+        <link rel="stylesheet" href="../assets/css/main.css">
+        <link rel="stylesheet" href="../assets/css/header.css">
+        <link rel="stylesheet" href="../assets/css/catalog-gsap.css">
+        <style>
+            /* .catalog-app {
+                position: relative;
+            }
+            .catalog-app::before {
+                content: '';
+                position: absolute;
+                inset: 0;
+                background: linear-gradient(to bottom, transparent 0%, transparent 50%, #FEFEFE 100%);
+                z-index: 0;
+                pointer-events: none;
+            }
+            .catalog-app > * {
+                position: relative;
+                z-index: 1;
+            } */
+            .guide-timeline-scroll {
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+                overscroll-behavior-x: contain;
+                border-radius: 12px;
+                cursor: grab;
+                user-select: none;
+                -webkit-user-select: none;
+                touch-action: pan-x;
+            }
+            .guide-timeline-scroll.is-dragging {
+                cursor: grabbing;
+                scroll-behavior: auto;
+            }
+            .guide-timeline-scroll::-webkit-scrollbar {
+                height: 8px;
+            }
+            .guide-timeline-scroll::-webkit-scrollbar-thumb {
+                background: rgba(12, 86, 37, 0.28);
+                border-radius: 9999px;
+            }
+            .guide-timeline-scroll::-webkit-scrollbar-track {
+                background: rgba(255, 255, 255, 0.55);
+                border-radius: 9999px;
+            }
+            .guide-crop-sticky {
+                position: sticky;
+                left: 0;
+                z-index: 3;
+            }
+            .guide-crop-sticky.guide-crop-head {
+                background: #fff;
+                box-shadow: 8px 0 12px -10px rgba(0, 0, 0, 0.18);
+                z-index: 4;
+            }
+            .guide-step-badge {
+                overflow: hidden;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                min-width: 0;
+            }
+            .guide-step-badge.is-overflow {
+                justify-content: flex-start;
+            }
+            .guide-step-badge__text {
+                display: inline-block;
+                white-space: nowrap;
+                will-change: transform;
+            }
+            .guide-step-badge.is-overflow .guide-step-badge__text {
+                padding-inline: 6px;
+                animation-name: guide-step-marquee;
+                animation-timing-function: ease-in-out;
+                animation-iteration-count: infinite;
+                animation-direction: alternate;
+                animation-fill-mode: both;
+            }
+            @keyframes guide-step-marquee {
+                from { transform: translateX(0); }
+                to { transform: translateX(var(--marquee-x, 0px)); }
+            }
+        </style>
+    </head>
+    <body class="min-h-screen bg-[#E6E6DC] text-white antialiased overflow-x-hidden">
+        <div class="catalog-app flex min-h-screen bg-cover bg-center bg-no-repeat bg-fixed">
+            <script src="../assets/js/include-header.js"></script>
+
+            <main class="relative flex flex-col justify-start items-center w-full pt-[150px] pb-[0] max-lg:pt-[110px] max-md:pt-[88px]">
+                <div class='boundary w-[90%] max-md:w-[94%] max-w-[1600px] min-[1921px]:max-w-[2000px] mx-auto mb-[50px]'>
+                    <h3 class='gsap-hide text-base max-md:text-sm text-[#154624] mb-[10px] text-center max-md:text-left' data-gsap-fade data-i18n="guide.eyebrow">Application Guide</h3>
+                    <div class='w-full'>
+                        <h2 class='gsap-hide text-6xl max-xl:text-5xl max-lg:text-4xl max-md:text-3xl font-bold text-[#154624] mb-[10px] text-center max-md:text-left' data-gsap-fade data-i18n="guide.title">제품 사용 가이드</h2>
+                        <p class='gsap-hide text-xl max-lg:text-lg max-md:text-base text-[#154624] font-medium text-center max-md:text-left' data-gsap-fade data-i18n="guide.desc">입상 토양개량제는 속효성이 아니라 토양 속에서 서서히 반응하는 완효성 제품입니다.</p>
+                    </div>
+                </div>
+                <div class='boundary w-[90%] max-md:w-[94%] max-w-[1600px] min-[1921px]:max-w-[2000px] mx-auto'>
+                    <div class='gsap-hide flex items-end justify-between gap-3 mb-[10px] max-md:flex-col max-md:items-start' data-gsap-fade>
+                        <h3 class='text-2xl max-lg:text-xl max-md:text-lg text-left text-[#154624] font-semibold' data-i18n="guide.timelineTitle">작물별 시비 타이밍 요약</h3>
+                        <p class='hidden max-xl:flex items-center gap-1.5 text-sm max-md:text-xs text-[#6c6c6c] font-medium'>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/><polyline points="21 18 15 12 21 6"/></svg>
+                            <span data-i18n="guide.scrollHint">좌우로 밀어 전체 일정을 확인하세요</span>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Scrollable calendar grid (all breakpoints) -->
+                <div class='gsap-hide boundary w-[90%] max-md:w-[94%] max-w-[1600px] min-[1921px]:max-w-[2000px] mx-auto' data-gsap-fade>
+                    <div class='guide-timeline-scroll'>
+                        <ul class='grid w-full min-w-[960px] list-none gap-y-[2px] [&>li]:bg-white grid-cols-[200px_repeat(12,minmax(64px,1fr))] xl:grid-cols-[240px_repeat(12,1fr)] rounded-xl overflow-hidden'>
+                            <li class='guide-crop-sticky guide-crop-head flex items-center justify-center text-sm text-center text-[#6c6c6c] py-[10px] font-semibold' data-i18n="guide.timeline.crop">작물</li>
+                            <li class='flex items-center justify-center text-sm text-center text-[#6c6c6c] py-[10px] font-semibold border-x-[0.5px] border-dashed border-[#D4D4D4]' data-i18n="guide.timeline.month1">1월</li>
+                            <li class='flex items-center justify-center text-sm text-center text-[#6c6c6c] py-[10px] font-semibold border-r-[0.5px] border-dashed border-[#D4D4D4]' data-i18n="guide.timeline.month2">2월</li>
+                            <li class='flex items-center justify-center text-sm text-center text-[#6c6c6c] py-[10px] font-semibold border-r-[0.5px] border-dashed border-[#D4D4D4]' data-i18n="guide.timeline.month3">3월</li>
+                            <li class='flex items-center justify-center text-sm text-center text-[#6c6c6c] py-[10px] font-semibold border-r-[0.5px] border-dashed border-[#D4D4D4]' data-i18n="guide.timeline.month4">4월</li>
+                            <li class='flex items-center justify-center text-sm text-center text-[#6c6c6c] py-[10px] font-semibold border-r-[0.5px] border-dashed border-[#D4D4D4]' data-i18n="guide.timeline.month5">5월</li>
+                            <li class='flex items-center justify-center text-sm text-center text-[#6c6c6c] py-[10px] font-semibold border-r-[0.5px] border-dashed border-[#D4D4D4]' data-i18n="guide.timeline.month6">6월</li>
+                            <li class='flex items-center justify-center text-sm text-center text-[#6c6c6c] py-[10px] font-semibold border-r-[0.5px] border-dashed border-[#D4D4D4]' data-i18n="guide.timeline.month7">7월</li>
+                            <li class='flex items-center justify-center text-sm text-center text-[#6c6c6c] py-[10px] font-semibold border-r-[0.5px] border-dashed border-[#D4D4D4]' data-i18n="guide.timeline.month8">8월</li>
+                            <li class='flex items-center justify-center text-sm text-center text-[#6c6c6c] py-[10px] font-semibold border-r-[0.5px] border-dashed border-[#D4D4D4]' data-i18n="guide.timeline.month9">9월</li>
+                            <li class='flex items-center justify-center text-sm text-center text-[#6c6c6c] py-[10px] font-semibold border-r-[0.5px] border-dashed border-[#D4D4D4]' data-i18n="guide.timeline.month10">10월</li>
+                            <li class='flex items-center justify-center text-sm text-center text-[#6c6c6c] py-[10px] font-semibold border-r-[0.5px] border-dashed border-[#D4D4D4]' data-i18n="guide.timeline.month11">11월</li>
+                            <li class='flex items-center justify-center text-sm text-center text-[#6c6c6c] py-[10px] font-semibold border-r-[0.5px] border-dashed border-[#D4D4D4]' data-i18n="guide.timeline.month12">12월</li>
+
+                            <li class='guide-crop-sticky relative h-[64px] flex items-center px-[20px] bg-cover bg-center' style='background-image: url(../assets/img/guide-01.jpg);'>
+                                <div class='absolute inset-0 bg-black/20'></div>
+                                <span class='relative z-10 text-white text-lg font-bold leading-[1.2]' data-i18n="guide.crop1">벼</span>
+                            </li>
+                            <li class='border-x-[0.5px] border-dashed border-[#D4D4D4]'></li>
+                            <li class='border-r-[0.5px] border-dashed border-[#D4D4D4]'></li>
+                            <li class='p-[4px] flex items-center justify-center border-r-[0.5px] border-dashed border-[#D4D4D4]' style='grid-column: span 2;'><div class='bg-[#2F6B3A] text-white text-sm max-xl:text-xs font-semibold text-center rounded-md py-[8px] max-xl:py-[6px] guide-step-badge w-full'><span class='guide-step-badge__text' data-i18n="guide.crop1Step1">모내기 한달 전</span></div></li>
+                            <li class='p-[4px] flex items-center justify-center border-r-[0.5px] border-dashed border-[#D4D4D4]' style='grid-column: span 2;'><div class='bg-[#2F6B3A] text-white text-sm max-xl:text-xs font-semibold text-center rounded-md py-[8px] max-xl:py-[6px] guide-step-badge w-full'><span class='guide-step-badge__text' data-i18n="guide.crop1Step2">모낸 후 15일 이내</span></div></li>
+                            <li class='p-[4px] flex items-center justify-center border-r-[0.5px] border-dashed border-[#D4D4D4]' style='grid-column: span 2;'><div class='bg-[#2F6B3A] text-white text-sm max-xl:text-xs font-semibold text-center rounded-md py-[8px] max-xl:py-[6px] guide-step-badge w-full'><span class='guide-step-badge__text' data-i18n="guide.crop1Step3">출수기 30일 전</span></div></li>
+                            <li class='border-r-[0.5px] border-dashed border-[#D4D4D4]'></li>
+                            <li class='border-r-[0.5px] border-dashed border-[#D4D4D4]'></li>
+                            <li class='border-r-[0.5px] border-dashed border-[#D4D4D4]'></li>
+                            <li class='border-r-[0.5px] border-dashed border-[#D4D4D4]'></li>
+
+                            <li class='guide-crop-sticky relative h-[64px] flex items-center px-[20px] bg-cover bg-center' style='background-image: url(../assets/img/guide-02.jpg);'>
+                                <div class='absolute inset-0 bg-black/20'></div>
+                                <span class='relative z-10 text-white text-lg font-bold leading-[1.2]' data-i18n="guide.crop2">고추 · 토마토 · 오이</span>
+                            </li>
+                            <li class='border-x-[0.5px] border-dashed border-[#D4D4D4]'></li>
+                            <li class='border-r-[0.5px] border-dashed border-[#D4D4D4]'></li>
+                            <li class='border-r-[0.5px] border-dashed border-[#D4D4D4]'></li>
+                            <li class='border-r-[0.5px] border-dashed border-[#D4D4D4]'></li>
+                            <li class='p-[4px] flex items-center justify-center border-r-[0.5px] border-dashed border-[#D4D4D4]' style='grid-column: span 4;'><div class='bg-[#D97706] text-white text-sm max-xl:text-xs font-semibold text-center rounded-md py-[8px] max-xl:py-[6px] guide-step-badge w-full'><span class='guide-step-badge__text' data-i18n="guide.crop2Step1">정식 3~4주전</span></div></li>
+                            <li class='border-r-[0.5px] border-dashed border-[#D4D4D4]'></li>
+                            <li class='border-r-[0.5px] border-dashed border-[#D4D4D4]'></li>
+                            <li class='border-r-[0.5px] border-dashed border-[#D4D4D4]'></li>
+                            <li class='border-r-[0.5px] border-dashed border-[#D4D4D4]'></li>
+
+                            <li class='guide-crop-sticky relative h-[64px] flex items-center px-[20px] bg-cover bg-center' style='background-image: url(../assets/img/guide-03.jpg);'>
+                                <div class='absolute inset-0 bg-black/20'></div>
+                                <span class='relative z-10 text-white text-lg font-bold leading-[1.2]' data-i18n="guide.crop3">마늘 · 양파 · 무 · 감자</span>
+                            </li>
+                            <li class='border-x-[0.5px] border-dashed border-[#D4D4D4]'></li>
+                            <li class='border-r-[0.5px] border-dashed border-[#D4D4D4]'></li>
+                            <li class='border-r-[0.5px] border-dashed border-[#D4D4D4]'></li>
+                            <li class='border-r-[0.5px] border-dashed border-[#D4D4D4]'></li>
+                            <li class='border-r-[0.5px] border-dashed border-[#D4D4D4]'></li>
+                            <li class='p-[4px] flex items-center justify-center border-r-[0.5px] border-dashed border-[#D4D4D4]' style='grid-column: span 3;'><div class='bg-[#B85C2E] text-white text-sm max-xl:text-xs font-semibold text-center rounded-md py-[8px] max-xl:py-[6px] guide-step-badge w-full'><span class='guide-step-badge__text' data-i18n="guide.crop3Step1">정식 2~3개월 전</span></div></li>
+                            <li class='p-[4px] flex items-center justify-center border-r-[0.5px] border-dashed border-[#D4D4D4]' style='grid-column: span 2;'><div class='bg-[#B85C2E] text-white text-sm max-xl:text-xs font-semibold text-center rounded-md py-[8px] max-xl:py-[6px] guide-step-badge w-full'><span class='guide-step-badge__text' data-i18n="guide.crop3Step2">가을 로터리 전</span></div></li>
+                            <li class='border-r-[0.5px] border-dashed border-[#D4D4D4]'></li>
+                            <li class='border-r-[0.5px] border-dashed border-[#D4D4D4]'></li>
+
+                            <li class='guide-crop-sticky relative h-[64px] flex items-center px-[20px] bg-cover bg-center' style='background-image: url(../assets/img/guide-04.jpg);'>
+                                <div class='absolute inset-0 bg-black/20'></div>
+                                <span class='relative z-10 text-white text-lg font-bold leading-[1.2]' data-i18n="guide.crop4">과수</span>
+                            </li>
+                            <li class='p-[4px] flex items-center justify-center border-x-[0.5px] border-dashed border-[#D4D4D4]' style='grid-column: span 2;'><div class='bg-[#6B46C1] text-white text-sm max-xl:text-xs font-semibold text-center rounded-md py-[8px] max-xl:py-[6px] guide-step-badge w-full'><span class='guide-step-badge__text' data-i18n="guide.crop4Step1">낙엽 후 휴면기</span></div></li>
+                            <li class='border-r-[0.5px] border-dashed border-[#D4D4D4]'></li>
+                            <li class='border-r-[0.5px] border-dashed border-[#D4D4D4]'></li>
+                            <li class='border-r-[0.5px] border-dashed border-[#D4D4D4]'></li>
+                            <li class='border-r-[0.5px] border-dashed border-[#D4D4D4]'></li>
+                            <li class='border-r-[0.5px] border-dashed border-[#D4D4D4]'></li>
+                            <li class='border-r-[0.5px] border-dashed border-[#D4D4D4]'></li>
+                            <li class='border-r-[0.5px] border-dashed border-[#D4D4D4]'></li>
+                            <li class='border-r-[0.5px] border-dashed border-[#D4D4D4]'></li>
+                            <li class='p-[4px] flex items-center justify-center border-r-[0.5px] border-dashed border-[#D4D4D4]' style='grid-column: span 2;'><div class='bg-[#6B46C1] text-white text-sm max-xl:text-xs font-semibold text-center rounded-md py-[8px] max-xl:py-[6px] guide-step-badge w-full'><span class='guide-step-badge__text' data-i18n="guide.crop4Step2">낙엽 후 휴면기</span></div></li>
+
+                            <li class='guide-crop-sticky relative h-[64px] flex items-center px-[20px] bg-cover bg-center' style='background-image: url(../assets/img/guide-05.jpg);'>
+                                <div class='absolute inset-0 bg-black/20'></div>
+                                <span class='relative z-10 text-white text-lg font-bold leading-[1.2]' data-i18n="guide.crop5">시설하우스</span>
+                            </li>
+                            <li class='p-[4px] flex items-center justify-center border-x-[0.5px] border-dashed border-[#D4D4D4]' style='grid-column: span 12;'><div class='bg-[#0F766E] text-white text-sm max-xl:text-xs font-semibold text-center rounded-md py-[8px] max-xl:py-[6px] guide-step-badge w-full'><span class='guide-step-badge__text' data-i18n="guide.crop5Step1">정식 3~4주 전 + 생육기 엽상 보완</span></div></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class='boundary w-[90%] max-md:w-[94%] max-w-[1600px] min-[1921px]:max-w-[2000px] mx-auto mt-[50px] max-md:mt-[32px]'>
+                    <h3 class='gsap-hide text-2xl max-lg:text-xl max-md:text-lg text-left text-[#154624] font-semibold mb-[10px]' data-gsap-fade data-i18n="guide.tipsTitle">제품 사용 가이드</h3>
+                </div>
+                <div class='boundary w-[90%] max-md:w-[94%] max-w-[1600px] min-[1921px]:max-w-[2000px] grid grid-cols-4 max-xl:grid-cols-2 max-md:grid-cols-1 gap-[20px] max-md:gap-[14px] mx-auto  max-md:pb-[120px]'>
+                    <div class='gsap-hide col-span-1 w-full bg-[#ffffff] rounded-[20px] mb-[30px] max-md:mb-0 flex flex-col overflow-hidden' data-gsap-card>
+                        <div class="img-wrap aspect-[16/9] overflow-hidden relative rounded-[20px] border-[3px] border-[#ffffff]">
+                            <img src='../assets/img/guide-sub-01.jpg' alt='혼용 금지' class='absolute inset-0 w-full h-full object-cover'>
+                        </div>
+                        <div class='relative flex items-center justify-center px-[20px] max-md:px-[16px] py-[40px] max-md:py-[28px] w-full flex-1 bg-[url(../assets/img/brand-story-card-ui-pettern.png)] bg-cover bg-center bg-no-repeat'>
+                            <div class='absolute top-[-25px] left-1/2 -translate-x-1/2 rounded-full w-[50px] h-[50px] bg-[#123E21] flex items-center justify-center border border-white'>
+                                <img src='../assets/img/guide-icon-01.svg' alt='혼용 금지'>
+                            </div>
+                            <div class='w-full relative z-10'>
+                                <h4 class='text-2xl max-lg:text-xl max-md:text-lg text-center font-bold text-[#000000] mb-[5px] leading-[1.2]' data-i18n="guide.tip1Title">혼용 금지</h4>
+                                <p class='text-lg max-md:text-base text-center text-[#6c6c6c] leading-[1.4]' data-i18n="guide.tip1Desc">질소질·복합비료와 <b>혼용해서 사용하지 말아야</b> 합니다.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class='gsap-hide col-span-1 w-full bg-[#ffffff] rounded-[20px] mb-[30px] max-md:mb-0 flex flex-col overflow-hidden' data-gsap-card>
+                        <div class="img-wrap aspect-[16/9] overflow-hidden relative rounded-[20px] border-[3px] border-[#ffffff]">
+                            <img src='../assets/img/guide-sub-02.jpg' alt='경운 추천' class='absolute inset-0 w-full h-full object-cover'>
+                        </div>
+                        <div class='relative flex items-center justify-center px-[20px] max-md:px-[16px] py-[40px] max-md:py-[28px] w-full flex-1 bg-[url(../assets/img/brand-story-card-ui-pettern.png)] bg-cover bg-center bg-no-repeat'>
+                            <div class='absolute top-[-25px] left-1/2 -translate-x-1/2 rounded-full w-[50px] h-[50px] bg-[#123E21] flex items-center justify-center border border-white'>
+                                <img src='../assets/img/guide-icon-02.svg' alt='경운 추천'>
+                            </div>
+                            <div class='w-full relative z-10'>
+                                <h4 class='text-2xl max-lg:text-xl max-md:text-lg text-center font-bold text-[#000000] mb-[5px] leading-[1.2]' data-i18n="guide.tip2Title">경운 추천</h4>
+                                <p class='text-lg max-md:text-base text-center text-[#6c6c6c] leading-[1.4]' data-i18n="guide.tip2Desc"><b>가능한 표면에 방치 금지</b>, <br> 작토층 전체에 골고루 혼화</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class='gsap-hide col-span-1 w-full bg-[#ffffff] rounded-[20px] mb-[30px] max-md:mb-0 flex flex-col overflow-hidden' data-gsap-card>
+                        <div class="img-wrap aspect-[16/9] overflow-hidden relative rounded-[20px] border-[3px] border-[#ffffff]">
+                            <img src='../assets/img/guide-sub-03.jpg' alt='1~2주 시차 살포' class='absolute inset-0 w-full h-full object-cover'>
+                        </div>
+                        <div class='relative flex items-center justify-center px-[20px] max-md:px-[16px] py-[40px] max-md:py-[28px] w-full flex-1 bg-[url(../assets/img/brand-story-card-ui-pettern.png)] bg-cover bg-center bg-no-repeat'>
+                            <div class='absolute top-[-25px] left-1/2 -translate-x-1/2 rounded-full w-[50px] h-[50px] bg-[#123E21] flex items-center justify-center border border-white'>
+                                <img src='../assets/img/guide-icon-03.svg' alt='1~2주 시차 살포'>
+                            </div>
+                            <div class='w-full relative z-10'>
+                                <h4 class='text-2xl max-lg:text-xl max-md:text-lg text-center font-bold text-[#000000] mb-[5px] leading-[1.2]' data-i18n="guide.tip3Title">1~2주 시차 살포</h4>
+                                <p class='text-lg max-md:text-base text-center text-[#6c6c6c] leading-[1.4]' data-i18n="guide.tip3Desc">토양개량제 먼저, <br> <b>1~2주</b> 뒤 화학비료 사용</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class='gsap-hide col-span-1 w-full bg-[#ffffff] rounded-[20px] mb-[30px] max-md:mb-0 flex flex-col overflow-hidden' data-gsap-card>
+                        <div class="img-wrap aspect-[16/9] overflow-hidden relative rounded-[20px] border-[3px] border-[#ffffff]">
+                            <img src='../assets/img/guide-sub-04.jpg' alt='토양검정' class='absolute inset-0 w-full h-full object-cover'>
+                        </div>
+                        <div class='relative flex items-center justify-center px-[20px] max-md:px-[16px] py-[40px] max-md:py-[28px] w-full flex-1 bg-[url(../assets/img/brand-story-card-ui-pettern.png)] bg-cover bg-center bg-no-repeat'>
+                            <div class='absolute top-[-25px] left-1/2 -translate-x-1/2 rounded-full w-[50px] h-[50px] bg-[#123E21] flex items-center justify-center border border-white'>
+                                <img src='../assets/img/guide-icon-04.svg' alt='토양검정'>
+                            </div>
+                            <div class='w-full relative z-10'>
+                                <h4 class='text-2xl max-lg:text-xl max-md:text-lg text-center font-bold text-[#000000] mb-[5px] leading-[1.2]' data-i18n="guide.tip4Title">토양검정</h4>
+                                <p class='text-lg max-md:text-base text-center text-[#6c6c6c] leading-[1.4]' data-i18n="guide.tip4Desc">과다 시비 시 미량요소 <br> 결핍과 <b>길항작용 주의</b></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </body>
+    <script>
+        (function () {
+            var el = document.querySelector('.guide-timeline-scroll');
+            if (!el) return;
+
+            var isDown = false;
+            var startX = 0;
+            var startScroll = 0;
+            var moved = false;
+
+            el.addEventListener('pointerdown', function (e) {
+                if (e.pointerType === 'mouse' && e.button !== 0) return;
+                isDown = true;
+                moved = false;
+                startX = e.clientX;
+                startScroll = el.scrollLeft;
+                el.classList.add('is-dragging');
+                try { el.setPointerCapture(e.pointerId); } catch (err) {}
+            });
+
+            el.addEventListener('pointermove', function (e) {
+                if (!isDown) return;
+                var dx = e.clientX - startX;
+                if (Math.abs(dx) > 3) moved = true;
+                el.scrollLeft = startScroll - dx;
+            });
+
+            function endDrag(e) {
+                if (!isDown) return;
+                isDown = false;
+                el.classList.remove('is-dragging');
+                try { el.releasePointerCapture(e.pointerId); } catch (err) {}
+            }
+
+            el.addEventListener('pointerup', endDrag);
+            el.addEventListener('pointercancel', endDrag);
+            el.addEventListener('lostpointercapture', function () {
+                isDown = false;
+                el.classList.remove('is-dragging');
+            });
+
+            el.addEventListener('click', function (e) {
+                if (moved) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    moved = false;
+                }
+            }, true);
+        })();
+
+        (function () {
+            function syncStepMarquees() {
+                var badges = document.querySelectorAll('.guide-step-badge');
+                Array.prototype.forEach.call(badges, function (badge) {
+                    var text = badge.querySelector('.guide-step-badge__text');
+                    if (!text) return;
+
+                    badge.classList.remove('is-overflow');
+                    text.style.animationDuration = '';
+                    badge.style.removeProperty('--marquee-x');
+
+                    if (text.scrollWidth > badge.clientWidth + 2) {
+                        badge.classList.add('is-overflow');
+                        var overflow = Math.max(0, text.scrollWidth - badge.clientWidth);
+                        if (overflow > 2) {
+                            badge.style.setProperty('--marquee-x', '-' + overflow + 'px');
+                            var duration = Math.max(2.4, Math.min(7, overflow / 28));
+                            text.style.animationDuration = duration + 's';
+                        } else {
+                            badge.classList.remove('is-overflow');
+                        }
+                    }
+                });
+            }
+
+            var raf = 0;
+            function schedule() {
+                cancelAnimationFrame(raf);
+                raf = requestAnimationFrame(function () {
+                    syncStepMarquees();
+                });
+            }
+
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', schedule);
+            } else {
+                schedule();
+            }
+            window.addEventListener('resize', schedule);
+            document.addEventListener('catalog:langchange', schedule);
+            setTimeout(schedule, 80);
+            setTimeout(schedule, 320);
+        })();
+    </script>
+</html>

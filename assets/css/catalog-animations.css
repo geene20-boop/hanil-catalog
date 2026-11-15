@@ -1,0 +1,15 @@
+/* Catalog page-enter helpers */
+
+.catalog-page-curtain {
+    position: fixed;
+    inset: 0;
+    z-index: 10040;
+    pointer-events: none;
+    background: #0C5625;
+    transform: scaleX(0);
+    transform-origin: left center;
+}
+
+.catalog-page-curtain.is-from-right {
+    transform-origin: right center;
+}

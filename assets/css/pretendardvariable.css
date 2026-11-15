@@ -1,0 +1,12 @@
+/*
+ * Pretendard Variable — external woff2 for http(s).
+ * On file://, include-header.js also loads pretendardvariable.file.css (data-URI)
+ * because Chrome CORS blocks local font file requests.
+ */
+@font-face {
+	font-family: 'Pretendard Variable';
+	font-weight: 45 920;
+	font-style: normal;
+	font-display: swap;
+	src: url('../font/PretendardVariable.woff2') format('woff2');
+}

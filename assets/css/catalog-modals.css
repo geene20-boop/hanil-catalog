@@ -1,0 +1,507 @@
+/* Modal open/close animation + Netflix-style outer scroll */
+
+.catalog-modal {
+    background: rgba(0, 0, 0, 0);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    overflow-x: hidden;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+    transition: background 0.35s ease, opacity 0.35s ease, visibility 0.35s ease;
+}
+
+.catalog-modal.is-open {
+    background: rgba(0, 0, 0, 0.72);
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+.catalog-modal__frame {
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    width: 100%;
+    min-height: 100%;
+    padding: 40px 12px 48px;
+}
+
+@media (min-width: 640px) {
+    .catalog-modal__frame {
+        padding: 48px 24px 64px;
+    }
+}
+
+.catalog-modal__panel {
+    transform: scale(0.85) translateY(24px);
+    opacity: 0;
+    border-radius: 24px;
+    overflow: hidden;
+    margin: 0 auto;
+    min-height: 0;
+    max-height: calc(100vh - 88px);
+    max-height: calc(100dvh - 88px);
+    transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.35s ease;
+}
+
+/* Header chrome (title + close) stays fixed; only .catalog-modal__scroll moves */
+.catalog-modal__header {
+    flex-shrink: 0;
+    position: relative;
+    z-index: 10;
+    background: #ffffff;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.catalog-modal__panel--no-title .catalog-modal__header {
+    border-bottom: none;
+    min-height: 52px;
+}
+
+.catalog-modal__close {
+    position: absolute;
+    top: 50%;
+    right: 16px;
+    z-index: 20;
+    transform: translateY(-50%);
+}
+
+.catalog-modal__close:hover,
+.catalog-modal__close:active,
+.catalog-modal__close:focus-visible {
+    transform: translateY(-50%);
+}
+
+.catalog-modal__scroll {
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
+}
+
+@media (max-width: 639px) {
+    /* Sheet chrome fixed; inner body scrolls — close stays top-right */
+    .catalog-modal {
+        overflow: hidden;
+    }
+
+    .catalog-modal__frame {
+        align-items: flex-end;
+        height: 100%;
+        min-height: 100%;
+        max-height: 100%;
+        padding: 48px 0 0;
+        overflow: hidden;
+    }
+
+    .catalog-modal__panel {
+        width: 100% !important;
+        max-width: none !important;
+        max-height: 100%;
+        margin: 0;
+        border-radius: 24px 24px 0 0 !important;
+        overflow: hidden !important;
+    }
+}
+
+.catalog-modal.is-open .catalog-modal__panel {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+}
+
+.catalog-modal__panel--wide {
+    max-width: 840px;
+}
+
+.catalog-modal__panel--product {
+    background: #ffffff;
+}
+
+.catalog-modal__body--product {
+    background: #ffffff;
+    padding-top: 1rem;
+    padding-bottom: 1.5rem !important;
+}
+
+@media (min-width: 640px) {
+    .catalog-modal__body--product {
+        padding-bottom: 2rem !important;
+    }
+}
+
+/* 생생비타 골드 등 CTA 없는 제품 상세: 스크롤 끝까지 여백 확보 */
+.vita-product-modal-end {
+    margin-top: 2.5rem;
+    height: 0;
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+.catalog-modal-table-wrap {
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    -webkit-overflow-scrolling: touch;
+    border-radius: 0;
+}
+
+.catalog-modal-table {
+    width: 100%;
+    min-width: 640px;
+    border-collapse: collapse;
+    font-size: 13px;
+    line-height: 1.45;
+    background: #ffffff;
+}
+
+.catalog-modal-table__th {
+    padding: 10px 8px;
+    text-align: center;
+    font-weight: 700;
+    color: #154624;
+    background: #e8f0ea;
+    border: none;
+    border-top: 1px solid #d5ddd7;
+    border-bottom: 1px solid #d5ddd7;
+    vertical-align: middle;
+}
+
+.catalog-modal-table__td {
+    padding: 9px 8px;
+    text-align: center;
+    font-weight: 500;
+    color: #4e5968;
+    border: none;
+    border-bottom: 1px solid #e5e8eb;
+    vertical-align: middle;
+}
+
+/* 생생비타 골드 – 핵심 열쇠 (직각, 가로 구분) */
+.vita-gold-key-grid {
+    gap: 0;
+    border-top: 1px solid #d5ddd7;
+    border-bottom: 1px solid #e5e8eb;
+}
+
+.vita-gold-key-col {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    border-radius: 0;
+}
+
+.vita-gold-key-col__head {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    padding: 10px 12px;
+    background: #e8f0ea;
+    border-bottom: 1px solid #d5ddd7;
+    text-align: center;
+}
+
+.vita-gold-key-col__head p {
+    color: #154624;
+    text-wrap: pretty;
+}
+
+/* EN: 2열 고정 + 표·제목 줄바꿈 완화 */
+.vita-gold-detail--en .vita-gold-key-col__head {
+    min-height: 40px;
+    padding: 8px 10px;
+}
+
+.vita-gold-detail--en .vita-gold-key-col__head p {
+    font-size: 13px;
+    line-height: 1.35;
+}
+
+.vita-gold-detail--en .vita-gold-key-col__body {
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.vita-gold-detail--en .catalog-modal-table {
+    min-width: 680px;
+    font-size: 12px;
+}
+
+.vita-gold-detail--en .catalog-modal-table__th {
+    padding: 8px 6px;
+    line-height: 1.35;
+    white-space: nowrap;
+}
+
+.vita-gold-detail--en .catalog-modal-table__td {
+    padding: 8px 6px;
+    line-height: 1.4;
+}
+
+@media (min-width: 640px) {
+    .vita-gold-key-grid--en .vita-gold-key-col:nth-child(-n + 2) {
+        border-bottom: 1px solid #e5e8eb;
+    }
+}
+
+.vita-gold-key-col__body {
+    flex: 1;
+    padding: 12px;
+    background: #ffffff;
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 1.55;
+    color: #4e5968;
+}
+
+.catalog-modal-table__td--left {
+    text-align: left;
+}
+
+.catalog-modal-table__note {
+    margin: 10px 0 0;
+    font-size: 13px;
+    font-weight: 600;
+    color: #2d8a3e;
+}
+
+/* 실측 비교: 하단 풀폭 라벨 */
+.vita-compare-label {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 12px;
+    box-sizing: border-box;
+    font-size: 13px;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.2;
+}
+
+.vita-compare-label--before {
+    background: rgba(78, 89, 104, 0.92);
+}
+
+.vita-compare-label--after {
+    background: rgba(45, 138, 62, 0.92);
+}
+
+/* 권장 시비: 제목은 하단에, 호버 시 상세와 함께 상승 */
+.vita-method-overlay {
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.25) 45%, transparent 100%);
+    transition: background 0.35s ease, opacity 0.35s ease;
+}
+
+.vita-method-card:hover .vita-method-overlay,
+.vita-method-card:focus .vita-method-overlay,
+.vita-method-card:focus-within .vita-method-overlay {
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.45) 0%, rgba(0, 0, 0, 0.12) 40%, transparent 100%);
+}
+
+.vita-method-card .vita-method-copy {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 14px 16px 16px;
+    color: #fff;
+    transform: translateY(0);
+    transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.vita-method-card .vita-method-detail {
+    display: grid;
+    grid-template-rows: 0fr;
+    opacity: 0;
+    margin-top: 0;
+    transition: grid-template-rows 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+        opacity 0.28s ease,
+        margin-top 0.35s ease;
+}
+
+.vita-method-card .vita-method-detail > div {
+    overflow: hidden;
+    min-height: 0;
+}
+
+.vita-method-card:hover .vita-method-copy,
+.vita-method-card:focus .vita-method-copy,
+.vita-method-card:focus-within .vita-method-copy {
+    transform: translateY(-10px);
+}
+
+.vita-method-card:hover .vita-method-detail,
+.vita-method-card:focus .vita-method-detail,
+.vita-method-card:focus-within .vita-method-detail {
+    grid-template-rows: 1fr;
+    opacity: 1;
+    margin-top: 8px;
+}
+
+@media (hover: none) {
+    .vita-method-card .vita-method-copy {
+        transform: translateY(-6px);
+    }
+
+    .vita-method-card .vita-method-detail {
+        grid-template-rows: 1fr;
+        opacity: 1;
+        margin-top: 8px;
+    }
+}
+
+/* CTA: 모달 스크롤 영역 하단 flush + 좁은 기본 → 호버 시 확장 */
+.vita-cta-wrap {
+    position: sticky;
+    bottom: 0;
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+    margin-left: -1rem;
+    margin-right: -1rem;
+    margin-top: 2.5rem;
+    margin-bottom: 0;
+    padding: 2.5rem 1rem 1.25rem;
+    background: linear-gradient(to top, #ffffff 55%, rgba(255, 255, 255, 0));
+}
+
+@media (min-width: 640px) {
+    .vita-cta-wrap {
+        margin-left: -1.25rem;
+        margin-right: -1.25rem;
+        padding: 2.75rem 1.25rem 1.5rem;
+    }
+}
+
+.vita-cta-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 240px;
+    min-height: 52px;
+    padding: 0 22px;
+    border-radius: 16px;
+    background: #2D8A3E;
+    color: #fff;
+    font-size: 15px;
+    font-weight: 700;
+    text-decoration: none;
+    white-space: nowrap;
+    box-shadow: 0 8px 24px rgba(45, 138, 62, 0.22);
+    transition: max-width 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+        background 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+.vita-cta-btn:hover,
+.vita-cta-btn:focus {
+    max-width: 100%;
+    background: #247A34;
+    box-shadow: 0 10px 28px rgba(45, 138, 62, 0.28);
+    outline: none;
+}
+
+@media (hover: none) {
+    .vita-cta-btn {
+        max-width: 100%;
+    }
+}
+
+/* ── Soil usage icon pills + floating tooltip ────────────────────────── */
+
+.soil-usage-pill {
+    font-family: inherit;
+    line-height: 1.2;
+}
+
+.soil-usage-pill__icon.material-symbols-outlined {
+    font-size: 16px;
+    line-height: 1;
+    color: inherit;
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 20;
+}
+
+.soil-usage-pill:focus-visible {
+    outline: 2px solid #2D8A3E;
+    outline-offset: 2px;
+}
+
+.soil-usage-floating-tip {
+    position: fixed;
+    z-index: 11000;
+    min-width: 140px;
+    max-width: 240px;
+    padding: 8px 10px;
+    border-radius: 10px;
+    background: #191F28;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 1.45;
+    text-align: center;
+    white-space: normal;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    box-shadow: 0 8px 20px rgba(25, 31, 40, 0.22);
+    transition: opacity 0.18s ease, visibility 0.18s ease;
+}
+
+.soil-usage-floating-tip.is-visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+.soil-usage-floating-tip::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border: 5px solid transparent;
+    border-top-color: #191F28;
+}
+
+.soil-usage-floating-tip.is-below::after {
+    top: auto;
+    bottom: 100%;
+    border-top-color: transparent;
+    border-bottom-color: #191F28;
+}
+
+/* ── Product package sample badge ────────────────────────────────────── */
+
+.soil-package-wrap {
+    overflow: visible;
+}
+
+.soil-sample-shot {
+    position: absolute;
+    left: -10px;
+    bottom: -10px;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 1px solid #ffffff;
+    object-fit: cover;
+    background: #ffffff;
+    box-shadow: 0 4px 12px rgba(25, 31, 40, 0.14);
+    z-index: 2;
+}
+
+@media (max-width: 639.98px) {
+    .soil-sample-shot {
+        left: auto;
+        right: -10px;
+    }
+}
+

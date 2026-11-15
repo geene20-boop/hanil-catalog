@@ -1,0 +1,1025 @@
+/**
+ * Catalog KO / EN language toggle
+ * - Persists to localStorage (`catalog-lang`)
+ * - Updates <html lang>
+ * - Fills [data-i18n="key"] from CatalogLang.dict[lang]
+ * - Also applies [data-i18n-placeholder], [data-i18n-aria], [data-i18n-title], [data-i18n-href]
+ * - Language buttons live inside [data-lang-switch][data-lang-theme="intro"|"header"]
+ */
+(function () {
+    'use strict';
+
+    var STORAGE_KEY = 'catalog-lang';
+    var DEFAULT_LANG = 'ko';
+    var EVENT_NAME = 'catalog:langchange';
+
+    /* Button skins — same active/inactive colors for intro + header */
+    var THEMES = {
+        intro: {
+            on: ['bg-[#0C5625]', 'text-white'],
+            off: ['text-gray-400', 'hover:text-[#0C5625]']
+        },
+        header: {
+            on: ['bg-[#0C5625]', 'text-white'],
+            off: ['text-gray-400', 'hover:text-[#0C5625]']
+        }
+    };
+
+    var dict = {
+        ko: {
+            langAria: '언어 선택',
+
+            /* ── Shared ─────────────────────────────────────────────── */
+            'shared.detailView': '자세히 보기',
+            'shared.detailViewShort': '자세히보기',
+            'shared.viewRx': '처방 바로가기',
+
+            /* ── Header navigation ──────────────────────────────────── */
+            'nav.company': '회사소개',
+            'nav.products': '제품소개',
+            'nav.plant': '특허 및 설비',
+            'nav.tech': '사용가이드',
+            'nav.export': '수출현황',
+            'nav.contact': '상담문의',
+            'nav.greeting': '인사말',
+            'nav.brandstory': '브랜드스토리',
+            'nav.history': '연혁',
+            'nav.cropSolutions': '작물 솔루션',
+            'nav.prescription01': '수도작 핵심처방',
+            'nav.prescription02': '밭작물 맞춤 처방',
+            'nav.prescription03': '과수·시설재배 전용',
+            'nav.organic': '유기농업자재',
+            'nav.vita': '미량요소복합비료',
+            'nav.productsLine': '토양개량제',
+            'nav.government': '정부지원',
+            'nav.faq': 'FAQ',
+            'nav.guide': '사용 가이드',
+            'nav.facility': '설비현황',
+            'nav.certification': '인증서 및 특허',
+            'nav.globalExport': '글로벌 수출',
+            'nav.oemOdm': '상담 및 컨설팅',
+            'nav.tabCompany': '회사',
+            'nav.tabPlant': '설비',
+            'nav.tabProducts': '제품',
+            'nav.tabTech': '가이드',
+            'nav.tabExport': '수출',
+            'nav.tabContact': '상담문의',
+            'nav.prevPage': '이전 페이지',
+            'nav.nextPage': '다음 페이지',
+            'nav.calcFarm': '내 농가 맞춤 시비량 자동 계산기',
+            'nav.calcOrchard': '인회농장 기반 과수원 예상 수익 산출기',
+            'nav.calcVita': '생생비타40 희석량 계산기',
+            'nav.phone': '054 -762 -9691',
+            'nav.phoneHref': 'tel:0547629691',
+            'nav.phoneAria': '전화 걸기 054-762-9691',
+
+            /* ── Document title / meta ──────────────────────────────── */
+            'meta.description': '1999년 설립 이래 26년간 토양개량제를 전문 제조해온 한일씨앤에스(HANIL C&S)의 전자카탈로그입니다. 입상규산질·석회고토·칼슘유황 등 토양개량제부터 유기농업자재, 고농축 액상비료 생생비타, 베트남·가나·중국 수출 제품까지 작물별 맞춤 처방을 확인하고 내 농가 시비량을 직접 계산해보세요.',
+            'meta.ogTitle': '(주)한일씨앤에스 | 친환경 인증으로 시작해, 작물에 맞게 완성합니다.',
+            'meta.ogSiteName': '한일씨앤에스',
+            'meta.page.index': '(주)한일씨앤에스 | 친환경 인증으로 시작해, 작물에 맞게 완성합니다.',
+            'meta.page.greeting': '인사말 | (주)한일씨앤에스',
+            'meta.page.brandstory': '브랜드스토리 | (주)한일씨앤에스',
+            'meta.page.history': '연혁 | (주)한일씨앤에스',
+            'meta.page.cropSolutions': '작물 솔루션 | (주)한일씨앤에스',
+            'meta.page.prescription01': '수도작 핵심처방 | (주)한일씨앤에스',
+            'meta.page.prescription02': '밭작물 맞춤 처방 | (주)한일씨앤에스',
+            'meta.page.prescription03': '과수·시설재배 전용 | (주)한일씨앤에스',
+            'meta.page.organic': '유기농업자재 | (주)한일씨앤에스',
+            'meta.page.vita': '미량요소복합비료 | (주)한일씨앤에스',
+            'meta.page.productsLine': '토양개량제 | (주)한일씨앤에스',
+            'meta.page.government': '정부지원 | (주)한일씨앤에스',
+            'meta.page.faq': '자주 묻는 질문 | (주)한일씨앤에스',
+            'meta.page.guide': '사용 가이드 | (주)한일씨앤에스',
+            'meta.page.facility': '설비현황 | (주)한일씨앤에스',
+            'meta.page.certification': '인증서 및 특허 | (주)한일씨앤에스',
+            'meta.page.globalExport': '글로벌 수출 | (주)한일씨앤에스',
+            'meta.page.oemOdm': '상담 및 컨설팅 | (주)한일씨앤에스',
+            'meta.page.contact': '상담문의 | (주)한일씨앤에스',
+
+            /* ── Intro (index.html) ─────────────────────────────────── */
+            'intro.title': '토양개량제 · 유기농자재 · 액상비료 · 수출 솔루션',
+            'intro.headline': '친환경 인증 기반의 작물별 맞춤 비료',
+            'intro.desc': '1999년 설립 이래 26년간 토양개량제를 전문 제조해 온 한일씨앤에스는, <br class="max-md:hidden">20년 이상 정부지원 무상 토양개량제 사업을 공급하며 농가와 함께해 왔습니다.',
+            'intro.cta': '전자카탈로그 입장하기',
+
+            /* ── Brand story ────────────────────────────────────────── */
+            'brandstory.eyebrow': 'Brand Identity',
+            'brandstory.headline': 'Built on Trust, <br> Driven by <span class="text-white">Technology</span>',
+            'brandstory.tagline': 'Soil-first Crop Solution',
+            'brandstory.desc': '1999년 창립 이래 토양을 먼저 생각하는 <br> 맞춤형 비료 포트폴리오를 제안합니다.',
+            'brandstory.vision': 'Vision',
+            'brandstory.visionDesc': '토양개량제 전문 제조 선도기업',
+            'brandstory.value': 'Value',
+            'brandstory.valueDesc': '엄격한 품질관리 기반 고객 만족',
+            'brandstory.strategy': 'Strategy',
+            'brandstory.strategyDesc': '비료 다변화를 통한 토양개량제 차별화',
+            'brandstory.certification': 'Certification',
+            'brandstory.certificationDesc': '우수단체표준 · 유기농업자재 공시 · <br> 벤처기업인증 · MSDS 안전성 검증',
+            'greeting.eyebrow': 'Greetings',
+            'greeting.lead': '농업 현장과 함께, 더 나은 결실을 만들어가겠습니다.',
+            'greeting.body': '<p class="text-2xl max-xl:text-xl max-lg:text-xl max-md:text-lg font-semibold text-white leading-[1.45]">안녕하십니까.<br>㈜한일씨앤에스 대표이사 김종옥입니다.</p><p>저희 ㈜한일씨앤에스를 찾아주시고 꾸준한 관심과 신뢰를 보내주시는 고객 여러분께 깊이 감사드립니다.</p><p>농업인에게 한 해의 농사는 오랜 시간 쌓아온 정성과 노력의 결실입니다. 저희는 그 소중한 과정에 함께한다는 책임감을 갖고, 농업 현장에서 믿고 사용할 수 있는 제품을 제공하고자 합니다.</p><p>좋은 제품의 가치는 현장에서 드러난다고 생각합니다. 농업인이 어떤 어려움을 겪고 무엇을 필요로 하는지 귀 기울이며, 제품 하나하나의 품질을 세심하게 살피겠습니다. 고객의 의견을 제품 개선에 반영하고, 필요한 정보를 충실히 전달하는 일에도 정성을 다하겠습니다.</p><p>이 카탈로그가 각자의 영농 환경에 맞는 제품을 살펴보고 선택하는 데 도움이 되기를 바랍니다. 앞으로도 농업인의 수고를 이해하고, 더 나은 결실에 보탬이 되는 기업으로 성장하겠습니다.</p><p>함께해 주시는 모든 분께 감사드리며, 여러분의 일터와 가정에 건강과 풍요가 함께하기를 기원합니다.</p><p class="text-xl max-md:text-lg font-semibold text-white pt-[0.5em] leading-[1.45]">감사합니다.<br>㈜한일씨앤에스 대표이사 김종옥</p>',
+
+            /* ── History ────────────────────────────────────────────── */
+            'history.eyebrow': 'History',
+            'history.title': '연혁',
+            'history.desc': '1999년 한일석회 설립부터, 토양개량제 전문기업 한일씨앤에스로 이어온 발자취입니다.',
+            'history.1999.1': '한일석회 설립',
+            'history.2002.1': '㈜한일씨앤에스 법인 전환',
+            'history.2005.1': '공장설비 증설 및 확충',
+            'history.2005.2': '한일석회에서 (주)한일씨앤에스로 상호변경',
+            'history.2005.3': '석회질비료(입상고토) 우수단체 표준제품 인증',
+            'history.2012.1': '비료생산라인 증설 및 유기질비료 생산/판매',
+            'history.2016.1': '농림축산식품부장관 친환경농업기여 표창장 수여',
+            'history.2018.1': '유기농업자재 규산질비료, 석회고토 비료등록',
+            'history.2019.1': '생생나라 상표권 등록',
+            'history.2019.2': '본점을 경북 경주시 안강읍 두류길 76으로 이전',
+            'history.2020.1': '유기농업자재 생생나라 바이오차 등록',
+            'history.2022.1': '중국 및 동남아 수출',
+            'history.2023.1': '벤처기업 확인 (혁신성장유형)',
+            'history.2023.2': '연구개발전담부서 신설',
+            'history.2023.3': '유기농업자재 생생바이오차 분말 등록',
+            'history.2023.4': '중국 농업국 중량원소 비료 등록증 발급',
+            'history.2025.1': '미량요소복합(생생비타40) 비료생산업 등록(제 경북 경주003-가-10804호)',
+            'history.2025.2': '생생황마그유황칼슘 유기농업자재 공시(공시번호 : 제 공시-3-3-729호)',
+            'history.2026.1': '카복시메틸셀룰로스 호화방법 및 이를 위한 장치 특허 등록(특허 제 10-2982907호)',
+            'history.2026.2': '벤처기업 재확인 (혁신성장유형)',
+
+            /* ── Crop solutions ─────────────────────────────────────── */
+            'cropSolutions.eyebrow': 'Crop-Specific Solution',
+            'cropSolutions.title': '내 작물에 딱 맞는 처방 찾아보세요.',
+            'cropSolutions.desc': '수도작부터 밭작물, 과수·시설까지 재배 작물에 맞는 최적의 비종 조합을 확인해 보세요.',
+            'cropSolutions.card1Label': '수도작 핵심처방',
+            'cropSolutions.card1Title': '규산질',
+            'cropSolutions.card1Desc': '도복 방지 · 뿌리 활력 · 알곡 충실',
+            'cropSolutions.card2Label': '밭작물 핵심처방',
+            'cropSolutions.card2Title': '석회고토 중심 + 규산질 보조',
+            'cropSolutions.card2Desc': '석회결핍 예방 · 저장성 · 수송성',
+            'cropSolutions.card3Label': '과수·시설재배 전용',
+            'cropSolutions.card3Title': '토양개량제 +미량요소복합비료',
+            'cropSolutions.card3Desc': '저온/고온 스트레스 · 당도·착색·품질',
+
+            /* ── Prescription 01 (paddy rice) ───────────────────────── */
+            'prescription01.label': '수도작 핵심처방',
+            'prescription01.title': '벼는 <span class="text-[#22703C]">건강</span>하게, 뿌리는 <span class="text-[#22703C]">튼튼</span>하게',
+            'prescription01.subtitle': '규산질비료',
+            'prescription01.product1Name': '규산질 비료',
+            'prescription01.product1Desc': '줄기·잎 세포벽을 강화하여 도복을 줄이고 작물이 튼튼하게 자라도록 돕습니다.',
+            'prescription01.product1Dose': '권장: 200~300kg/300평(1,000㎡)',
+            'prescription01.product3Name': '생생나라규산',
+            'prescription01.product3Desc': '친환경 인증 농가용 유기농업자재로, 줄기·잎 세포벽을 강화하여 도복을 줄이고 작물이 튼튼하게 자라도록 돕습니다.',
+            'prescription01.product3Dose': '권장: 200~300kg/300평(1,000㎡)',
+            'prescription01.timingLabel': '추천시기',
+            'prescription01.timingValue': '모내기 1개월 전 · 가을 경운 시 · 이른 봄 로터리 전',
+
+            /* ── Prescription 02 (field crops) ──────────────────────── */
+            'prescription02.label': '밭작물 맞춤 처방',
+            'prescription02.title': '밭작물, <span class="text-[#22703C]">맞는</span> 처방이 모두 다릅니다',
+            'prescription02.subtitle': '과채·근채·엽채는 정식 <span class="text-[#22703C]">3~4주 전</span> 토양개량제 선처리가 핵심입니다.',
+            'prescription02.limestone': '석회고토',
+            'prescription02.silicate': '규산질',
+            'prescription02.group1Title': '과채류',
+            'prescription02.group1Crops': '고추·토마토·오이',
+            'prescription02.group1Note': '300평(1,000㎡) 기준, 정식 3~4주 전 시비',
+            'prescription02.group2Title': '근채·인경채',
+            'prescription02.group2Crops': '마늘·양파·무·감자',
+            'prescription02.group2Note': '300평(1,000㎡) 기준, 가을 로터리 전 또는 봄 재배 1개월 전',
+            'prescription02.group3Title': '엽채류',
+            'prescription02.group3Crops': '배추·상추·양배추',
+            'prescription02.group3Note': '300평(1,000㎡) 기준, 정식 3~4주 전 시비',
+            'prescription02.limestoneProductName': '석회고토 비료',
+            'prescription02.limestoneProductDesc': '산성토양을 중성으로 개량하고, 칼슘과 마그네슘을 공급하여 엽록소 향상과 뿌리 활력에 도움을 줍니다.',
+            'prescription02.limestoneProductDose': '권장: 150~200kg/300평(1,000㎡)',
+            'prescription02.organicLimestoneProductName': '생생나라고토',
+            'prescription02.organicLimestoneProductDesc': '친환경 인증 농가용 유기농업자재로, 산성토양을 중성으로 개량하고 칼슘·마그네슘을 공급하여 엽록소 향상과 뿌리 활력에 도움을 줍니다.',
+            'prescription02.organicLimestoneProductDose': '권장: 150~200kg/300평(1,000㎡)',
+
+            /* ── Prescription 03 (orchard / greenhouse) ─────────────── */
+            'prescription03.label': '과수·시설재배 전용',
+            'prescription03.title': '흙은 <span class="text-[#22703C]">건강</span>하게, <br>작물은 <span class="text-[#22703C]">튼튼</span>하게, <br> 회복은 <span class="text-[#22703C]">빠르게</span>',
+            'prescription03.subtitle': '정식전 토양개량제를 우선살포하고 생육기에는 <br class="max-md:hidden"> 양액/관주 또는 엽면시비로 보완합니다.',
+            'prescription03.item1Title': '입상 석회고토',
+            'prescription03.item1Badge': '60~70kg',
+            'prescription03.item1Desc': '산성토양을 중화, 염류장해 완화',
+            'prescription03.item2Title': '입상 규산질',
+            'prescription03.item2Badge': '80~90kg',
+            'prescription03.item2Desc': '산성토양 중화, 가지·줄기 조직강화',
+            'prescription03.item3Title': '생생비타 액상',
+            'prescription03.item3Desc': '저온·고온 스트레스 회복, 당도·착색·초세 유지<br>(개화전후~비대기/착색기) 7~10일 간격으로 시비',
+
+            /* ── Organic inputs ─────────────────────────────────────── */
+            'organic.eyebrow': 'Organic Inputs',
+            'organic.title': '유기농업자재',
+            'organic.item1Name': '생생나라 규산',
+            'organic.noticeLabel': '공시번호',
+            'organic.item1Notice': '제 공시-2-3-453 호',
+            'organic.labelSilica': '가용성규산',
+            'organic.labelAlkali': '알칼리분',
+            'organic.labelCitrateMagnesia': '구용성고토',
+            'organic.labelMagnesia': '가용성고토',
+            'organic.labelCaO': 'CaO',
+            'organic.labelSulfur': '황전량',
+            'organic.item2Name': '생생나라 석회고토',
+            'organic.item2Notice': '제 공시-2-3-454 호',
+            'organic.item3Name': '생생황 마그유황칼슘',
+            'organic.item3Notice': '제 공시-3-379호',
+
+            /* ── Liquid fertilizer (Vita) ───────────────────────────── */
+            'vita.eyebrow': 'Micronutrients & Safety',
+            'vita.title': '미량요소복합비료',
+            'vita.item1Name': '생생비타 40',
+            'vita.labelNpk': 'N-P-K',
+            'vita.labelAmino': '아미노산',
+            'vita.labelOrganic': '유기물',
+            'vita.item2Name': '생생비타 골드',
+            'vita.item1Desc': '식물성 아미노산 17종 · 미량원소 고농축 액비',
+            'vita.item2Desc': '발효 공법 · 토양관주와 엽면시비 겸용',
+
+            /* ── Product lineup ─────────────────────────────────────── */
+            'productsLine.eyebrow': 'Product Lineup',
+            'productsLine.title': '토양개량제',
+            'productsLine.item1Name': '입상규산질 비료',
+            'productsLine.item1Sub': '벼 도복 방지 & 세포벽 강화',
+            'productsLine.item2Name': '입상석회고토 비료',
+            'productsLine.item2Sub': '토양 pH 교정 & 엽록소 형성',
+            'productsLine.item3Name': '칼슘유황비료',
+            'productsLine.item3Sub': '중성 칼슘 & 맛·향·저장성',
+            'productsLine.labelSilica': '가용성규산',
+            'productsLine.labelAlkali': '알칼리분',
+            'productsLine.labelCitrateMagnesia': '구용성고토',
+            'productsLine.labelMagnesia': '가용성고토',
+            'productsLine.labelLime': '가용성석회',
+            'productsLine.labelSulfur': '유황(SO₃)',
+
+            /* ── Government program ─────────────────────────────────── */
+            'government.eyebrow': 'Government Program',
+            'government.title': '정부지원 무상 토양개량제 사업',
+            'government.desc': '20년 이상 연속 공급 경험을 바탕으로 농가 부담을 줄이는 토양개량 솔루션입니다.',
+            'government.stat1Unit': '%',
+            'government.stat1Label': '국비·지방비 지원',
+            'government.stat2Unit': '년',
+            'government.stat2Label': '1주기 순환 공급',
+            'government.stat3Unit': '원',
+            'government.stat3Label': '농가 부담금',
+            'government.stat4Unit': '+',
+            'government.stat4Label': '공급 경험',
+            'government.card1Title': '무상지원 배경',
+            'government.card1Desc': '화학비료 장기 사용으로 인한 농경지 산성화 및 유효규산 저하 문제를 개선하기 위한 토양 지력 회복 사업입니다.',
+            'government.card2Title': '신청 절차',
+            'government.card2Desc': '공고 확인 → 신청서 제출(읍·면·동/Agrix) → 물량 확정 → 지역농협 무상 배송·살포 순서로 진행됩니다.',
+            'government.card3Title': '공급 제품',
+            'government.card3Desc': '입상규산질 비료와 입상석회고토 비료는 농가 현장에서 가장 익숙한 대표 토양개량제입니다.',
+
+            /* ── FAQ ────────────────────────────────────────────────── */
+            'faq.eyebrow': 'Product FAQ',
+            'faq.title': '자주 묻는 질문, 여기서 바로 확인하세요',
+            'faq.desc': '농가와 바이어가 자주 묻는 질문을 제품별 한 문장 답변으로 정리했습니다.',
+            'faq.selectLabel': '제품 카테고리 선택',
+            'faq.tabAll': '전체',
+            'faq.tabSilicate': '입상규산질',
+            'faq.tabVita40': '생생비타 40',
+            'faq.tabCalciumSulfur': '입상칼슘유황',
+            'faq.tabLimestone': '입상석회고토',
+            'faq.tabVitaGold': '생생비타 골드',
+            'faq.tabMagSulfur': '생생황 마그유황칼슘',
+            'faq.q1': '복합비료나 퇴비랑 같이 시비해도 되나요?',
+            'faq.a1': '퇴비는 가능하나 복합비료는 혼합시비 안됩니다. 규산질비료 먼저 시비후 최소2주후 복합비료 시비하여야 합니다. 혼용시 가스장애로 작물 피해발생',
+            'faq.q2': '규산질비료가 없는데 벼농사에 석회고토 시비해도 되나요?',
+            'faq.a2': '사용은 가능합니다. 토양의 pH 조절은 가능하지만, 규산 성분이 없어 도복 경감 효과는 기대하기 어렵습니다.',
+            'faq.q3': '과수 수확기에 시비해도 되나요?',
+            'faq.a3': '수확 2주전이면 사용가능하지만 1주일전이면 효과가 없습니다.',
+            'faq.q4': '시비간격과 희석농도 알려주세요',
+            'faq.a4': '7~10일 간격으로 시비하고 1000배정도로 희석하여 흠뻑 젖도록 살포하세요.',
+            'faq.q5': '엽면시비나 관주로 시비해도 되나요?',
+            'faq.a5': '관주가능은하나 잘녹지않아 권장하지 않습니다. 엽면시비시 입자가 커서 기공을 막을 수 있어서 비추천. 토양혼용 시비 추천합니다.',
+            'faq.q6': '시비일정 및 복합비료 혼용하여 시비가능한가요?',
+            'faq.a6': '작물 정식 심기전에 시비하시고 퇴비는 혼용가능하나 복합비료는 1~2주후 시비하세요',
+
+            /* ── Application guide ──────────────────────────────────── */
+            'guide.eyebrow': 'Application Guide',
+            'guide.title': '제품 사용 가이드',
+            'guide.desc': '입상 토양개량제는 속효성이 아니라 토양 속에서 서서히 반응하는 완효성 제품입니다.',
+            'guide.timelineTitle': '작물별 시비 타이밍 요약',
+            'guide.scrollHint': '좌우로 밀어 전체 일정을 확인하세요',
+            'guide.timeline.crop': '작물',
+            'guide.timeline.recommend': '추천 처방',
+            'guide.timeline.month1': '1월',
+            'guide.timeline.month2': '2월',
+            'guide.timeline.month3': '3월',
+            'guide.timeline.month4': '4월',
+            'guide.timeline.month5': '5월',
+            'guide.timeline.month6': '6월',
+            'guide.timeline.month7': '7월',
+            'guide.timeline.month8': '8월',
+            'guide.timeline.month9': '9월',
+            'guide.timeline.month10': '10월',
+            'guide.timeline.month11': '11월',
+            'guide.timeline.month12': '12월',
+            'guide.crop1': '벼',
+            'guide.crop1Step1': '모내기 한달 전',
+            'guide.crop1Step2': '모낸 후 15일 이내',
+            'guide.crop1Step3': '출수기 30일 전',
+            'guide.crop1Rec': '입상규산질, 석회고토 교대',
+            'guide.crop2': '고추 · 토마토 · 오이',
+            'guide.crop2Step1': '정식 3~4주전',
+            'guide.crop2Rec': '석회고토 중심 + 석회고토 보조',
+            'guide.crop3': '마늘 · 양파 · 무 · 감자',
+            'guide.crop3Step1': '정식 2~3개월 전',
+            'guide.crop3Step2': '가을 로터리 전',
+            'guide.crop3Rec': '규산질 중심 + 석회고토 보조',
+            'guide.crop4': '과수',
+            'guide.crop4Step1': '낙엽 후 휴면기',
+            'guide.crop4Step2': '낙엽 후 휴면기',
+            'guide.crop4Rec': '석회고토·칼슘유황',
+            'guide.crop5': '시설하우스',
+            'guide.crop5Step1': '정식 3~4주 전 + 생육기 엽상 보완',
+            'guide.crop5Rec': '토양개량제 + 생생비타',
+            'guide.tipsTitle': '제품 사용 가이드',
+            'guide.tip1Title': '혼용 금지',
+            'guide.tip1Desc': '질소질·복합비료와 <br> <b>혼용해서 사용하지 말아야</b> 합니다.',
+            'guide.tip2Title': '경운 추천',
+            'guide.tip2Desc': '<b>가능한 표면에 방치 금지</b>, <br> 작토층 전체에 골고루 혼화',
+            'guide.tip3Title': '1~2주 시차 살포',
+            'guide.tip3Desc': '토양개량제 먼저, <br> <b>1~2주</b> 뒤 화학비료 사용',
+            'guide.tip4Title': '토양검정',
+            'guide.tip4Desc': '과다 시비 시 미량요소 <br> 결핍과 <b>길항작용 주의</b>',
+
+            /* ── Facility ───────────────────────────────────────────── */
+            'facility.eyebrow': 'Manufacturing Facility',
+            'facility.title': '최첨단 원스톱 비료 생산 설비 현장',
+            'facility.desc': '원료 입고 사일로, 배합 호퍼, <br> 과립 성형 드럼 및 자동 로봇 적재 포장기까지 전 과정을 자동화하였습니다.',
+            'facility.item1Tag': '01 원료 사일로',
+            'facility.item1Title': '대용량 원료 저장 사일로 및 이송 라인',
+            'facility.item1Desc': '원료를 종류별로 구분하여 저장하고, 밀폐형 구조로 습기와 우수 유입을 최소화하여 원료 품질을 안정적으로 유지합니다.',
+            'facility.item2Tag': '02 혼합기',
+            'facility.item2Title': '원료 혼합 설비',
+            'facility.item2Desc': '배합 설계에 따라 투입된 원료를 혼합기에서 고르게 혼합하여 제품별 성분이 균일하게 유지되도록 합니다.',
+            'facility.item3Tag': '03 과립 성형기',
+            'facility.item3Title': '회전 드럼(로터리 드럼)식 과립기',
+            'facility.item3Desc': '혼합된 원료를 회전 드럼에서 구형 입자로 성형합니다.',
+            'facility.item4Tag': '04 건조·냉각',
+            'facility.item4Title': '건조 및 냉각 시스템',
+            'facility.item4Desc': '성형된 과립의 수분을 규격 수준으로 낮추고 냉각하여 입자 경도를 확보합니다.',
+            'facility.item5Tag': '05 선별·자동 포장',
+            'facility.item5Title': '입자 선별 및 20kg 자동 포장 라인',
+            'facility.item5Desc': '스크린으로 규격 입자를 선별하고, 규격 외 입자는 분리하여 재처리합니다. 20kg 단위로 자동 정량 포장합니다.',
+            'facility.item6Tag': '06 자동 적재·포장',
+            'facility.item6Title': '로봇 팔레트 적재 및 자동 랩핑 시스템',
+            'facility.item6Desc': '포장된 제품을 자동 로봇이 팔레트에 적재하고, 자동 랩핑, 탑시트 부착까지 전 과정을 자동화했습니다.',
+
+            /* ── Certification ──────────────────────────────────────── */
+            'certification.eyebrow': 'Certification',
+            'certification.title': '인증서 및 특허',
+            'certification.desc': '한국석회석가공업협동조합, 대구세관 및 국립농산물품질관리원 등 공식 기관의 인증과 특허를 보유하고 있습니다.',
+            'certification.item1Tag': '특허증',
+            'certification.item1Title': '카복시메틸셀룰로스 호화방법 및 이를 위한 장치',
+            'certification.item2Tag': '확인서',
+            'certification.item2Title': '벤처기업확인서',
+            'certification.item3Tag': '상표등록증',
+            'certification.item3Title': '생생나라 상표등록증',
+            'certification.item4Tag': '인증서',
+            'certification.item4Title': '연구개발조직 인증서',
+            'certification.item5Tag': '공시서',
+            'certification.item5Title': '생생황마그유황칼슘 유기농업자재공시서',
+            'certification.item6Tag': '인증서',
+            'certification.item6Title': '유기농업자재공시서2 <br>(생생나라고토)',
+            'certification.item7Tag': '인증서',
+            'certification.item7Title': '유기농업자재공시서3 <br>(생생나라규산)',
+            'certification.item8Tag': '확인서',
+            'certification.item8Title': '우수단체표준제품확인서',
+            'certification.item9Tag': '등록증',
+            'certification.item9Title': '중국비료등록증',
+
+            /* ── Global export ──────────────────────────────────────── */
+            'globalExport.eyebrow': 'Global Export',
+            'globalExport.title': '글로벌 수출 제품 정보',
+            'globalExport.desc': '가나·중국·베트남 국가별 등록번호와 성분 기준에 맞춰 현지 맞춤형 제품을 공급합니다.',
+            'globalExport.tabAll': '전체 (8)',
+            'globalExport.tabChina': '중국(4)',
+            'globalExport.tabVietnam': '베트남(3)',
+            'globalExport.tabGhana': '가나(1)',
+            'globalExport.labelSilica': '규산',
+            'globalExport.labelAlkali': '알칼리분',
+            'globalExport.labelMagnesia': '고토',
+            'globalExport.badgeGhana': '가나 수출',
+            'globalExport.badgeVietnam': '베트남 수출',
+            'globalExport.badgeChina': '중국 수출',
+            'globalExport.item1Name': 'CHOBI GHANA Rice Starter',
+            'globalExport.item1Desc': '가나 벼 전용 규산질 비료',
+            'globalExport.item2Name': 'HF-CASIMAG (SICA)',
+            'globalExport.item2Desc': '베트남 전 작물 맞춤 토양개량제',
+            'globalExport.item3Name': 'HF-CASIMAG',
+            'globalExport.item3Desc': '베트남 전 작물 맞춤 토양개량제',
+            'globalExport.item4Name': 'CA-SI-MAG',
+            'globalExport.item4Desc': '뿌리 활력·당도 증대',
+            'globalExport.item5Name': '韩一福 석회고토비료',
+            'globalExport.item5Desc': '산성토양 중화',
+            'globalExport.item6Name': '雅植道 中量元素肥料',
+            'globalExport.item6Desc': '중국 비수용성 중량원소비료',
+            'globalExport.item7Name': 'OMAC Agri 欧迈克',
+            'globalExport.item7Desc': '중국 토양개량제',
+            'globalExport.item8Name': 'MOXI Granular Silicate',
+            'globalExport.item8Desc': '중국 과실 착색·품질 개선',
+
+            /* ── OEM & ODM ──────────────────────────────────────────── */
+            'oemOdm.eyebrow': '상담 및 컨설팅',
+            'oemOdm.title': '대량 구매 프로세스',
+            'oemOdm.desc': '상담에서 수출까지, 한 번에 끝냅니다.',
+            'oemOdm.step1Title': '상담 및 컨설팅',
+            'oemOdm.step1Desc': '작물별·지역별 맞춤 비종 스펙과 요구사항 검토',
+            'oemOdm.step2Title': '샘플 & 테스트',
+            'oemOdm.step2Desc': '성분 배합, R&D 분석 및 농가 실증 테스트',
+            'oemOdm.step3Title': '상담 및 컨설팅 생산',
+            'oemOdm.step3Desc': '전용 브랜드 패키징 및 입상/액상 대량 제조',
+            'oemOdm.step4Title': '출고 및 수출',
+            'oemOdm.step4Desc': '농협 조달, 국내 대량 물류 및 컨테이너 수출 대응',
+
+            /* ── Contact us ─────────────────────────────────────────── */
+            'contactUs.eyebrow': '상담문의',
+            'contactUs.title': '지속가능한 미래 농업과 <br> 글로벌 시장을 함께 여는 파트너',
+            'contactUs.subtitle': '<span class="text-[#B0C45F]">(주)한일씨앤에스</span>가 함께하겠습니다.',
+            'contactUs.company': '㈜한일씨앤에스',
+            'contactUs.address': '경상북도 경주시 안강읍 두류길 76',
+            'contactUs.tel': 'TEL (054) 762-9691~2',
+            'contactUs.fax': 'FAX (054) 762-9695',
+            'contactUs.web': 'www.hanilcns.com',
+            'contactUs.telHref': 'tel:+82547629691',
+            'contactUs.faxHref': 'fax:+82547629695',
+            'contactUs.webHref': 'https://www.hanilcns.com'
+        },
+
+        en: {
+            langAria: 'Language selection',
+
+            /* ── Shared ─────────────────────────────────────────────── */
+            'shared.detailView': 'View Details',
+            'shared.detailViewShort': 'View Details',
+            'shared.viewRx': 'Go to Prescription',
+
+            /* ── Header navigation ──────────────────────────────────── */
+            'nav.company': 'About',
+            'nav.products': 'Products',
+            'nav.plant': 'Patents & Facilities',
+            'nav.tech': 'Guide',
+            'nav.export': 'Export',
+            'nav.contact': 'Inquiry',
+            'nav.greeting': 'Greeting',
+            'nav.brandstory': 'Brand Story',
+            'nav.history': 'History',
+            'nav.cropSolutions': 'Crops',
+            'nav.prescription01': 'Paddy Rice',
+            'nav.prescription02': 'Field Crops',
+            'nav.prescription03': 'Orchard',
+            'nav.organic': 'Organic',
+            'nav.vita': 'Micronutrients',
+            'nav.productsLine': 'Soil Conditioner',
+            'nav.government': 'Government Support',
+            'nav.faq': 'FAQ',
+            'nav.guide': 'Usage',
+            'nav.facility': 'Facilities',
+            'nav.certification': 'Certificates',
+            'nav.globalExport': 'Global Export',
+            'nav.oemOdm': 'Consulting',
+            'nav.tabCompany': 'Company',
+            'nav.tabPlant': 'Facility',
+            'nav.tabProducts': 'Products',
+            'nav.tabTech': 'Guide',
+            'nav.tabExport': 'Export',
+            'nav.tabContact': 'Inquiry',
+            'nav.prevPage': 'Previous page',
+            'nav.nextPage': 'Next page',
+            'nav.calcFarm': 'Farm Fertilizer Rate Calculator',
+            'nav.calcOrchard': 'Inhoe Farm–based Orchard Profit Estimator',
+            'nav.calcVita': 'Vita40 Dilution Calculator',
+            'nav.phone': '+82-54-762-9691',
+            'nav.phoneHref': 'tel:+82547629691',
+            'nav.phoneAria': 'Call +82-54-762-9691',
+
+            /* ── Document title / meta ──────────────────────────────── */
+            'meta.description': 'The HANIL C&S e-catalog from a soil-conditioner specialist manufacturing since 1999. Explore granular silicate, lime magnesia and calcium-sulfur conditioners, organic inputs, Saengsaeng Vita liquid fertilizers, export products for Vietnam, Ghana and China, crop-specific prescriptions, and farm fertilizer calculators.',
+            'meta.ogTitle': 'HANIL C&S | Starting with eco certification, finished for each crop.',
+            'meta.ogSiteName': 'HANIL C&S',
+            'meta.page.index': 'HANIL C&S | Starting with eco certification, finished for each crop.',
+            'meta.page.greeting': 'Greeting | HANIL C&S',
+            'meta.page.brandstory': 'Brand Story | HANIL C&S',
+            'meta.page.history': 'History | HANIL C&S',
+            'meta.page.cropSolutions': 'Crop Solutions | HANIL C&S',
+            'meta.page.prescription01': 'Paddy Rice Prescription | HANIL C&S',
+            'meta.page.prescription02': 'Field Crop Prescription | HANIL C&S',
+            'meta.page.prescription03': 'Orchard & Greenhouse | HANIL C&S',
+            'meta.page.organic': 'Organic Agricultural Inputs | HANIL C&S',
+            'meta.page.vita': 'Micronutrient Compound Fertilizer | HANIL C&S',
+            'meta.page.productsLine': 'Soil Conditioners | HANIL C&S',
+            'meta.page.government': 'Government Support | HANIL C&S',
+            'meta.page.faq': 'FAQ | HANIL C&S',
+            'meta.page.guide': 'Application Guide | HANIL C&S',
+            'meta.page.facility': 'Facilities | HANIL C&S',
+            'meta.page.certification': 'Certifications & Patents | HANIL C&S',
+            'meta.page.globalExport': 'Global Export | HANIL C&S',
+            'meta.page.oemOdm': 'OEM & ODM | HANIL C&S',
+            'meta.page.contact': 'Inquiry | HANIL C&S',
+
+            /* ── Intro (index.html) ─────────────────────────────────── */
+            'intro.title': 'Soil Conditioner · Organic Inputs · Liquid Fertilizer · Export',
+            'intro.headline': 'Crop-specific fertilizers built on eco certification',
+            'intro.desc': 'Since 1999, HANIL C&S has specialized in soil conditioners for 26 years, <br class="max-md:hidden">supplying government-supported free soil amendment programs for over 20 years.',
+            'intro.cta': 'Open the catalog',
+
+            /* ── Brand story ────────────────────────────────────────── */
+            'brandstory.eyebrow': 'Brand Identity',
+            'brandstory.headline': 'Built on Trust, <br> Driven by <span class="text-white">Technology</span>',
+            'brandstory.tagline': 'Soil-first Crop Solution',
+            'brandstory.desc': 'Since our founding in 1999 we have put soil first, proposing fertilizer portfolios tailored to each crop.',
+            'brandstory.vision': 'Vision',
+            'brandstory.visionDesc': 'A leading specialist manufacturer of soil conditioners',
+            'brandstory.value': 'Value',
+            'brandstory.valueDesc': 'Customer satisfaction built on strict quality control',
+            'brandstory.strategy': 'Strategy',
+            'brandstory.strategyDesc': 'Differentiated soil conditioners through a diversified fertilizer range',
+            'brandstory.certification': 'Certification',
+            'brandstory.certificationDesc': 'Excellent Group Standard · Organic Input Listing ·  Venture Company Certification · MSDS Safety Verification',
+            'greeting.eyebrow': 'Greeting',
+            'greeting.lead': 'With farmers in the field, we work toward a better harvest.',
+            'greeting.body': '<p class="text-2xl max-xl:text-xl max-lg:text-xl max-md:text-lg font-semibold text-white leading-[1.45]">Hello.<br>I am Jong-ok Kim, CEO of HANIL C&amp;S Co., Ltd.</p><p>Thank you sincerely for your continued interest and trust in HANIL C&amp;S.</p><p>For farmers, each season is the fruit of long dedication and hard work. We feel responsible to stand with you in that process and to provide products you can rely on in the field.</p><p>We believe the value of a good product shows in the field. We listen to the challenges and needs of growers and examine the quality of every product with care. We will reflect your feedback in product improvement and do our best to share the information you need.</p><p>We hope this catalog helps you review and choose products suited to your farm. We will keep growing as a company that understands your work and supports a better harvest.</p><p>Thank you to everyone who stands with us. We wish you health and abundance at work and at home.</p><p class="text-xl max-md:text-lg font-semibold text-white pt-[0.5em] leading-[1.45]">Thank you.<br>Jong-ok Kim, CEO, HANIL C&amp;S Co., Ltd.</p>',
+
+            /* ── History ────────────────────────────────────────────── */
+            'history.eyebrow': 'History',
+            'history.title': 'Company History',
+            'history.desc': 'From Hanil Lime in 1999 to today’s HANIL C&S, a soil-conditioner specialist.',
+            'history.1999.1': 'Hanil Lime established',
+            'history.2002.1': 'Incorporated as Hanil C&S Co., Ltd.',
+            'history.2005.1': 'Factory equipment expanded and upgraded',
+            'history.2005.2': 'Renamed from Hanil Lime to HANIL C&S Co., Ltd.',
+            'history.2005.3': 'Excellent Group Standard certification for lime fertilizer (granular magnesia)',
+            'history.2012.1': 'Fertilizer line expanded; organic fertilizer production and sales',
+            'history.2016.1': 'Commendation for contribution to eco-friendly agriculture from the Minister of Agriculture, Food and Rural Affairs',
+            'history.2018.1': 'Organic input registration: silicate and lime magnesia fertilizers',
+            'history.2019.1': 'Saengsaengnara trademark registered',
+            'history.2019.2': 'Head office relocated to 76 Duryu-gil, Angang-eup, Gyeongju, Gyeongsangbuk-do',
+            'history.2020.1': 'Organic input registration: Saengsaengnara biochar',
+            'history.2022.1': 'Exports to China and Southeast Asia',
+            'history.2023.1': 'Venture company certification (innovative growth type)',
+            'history.2023.2': 'Dedicated R&D department established',
+            'history.2023.3': 'Organic input registration: Saengsaeng biochar powder',
+            'history.2023.4': 'Secondary nutrient fertilizer registration issued by China\'s Ministry of Agriculture',
+            'history.2025.1': 'Micronutrient compound (Saengsaeng Vita 40) fertilizer production registered (Gyeongbuk Gyeongju 003-ga-10804)',
+            'history.2025.2': 'Organic input listing for Saengsaenghwang Mag-Sulfur-Calcium (Listing No. 3-3-729)',
+            'history.2026.1': 'Patent registered: carboxymethyl cellulose gelatinization method and apparatus (Patent No. 10-2982907)',
+            'history.2026.2': 'Venture company re-confirmed (innovative growth type)',
+
+            /* ── Crop solutions ─────────────────────────────────────── */
+            'cropSolutions.eyebrow': 'Crop-Specific Solution',
+            'cropSolutions.title': 'Find the prescription that fits your crop.',
+            'cropSolutions.desc': 'From paddy rice to field crops, orchards and greenhouses, see the fertilizer combination best suited to what you grow.',
+            'cropSolutions.card1Label': 'Paddy Rice Prescription',
+            'cropSolutions.card1Title': 'Silicate',
+            'cropSolutions.card1Desc': 'Lodging prevention · Root vigor · Fuller grain',
+            'cropSolutions.card2Label': 'Field Crop Prescription',
+            'cropSolutions.card2Title': 'Lime magnesia base <br> + silicate support',
+            'cropSolutions.card2Desc': 'Calcium deficiency prevention · Shelf life · Transit durability',
+            'cropSolutions.card3Label': 'Orchard & Greenhouse',
+            'cropSolutions.card3Title': 'Soil Conditioner <br>+ Micronutrient Compound Fertilizer',
+            'cropSolutions.card3Desc': 'Cold and heat stress · Sugar content, coloring, quality',
+
+            /* ── Prescription 01 (paddy rice) ───────────────────────── */
+            'prescription01.label': 'Paddy Rice Prescription',
+            'prescription01.title': 'Healthy <span class="text-[#22703C]">rice</span>, sturdy <span class="text-[#22703C]">roots</span>',
+            'prescription01.subtitle': 'Silicate fertilizer',
+            'prescription01.product1Name': 'Silicate Fertilizer',
+            'prescription01.product1Desc': 'Strengthens stem and leaf cell walls to reduce lodging and help crops grow sturdy.',
+            'prescription01.product1Dose': 'Recommended: 200~300kg / 300 pyeong (1,000㎡)',
+            'prescription01.product3Name': 'Saengsaengnara Silicate (Organic)',
+            'prescription01.product3Desc': 'Certified organic input for eco-friendly farms—strengthens stem and leaf cell walls to reduce lodging and help crops grow sturdy.',
+            'prescription01.product3Dose': 'Recommended: 200~300kg / 300 pyeong (1,000㎡)',
+            'prescription01.timingLabel': 'Recommended <br> Timing',
+            'prescription01.timingValue': 'One month before transplanting · At autumn tillage · Before early spring rotary',
+
+            /* ── Prescription 02 (field crops) ──────────────────────── */
+            'prescription02.label': 'Field Crop Prescription',
+            'prescription02.title': 'Every field crop needs a <span class="text-[#22703C]">different</span> prescription',
+            'prescription02.subtitle': 'For fruit, root and leafy vegetables, treating the soil <span class="text-[#22703C]">3~4 weeks before</span> planting is the key.',
+            'prescription02.limestone': 'Lime Magnesia',
+            'prescription02.silicate': 'Silicate',
+            'prescription02.group1Title': 'Fruit Vegetables',
+            'prescription02.group1Crops': 'Pepper · Tomato · Cucumber',
+            'prescription02.group1Note': '300 pyeong (1,000㎡) basis, apply 3~4 weeks before planting',
+            'prescription02.group2Title': 'Root & Bulb Vegetables',
+            'prescription02.group2Crops': 'Garlic · Onion · Radish · Potato',
+            'prescription02.group2Note': '300 pyeong (1,000㎡) basis, before autumn rotary or one month before spring planting',
+            'prescription02.group3Title': 'Leafy Vegetables',
+            'prescription02.group3Crops': 'Napa Cabbage · Lettuce · Cabbage',
+            'prescription02.group3Note': '300 pyeong (1,000㎡) basis, apply 3~4 weeks before planting',
+            'prescription02.limestoneProductName': 'Lime Magnesia Fertilizer',
+            'prescription02.limestoneProductDesc': 'Improves acidic soil toward neutral, supplies calcium and magnesium, and helps chlorophyll development and root vigor.',
+            'prescription02.limestoneProductDose': 'Recommended: 150~200kg / 300 pyeong (1,000㎡)',
+            'prescription02.organicLimestoneProductName': 'Saengsaengnara Lime Magnesia (Organic)',
+            'prescription02.organicLimestoneProductDesc': 'Certified organic input for eco-friendly farms—improves acidic soil toward neutral, supplies calcium and magnesium, and supports chlorophyll development and root vigor.',
+            'prescription02.organicLimestoneProductDose': 'Recommended: 150~200kg / 300 pyeong (1,000㎡)',
+
+            /* ── Prescription 03 (orchard / greenhouse) ─────────────── */
+            'prescription03.label': 'Orchard & Greenhouse',
+            'prescription03.title': 'Keep soil <span class="text-[#22703C]">healthy</span>, <br>grow <span class="text-[#22703C]">sturdy</span> crops, recover <span class="text-[#22703C]">faster</span>',
+            'prescription03.subtitle': 'Apply soil conditioner first before planting; during growth, supplement with nutrient solution, drenching or foliar feeding.',
+            'prescription03.item1Title': 'Granular Lime Magnesia',
+            'prescription03.item1Badge': '60~70kg',
+            'prescription03.item1Desc': 'Neutralizes acidic soil, eases salt injury',
+            'prescription03.item2Title': 'Granular Silicate',
+            'prescription03.item2Badge': '80~90kg',
+            'prescription03.item2Desc': 'Neutralizes acidic soil, strengthens branch and stem tissue',
+            'prescription03.item3Title': 'Saengsaeng Vita Liquid',
+            'prescription03.item3Desc': 'Recovery from cold and heat stress, sustained sugar, coloring and vigor<br>Apply every 7~10 days (around flowering through sizing and coloring)',
+
+            /* ── Organic inputs ─────────────────────────────────────── */
+            'organic.eyebrow': 'Organic Inputs',
+            'organic.title': 'Organic Inputs',
+            'organic.item1Name': 'Saengsaengnara Silicate',
+            'organic.noticeLabel': 'Listing No.',
+            'organic.item1Notice': 'No. 2-3-453',
+            'organic.labelSilica': 'Soluble silica',
+            'organic.labelAlkali': 'Alkali content',
+            'organic.labelCitrateMagnesia': 'Citrate-soluble MgO',
+            'organic.labelMagnesia': 'Soluble MgO',
+            'organic.labelCaO': 'CaO',
+            'organic.labelSulfur': 'Total sulfur',
+            'organic.item2Name': 'Saengsaengnara Lime Magnesia',
+            'organic.item2Notice': 'No. 2-3-454',
+            'organic.item3Name': 'Saengsaenghwang <br> Mag-Sulfur-Calcium',
+            'organic.item3Notice': 'No. 3-379',
+
+            /* ── Liquid fertilizer (Vita) ───────────────────────────── */
+            'vita.eyebrow': 'Micronutrients & Safety',
+            'vita.title': 'Micronutrient Compound Fertilizer',
+            'vita.item1Name': 'Saengsaeng Vita 40',
+            'vita.labelNpk': 'N-P-K',
+            'vita.labelAmino': 'Amino acids',
+            'vita.labelOrganic': 'Organic matter',
+            'vita.item2Name': 'Saengsaeng Vita Gold',
+            'vita.item1Desc': 'Concentrated liquid with 17 plant amino acids and micronutrients',
+            'vita.item2Desc': 'Fermentation-based · for soil drench and foliar spray',
+
+            /* ── Product lineup ─────────────────────────────────────── */
+            'productsLine.eyebrow': 'Product Lineup',
+            'productsLine.title': 'Soil Conditioners',
+            'productsLine.item1Name': 'Granular Silicate Fertilizer',
+            'productsLine.item1Sub': 'Lodging prevention & cell wall strengthening',
+            'productsLine.item2Name': 'Granular Lime Magnesia Fertilizer',
+            'productsLine.item2Sub': 'Soil pH correction & chlorophyll formation',
+            'productsLine.item3Name': 'Calcium Sulfur Fertilizer',
+            'productsLine.item3Sub': 'Neutral calcium & taste, aroma, shelf life',
+            'productsLine.labelSilica': 'Soluble silica',
+            'productsLine.labelAlkali': 'Alkali content',
+            'productsLine.labelCitrateMagnesia': 'Citrate-soluble MgO',
+            'productsLine.labelMagnesia': 'Soluble MgO',
+            'productsLine.labelLime': 'Soluble lime',
+            'productsLine.labelSulfur': 'Sulfur (SO₃)',
+
+            /* ── Government program ─────────────────────────────────── */
+            'government.eyebrow': 'Government Program',
+            'government.title': 'Government-funded free soil conditioner program',
+            'government.desc': 'More than 20 years of continuous supply, easing the cost burden on farms.',
+            'government.stat1Unit': '%',
+            'government.stat1Label': 'National and local funding',
+            'government.stat2Unit': 'yrs',
+            'government.stat2Label': 'One supply cycle',
+            'government.stat3Unit': 'USD',
+            'government.stat3Label': 'Farmer cost share',
+            'government.stat4Unit': '+',
+            'government.stat4Label': 'Years of supply',
+            'government.card1Title': 'Why it is free',
+            'government.card1Desc': 'A soil fertility recovery program that addresses farmland acidification and declining available silica caused by long-term chemical fertilizer use.',
+            'government.card2Title': 'How to apply',
+            'government.card2Desc': 'Check the public notice → submit an application (local district office / Agrix) → confirm volume → free delivery and spreading by the local agricultural cooperative.',
+            'government.card3Title': 'Supplied products',
+            'government.card3Desc': 'Granular silicate and granular lime magnesia fertilizers are the soil conditioners farmers know best in the field.',
+
+            /* ── FAQ ────────────────────────────────────────────────── */
+            'faq.eyebrow': 'Product FAQ',
+            'faq.title': 'Frequently asked questions, answered right here',
+            'faq.desc': 'The questions farmers and buyers ask most, answered in one sentence per product.',
+            'faq.selectLabel': 'Select a product category',
+            'faq.tabAll': 'All',
+            'faq.tabSilicate': 'Granular Silicate',
+            'faq.tabVita40': 'Saengsaeng Vita 40',
+            'faq.tabCalciumSulfur': 'Granular Calcium Sulfur',
+            'faq.tabLimestone': 'Granular Lime Magnesia',
+            'faq.tabVitaGold': 'Saengsaeng Vita Gold',
+            'faq.tabMagSulfur': 'Saengsaenghwang Mag-Sulfur-Calcium',
+            'faq.q1': 'Can I apply it together with compound fertilizer or compost?',
+            'faq.a1': 'Compost is fine, but compound fertilizer must not be mixed in. Apply the silicate fertilizer first and wait at least two weeks before the compound fertilizer; mixing them causes gas damage to crops.',
+            'faq.q2': 'I have no silicate fertilizer. Can I apply lime magnesia to rice instead?',
+            'faq.a2': 'You can. It will adjust soil pH, but without silica it will not help reduce lodging.',
+            'faq.q3': 'Can I apply it during the orchard harvest period?',
+            'faq.a3': 'Two weeks before harvest is fine, but one week before is too late to have any effect.',
+            'faq.q4': 'What application interval and dilution should I use?',
+            'faq.a4': 'Apply every 7~10 days, diluted about 1,000 times, spraying until the crop is thoroughly wet.',
+            'faq.q5': 'Can I apply it as a foliar spray or a drench?',
+            'faq.a5': 'Drenching is possible but not recommended because it dissolves poorly. Foliar spraying is also discouraged since the large particles can block stomata. Mixing it into the soil is recommended.',
+            'faq.q6': 'What is the application schedule, and can it be mixed with compound fertilizer?',
+            'faq.a6': 'Apply before planting. Compost can be mixed in, but apply compound fertilizer 1~2 weeks later.',
+
+            /* ── Application guide ──────────────────────────────────── */
+            'guide.eyebrow': 'Application Guide',
+            'guide.title': 'Product Application Guide',
+            'guide.desc': 'Granular soil conditioners are slow-release products that react gradually in the soil rather than acting immediately.',
+            'guide.timelineTitle': 'Application timing by crop',
+            'guide.scrollHint': 'Swipe sideways to see the full schedule',
+            'guide.timeline.crop': 'Crop',
+            'guide.timeline.recommend': 'Recommended',
+            'guide.timeline.month1': 'Jan',
+            'guide.timeline.month2': 'Feb',
+            'guide.timeline.month3': 'Mar',
+            'guide.timeline.month4': 'Apr',
+            'guide.timeline.month5': 'May',
+            'guide.timeline.month6': 'Jun',
+            'guide.timeline.month7': 'Jul',
+            'guide.timeline.month8': 'Aug',
+            'guide.timeline.month9': 'Sep',
+            'guide.timeline.month10': 'Oct',
+            'guide.timeline.month11': 'Nov',
+            'guide.timeline.month12': 'Dec',
+            'guide.crop1': 'Rice',
+            'guide.crop1Step1': 'One month before transplanting',
+            'guide.crop1Step2': 'Within 15 days after transplanting',
+            'guide.crop1Step3': '30 days before heading',
+            'guide.crop1Rec': 'Alternating granular silicate and lime magnesia',
+            'guide.crop2': 'Pepper · Tomato · Cucumber',
+            'guide.crop2Step1': '3~4 weeks before planting',
+            'guide.crop2Rec': 'Lime magnesia base + lime magnesia support',
+            'guide.crop3': 'Garlic · Onion · Radish · Potato',
+            'guide.crop3Step1': '2~3 months before transplanting',
+            'guide.crop3Step2': 'Before autumn rotary',
+            'guide.crop3Rec': 'Silicate base + lime magnesia support',
+            'guide.crop4': 'Fruit Trees',
+            'guide.crop4Step1': 'Dormancy after leaf fall',
+            'guide.crop4Step2': 'Dormancy after leaf fall',
+            'guide.crop4Rec': 'Lime magnesia · Calcium sulfur',
+            'guide.crop5': 'Greenhouse',
+            'guide.crop5Step1': '3~4 weeks before planting + foliar top-up during growth',
+            'guide.crop5Rec': 'Soil conditioner + Saengsaeng Vita',
+            'guide.tipsTitle': 'Product Application Guide',
+            'guide.tip1Title': 'Do not mix',
+            'guide.tip1Desc': 'Do not <b>mix and use together</b> with nitrogen or compound fertilizer.',
+            'guide.tip2Title': 'Tillage recommended',
+            'guide.tip2Desc': '<b>Do not leave it on the surface</b>; <br> mix it evenly through the tilled layer',
+            'guide.tip3Title': 'Stagger by 1~2 weeks',
+            'guide.tip3Desc': 'Soil conditioner first, <br> use chemical fertilizer <b>1~2 weeks</b> later',
+            'guide.tip4Title': 'Soil testing',
+            'guide.tip4Desc': 'Over-application risks trace element <br> deficiency and <b>antagonism</b>',
+
+            /* ── Facility ───────────────────────────────────────────── */
+            'facility.eyebrow': 'Manufacturing Facility',
+            'facility.title': 'A state-of-the-art, <br> one-stop fertilizer production site',
+            'facility.desc': 'Every step is automated, from intake silos and blending hoppers to granulating drums and automatic robot palletizing.',
+            'facility.item1Tag': '01 Raw material silo',
+            'facility.item1Title': 'High-capacity raw material silos and transfer lines',
+            'facility.item1Desc': 'Raw materials are stored by type in sealed silos that limit moisture and rainwater ingress, keeping quality stable.',
+            'facility.item2Tag': '02 Mixer',
+            'facility.item2Title': 'Raw material mixing system',
+            'facility.item2Desc': 'Materials fed according to each blend formula are mixed evenly so every product keeps a uniform composition.',
+            'facility.item3Tag': '03 Granulator',
+            'facility.item3Title': 'Rotary drum granulator',
+            'facility.item3Desc': 'Blended materials are formed into spherical granules in a rotating drum.',
+            'facility.item4Tag': '04 Drying & cooling',
+            'facility.item4Title': 'Drying and cooling system',
+            'facility.item4Desc': 'Moisture in formed granules is reduced to spec and cooled to secure particle hardness.',
+            'facility.item5Tag': '05 Sorting & auto packing',
+            'facility.item5Title': 'Particle screening and 20kg automatic packing line',
+            'facility.item5Desc': 'On-spec granules pass through screens; off-spec material is separated for reprocessing. Products are automatically weighed and packed in 20kg units.',
+            'facility.item6Tag': '06 Auto palletizing',
+            'facility.item6Title': 'Robot palletizing and automatic wrapping system',
+            'facility.item6Desc': 'Robots palletize the packed products, then wrap the pallets and apply a top sheet.',
+
+            /* ── Certification ──────────────────────────────────────── */
+            'certification.eyebrow': 'Certification',
+            'certification.title': 'Certifications & Patents',
+            'certification.desc': 'We hold certifications and patents from official bodies including the Korea Limestone Processing Cooperative, Daegu Customs and the National Agricultural Products Quality Management Service.',
+            'certification.item1Tag': 'Patent',
+            'certification.item1Title': 'Method and apparatus for gelatinizing carboxymethyl cellulose',
+            'certification.item2Tag': 'Confirmation',
+            'certification.item2Title': 'Venture Company Confirmation',
+            'certification.item3Tag': 'Trademark',
+            'certification.item3Title': 'Saengsaengnara Trademark Registration',
+            'certification.item4Tag': 'Certificate',
+            'certification.item4Title': 'R&D Organization Certificate',
+            'certification.item5Tag': 'Listing',
+            'certification.item5Title': 'Organic Input Listing for Saengsaenghwang Mag-Sulfur-Calcium',
+            'certification.item6Tag': 'Certificate',
+            'certification.item6Title': 'Organic Input Listing 2 <br>(Saengsaengnara Magnesia)',
+            'certification.item7Tag': 'Certificate',
+            'certification.item7Title': 'Organic Input Listing 3 <br>(Saengsaengnara Silicate)',
+            'certification.item8Tag': 'Confirmation',
+            'certification.item8Title': 'Excellent Group Standard Product Certificate',
+            'certification.item9Tag': 'Registration',
+            'certification.item9Title': 'China Fertilizer Registration Certificate',
+
+            /* ── Global export ──────────────────────────────────────── */
+            'globalExport.eyebrow': 'Global Export',
+            'globalExport.title': 'Global export product information',
+            'globalExport.desc': 'We supply locally tailored products that meet the registration numbers and composition standards of Ghana, China and Vietnam.',
+            'globalExport.tabAll': 'All (8)',
+            'globalExport.tabChina': 'China (4)',
+            'globalExport.tabVietnam': 'Vietnam (3)',
+            'globalExport.tabGhana': 'Ghana (1)',
+            'globalExport.labelSilica': 'Silica',
+            'globalExport.labelAlkali': 'Alkali content',
+            'globalExport.labelMagnesia': 'Magnesia',
+            'globalExport.badgeGhana': 'Export to Ghana',
+            'globalExport.badgeVietnam': 'Export to Vietnam',
+            'globalExport.badgeChina': 'Export to China',
+            'globalExport.item1Name': 'CHOBI GHANA Rice Starter',
+            'globalExport.item1Desc': 'Silicate fertilizer made for rice in Ghana',
+            'globalExport.item2Name': 'HF-CASIMAG (SICA)',
+            'globalExport.item2Desc': 'Soil conditioner tailored to all crops in Vietnam',
+            'globalExport.item3Name': 'HF-CASIMAG',
+            'globalExport.item3Desc': 'Soil conditioner tailored to all crops in Vietnam',
+            'globalExport.item4Name': 'CA-SI-MAG',
+            'globalExport.item4Desc': 'Stronger root vigor and higher sugar content',
+            'globalExport.item5Name': '韩一福 Lime Magnesia Fertilizer',
+            'globalExport.item5Desc': 'Neutralizes acidic soil',
+            'globalExport.item6Name': '雅植道 中量元素肥料',
+            'globalExport.item6Desc': 'Water-insoluble secondary nutrient fertilizer for China',
+            'globalExport.item7Name': 'OMAC Agri 欧迈克',
+            'globalExport.item7Desc': 'Soil conditioner for China',
+            'globalExport.item8Name': 'MOXI Granular Silicate',
+            'globalExport.item8Desc': 'Improved fruit coloring and quality for China',
+
+            /* ── OEM & ODM ──────────────────────────────────────────── */
+            'oemOdm.eyebrow': 'OEM & ODM',
+            'oemOdm.title': 'OEM/ODM <br> & bulk purchase process',
+            'oemOdm.desc': 'From consultation to export, handled end to end.',
+            'oemOdm.step1Title': 'Consultation',
+            'oemOdm.step1Desc': 'Reviewing tailored formulation specs and requirements by crop and region',
+            'oemOdm.step2Title': 'Sampling & testing',
+            'oemOdm.step2Desc': 'Component blending, R&D analysis and on-farm field trials',
+            'oemOdm.step3Title': 'OEM/ODM production',
+            'oemOdm.step3Desc': 'Private-label packaging and bulk granular or liquid manufacturing',
+            'oemOdm.step4Title': 'Shipping & export',
+            'oemOdm.step4Desc': 'Cooperative procurement, domestic bulk logistics and container export',
+
+            /* ── Contact us ─────────────────────────────────────────── */
+            'contactUs.eyebrow': 'Inquiry',
+            'contactUs.title': 'A partner opening sustainable future farming and global markets together',
+            'contactUs.subtitle': '<span class="text-[#B0C45F]">HANIL C&amp;S</span> will be with you.',
+            'contactUs.company': 'HANIL C&amp;S Co., Ltd.',
+            'contactUs.address': '76 Duryu-gil, Angang-eup, Gyeongju-si, Gyeongsangbuk-do, Korea',
+            'contactUs.tel': 'TEL +82-54-762-9691~2',
+            'contactUs.fax': 'FAX +82-54-762-9695',
+            'contactUs.web': 'www.hanilcns.com',
+            'contactUs.telHref': 'tel:+82547629691',
+            'contactUs.faxHref': 'fax:+82547629695',
+            'contactUs.webHref': 'https://www.hanilcns.com'
+        }
+    };
+
+    var ALL_THEME_CLASSES = (function () {
+        var list = [];
+        Object.keys(THEMES).forEach(function (name) {
+            list = list.concat(THEMES[name].on, THEMES[name].off);
+        });
+        return list;
+    })();
+
+    function getLang() {
+        try {
+            var saved = localStorage.getItem(STORAGE_KEY);
+            if (saved === 'ko' || saved === 'en') return saved;
+        } catch (e) { /* ignore */ }
+        return DEFAULT_LANG;
+    }
+
+    function setLang(lang) {
+        if (lang !== 'ko' && lang !== 'en') lang = DEFAULT_LANG;
+        try {
+            localStorage.setItem(STORAGE_KEY, lang);
+        } catch (e) { /* ignore */ }
+        document.documentElement.lang = lang;
+        applyCopy(lang, { skipMainIfKo: false });
+        syncButtons(lang);
+        document.dispatchEvent(new CustomEvent(EVENT_NAME, { detail: { lang: lang } }));
+    }
+
+    function applyCopy(lang, opts) {
+        opts = opts || {};
+        var pack = dict[lang] || dict.ko;
+        document.documentElement.lang = lang === 'en' ? 'en' : 'ko';
+        /* Initial KO load only: HTML already has Korean in main */
+        var skipMainCopy = opts.skipMainIfKo === true && lang === 'ko';
+
+        Array.prototype.forEach.call(document.querySelectorAll('[data-i18n]'), function (el) {
+            var key = el.getAttribute('data-i18n');
+            if (!key || pack[key] == null) return;
+            if (skipMainCopy && el.closest && el.closest('main')) return;
+            if (skipMainCopy && el.tagName === 'TITLE') return;
+            if (el.tagName === 'TITLE') {
+                el.textContent = pack[key];
+            } else {
+                el.innerHTML = pack[key];
+            }
+        });
+
+        Array.prototype.forEach.call(document.querySelectorAll('[data-i18n-content]'), function (el) {
+            var key = el.getAttribute('data-i18n-content');
+            if (!key || pack[key] == null) return;
+            if (skipMainCopy && el.closest && el.closest('main')) return;
+            el.setAttribute('content', pack[key]);
+        });
+
+        Array.prototype.forEach.call(document.querySelectorAll('[data-i18n-placeholder]'), function (el) {
+            var key = el.getAttribute('data-i18n-placeholder');
+            if (!key || pack[key] == null) return;
+            el.setAttribute('placeholder', pack[key]);
+        });
+
+        Array.prototype.forEach.call(document.querySelectorAll('[data-i18n-aria]'), function (el) {
+            var key = el.getAttribute('data-i18n-aria');
+            if (!key || pack[key] == null) return;
+            el.setAttribute('aria-label', pack[key]);
+        });
+
+        Array.prototype.forEach.call(document.querySelectorAll('[data-i18n-title]'), function (el) {
+            var key = el.getAttribute('data-i18n-title');
+            if (!key || pack[key] == null) return;
+            el.setAttribute('title', pack[key]);
+        });
+
+        Array.prototype.forEach.call(document.querySelectorAll('[data-i18n-href]'), function (el) {
+            var key = el.getAttribute('data-i18n-href');
+            if (!key || pack[key] == null) return;
+            el.setAttribute('href', pack[key]);
+        });
+
+        Array.prototype.forEach.call(document.querySelectorAll('[data-lang-switch]'), function (group) {
+            if (pack.langAria) group.setAttribute('aria-label', pack.langAria);
+        });
+    }
+
+    function themeFor(btn) {
+        var group = btn.closest ? btn.closest('[data-lang-switch]') : null;
+        var name = group && group.getAttribute('data-lang-theme');
+        return THEMES[name] || THEMES.intro;
+    }
+
+    function syncButtons(lang) {
+        Array.prototype.forEach.call(document.querySelectorAll('[data-lang]'), function (btn) {
+            var active = btn.getAttribute('data-lang') === lang;
+            var theme = themeFor(btn);
+            btn.setAttribute('aria-pressed', active ? 'true' : 'false');
+            ALL_THEME_CLASSES.forEach(function (cls) {
+                btn.classList.remove(cls);
+            });
+            (active ? theme.on : theme.off).forEach(function (cls) {
+                btn.classList.add(cls);
+            });
+        });
+    }
+
+    /* Delegated so buttons inside the JS-injected header work too */
+    function bind() {
+        document.addEventListener('click', function (e) {
+            var btn = e.target && e.target.closest ? e.target.closest('[data-lang]') : null;
+            if (!btn) return;
+            e.preventDefault();
+            setLang(btn.getAttribute('data-lang'));
+        });
+    }
+
+    function apply(opts) {
+        var lang = getLang();
+        if (!opts) opts = { skipMainIfKo: true };
+        applyCopy(lang, opts);
+        syncButtons(lang);
+    }
+
+    function init() {
+        bind();
+        apply();
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+    } else {
+        init();
+    }
+
+    function t(key, vars) {
+        var lang = getLang();
+        var pack = dict[lang] || dict.ko;
+        var text = pack[key];
+        if (text == null && dict.ko) text = dict.ko[key];
+        if (text == null) return key;
+        if (vars && typeof vars === 'object') {
+            Object.keys(vars).forEach(function (name) {
+                text = String(text).split('{' + name + '}').join(String(vars[name]));
+            });
+        }
+        return text;
+    }
+
+    window.CatalogLang = {
+        get: getLang,
+        set: setLang,
+        apply: apply,
+        t: t,
+        dict: dict
+    };
+})();

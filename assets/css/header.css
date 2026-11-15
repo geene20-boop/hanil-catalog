@@ -1,0 +1,363 @@
+/* ?? FOUC guard (must stay in head-linked CSS) ?? */
+html.js-anim:not(.catalog-anim-ready) main {
+    opacity: 0 !important;
+}
+
+html.js-anim.catalog-anim-ready main {
+    opacity: 1;
+}
+
+/* Prevent horizontal overscroll lock + native link/image drag freezes */
+html,
+body {
+    overscroll-behavior-x: none;
+}
+
+a,
+img {
+    -webkit-user-drag: none;
+}
+
+header {
+    position: fixed;
+    border-radius: 25px 25px 0 0;
+    overflow: visible;
+}
+
+.menu-wrap {
+    position: static;
+}
+
+.menu-wrap .group {
+    position: static;
+}
+
+.catalog-nav-arrow.is-disabled {
+    opacity: 0.35;
+    pointer-events: none;
+    cursor: default;
+}
+
+@media (max-width: 1023px) {
+    header {
+        border-radius: 0;
+    }
+
+    body {
+        padding-bottom: calc(108px + env(safe-area-inset-bottom, 0px));
+    }
+}
+
+.menu-wrap .group > a,
+.menu-wrap .group .catalog-top-subnav a {
+    color: #9CA3AF !important;
+    transition: color 0.2s ease;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-user-drag: none;
+}
+
+.menu-wrap .group:hover > a,
+.menu-wrap .group .catalog-top-subnav a:hover {
+    color: #0C5625 !important;
+}
+
+.menu-wrap .group.is-active > a,
+.menu-wrap .group .catalog-top-subnav a.is-current {
+    color: #0C5625 !important;
+}
+
+.menu-wrap:has(.group:not(.is-active):hover) .group.is-active > .catalog-top-subnav {
+    opacity: 0 !important;
+    visibility: hidden !important;
+}
+
+/* Top submenu: plain centered flex strip (no Swiper touch handlers) */
+.catalog-top-subnav {
+    position: absolute !important;
+    top: 100% !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+    height: auto !important;
+    margin: 0 !important;
+    z-index: 9999;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    touch-action: pan-x;
+    overscroll-behavior-x: contain;
+    scrollbar-width: none;
+    box-sizing: border-box;
+}
+
+.catalog-top-subnav::-webkit-scrollbar {
+    display: none;
+}
+
+.catalog-top-subnav a {
+    flex: 0 0 auto;
+}
+
+/* ?? Instagram-style floating bottom nav ?? */
+.catalog-mobile-nav {
+    display: none;
+    position: fixed !important;
+    left: 12px;
+    right: 12px;
+    bottom: calc(10px + env(safe-area-inset-bottom, 0px));
+    z-index: 10050 !important;
+    flex-direction: column;
+    gap: 4px;
+    pointer-events: none;
+}
+
+@media (max-width: 1023px) {
+    .catalog-mobile-nav {
+        display: flex;
+    }
+}
+
+.catalog-mobile-nav > * {
+    pointer-events: auto;
+}
+
+.catalog-tabbar {
+    display: grid;
+    width: 100%;
+    height: 58px;
+    min-height: 58px;
+    margin: 0;
+    padding: 4px;
+    box-sizing: border-box;
+    background: #ffffff;
+    border: 1px solid #E5E8EB;
+    border-radius: 9999px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    align-items: center;
+    gap: 2px;
+}
+
+.catalog-tab {
+    appearance: none;
+    border: 0;
+    background: transparent;
+    color: #8B95A1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    min-width: 0;
+    height: 100%;
+    padding: 4px 2px;
+    border-radius: 9999px;
+    cursor: pointer;
+    font-family: inherit;
+    text-decoration: none;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.catalog-tab svg {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+}
+
+.catalog-tab span {
+    font-size: 9px;
+    font-weight: 600;
+    line-height: 1.1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+}
+
+.catalog-tab.is-active,
+.catalog-tab[aria-pressed="true"] {
+    color: #0C5625;
+    background: rgba(234, 245, 238, 0.85);
+}
+
+/* Submenu strip above bottom bar ??Swiper freeMode */
+.catalog-subnav {
+    width: 100%;
+    padding: 0;
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    overflow: hidden;
+    margin: 0;
+    touch-action: pan-x;
+}
+
+.catalog-subnav.swiper-horizontal {
+    touch-action: pan-x !important;
+}
+
+.catalog-subnav[hidden] {
+    display: none !important;
+}
+
+.catalog-subnav .swiper-wrapper {
+    align-items: center;
+    box-sizing: border-box;
+    padding: 8px 16px 8px 12px;
+}
+
+.catalog-subnav .swiper-wrapper::after {
+    content: '';
+    flex: 0 0 8px;
+    width: 8px;
+    height: 1px;
+    pointer-events: none;
+}
+
+.catalog-subnav__slide,
+.catalog-subnav .swiper-slide {
+    width: auto;
+    height: auto;
+    flex-shrink: 0;
+}
+
+.catalog-subnav .swiper-slide:last-child {
+    margin-right: 4px;
+}
+
+.catalog-subnav__link {
+    display: inline-flex;
+    align-items: center;
+    padding: 7px 12px;
+    border-radius: 9999px;
+    background: #F0F5ED;
+    color: #4E5968;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1.2;
+    white-space: nowrap;
+    text-decoration: none;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-user-drag: none;
+}
+
+.catalog-subnav__link.is-current,
+.catalog-subnav__link:hover {
+    background: #0C5625;
+    color: #fff;
+}
+
+/* Header tools: phone always; calculators only on mobile */
+.header-tool-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    border-radius: 9999px;
+    color: #154624;
+    background: #F0F5ED;
+    text-decoration: none;
+    flex-shrink: 0;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.header-tool-btn:hover {
+    background: #0C5625;
+    color: #fff;
+}
+
+.header-tool-btn img {
+    display: block;
+}
+
+.header-calc-btn {
+    display: none;
+}
+
+@media (max-width: 1023px) {
+    .header-calc-btn {
+        display: inline-flex;
+    }
+}
+
+@media (max-width: 767px) {
+    .header-tool-btn {
+        width: 32px;
+        height: 32px;
+    }
+}
+
+/* Desktop: fixed right-column calculator FAB */
+.catalog-calc-nav {
+    display: none;
+    position: fixed;
+    top: 90px;
+    right: 28px;
+    z-index: 9999;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 8px;
+}
+
+@media (min-width: 1024px) {
+    .catalog-calc-nav {
+        display: flex;
+    }
+}
+
+.catalog-calc-btn {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 0;
+    min-width: 48px;
+    min-height: 48px;
+    padding: 0 14px;
+    border-radius: 9999px;
+    color: #154624;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 0 8px 28px rgba(12, 86, 37, 0.18);
+    text-decoration: none;
+    overflow: hidden;
+    transition: gap 0.3s ease, background-color 0.2s ease, color 0.2s ease;
+}
+
+.catalog-calc-btn svg {
+    flex-shrink: 0;
+}
+
+.catalog-calc-label {
+    max-width: 0;
+    opacity: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1.2;
+    transition: max-width 0.3s ease, opacity 0.25s ease, margin 0.3s ease;
+}
+
+.catalog-calc-btn:hover {
+    gap: 8px;
+    background: #0C5625;
+    color: #fff;
+}
+
+.catalog-calc-btn:hover .catalog-calc-label {
+    max-width: 360px;
+    opacity: 1;
+}
+
+/* ≥1600px: shrink rem root so Tailwind text-* (text-2xl etc.) scales down */
+@media (min-width: 1600px) {
+    html {
+        font-size: 14px !important;
+    }
+}

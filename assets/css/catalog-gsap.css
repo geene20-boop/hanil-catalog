@@ -1,0 +1,116 @@
+/* Shared GSAP FOUC / reveal helpers — used with catalog-gsap.js */
+
+.gsap-hide,
+.intro-anim,
+.bs-fade-up,
+.cs-fade-up {
+    opacity: 0;
+    transform: translate3d(0, 24px, 0);
+}
+
+.intro-anim {
+    transform: translate3d(0, 28px, 0);
+    will-change: transform, opacity;
+}
+
+.intro-overlay {
+    opacity: 0;
+}
+
+/* Gauge fill (left → right) */
+.gsap-gauge {
+    clip-path: inset(0 100% 0 0);
+    will-change: clip-path;
+}
+
+/* Curtain reveal */
+.gsap-reveal,
+.pre-reveal {
+    overflow: hidden;
+}
+
+.gsap-reveal__media,
+.pre-reveal__media,
+.gsap-reveal__media img,
+.pre-reveal__media img {
+    width: 100%;
+    height: 100%;
+}
+
+.gsap-reveal__media img,
+.pre-reveal__media img {
+    transform: scale(1.12);
+    transform-origin: center center;
+    will-change: transform;
+}
+
+.gsap-reveal__curtain,
+.pre-reveal__curtain {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    background: #E6E6DC;
+    pointer-events: none;
+    will-change: transform;
+}
+
+.gsap-reveal.is-revealed .gsap-reveal__media img,
+.pre-reveal.is-revealed .pre-reveal__media img {
+    transform: none;
+    will-change: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .gsap-hide,
+    .intro-anim,
+    .bs-fade-up,
+    .cs-fade-up,
+    .intro-overlay {
+        opacity: 1 !important;
+        transform: none !important;
+        will-change: auto;
+    }
+
+    .gsap-reveal__curtain,
+    .pre-reveal__curtain {
+        display: none !important;
+    }
+
+    .gsap-reveal__media img,
+    .pre-reveal__media img {
+        transform: none !important;
+        will-change: auto;
+    }
+
+    .gsap-gauge {
+        clip-path: none !important;
+        will-change: auto;
+    }
+}
+
+/* include-header.js sets CATALOG_GSAP_DISABLED — skip GSAP download, show content immediately */
+html.catalog-gsap-off .gsap-hide,
+html.catalog-gsap-off .intro-anim,
+html.catalog-gsap-off .bs-fade-up,
+html.catalog-gsap-off .cs-fade-up,
+html.catalog-gsap-off .intro-overlay {
+    opacity: 1 !important;
+    transform: none !important;
+    will-change: auto;
+}
+
+html.catalog-gsap-off .gsap-reveal__curtain,
+html.catalog-gsap-off .pre-reveal__curtain {
+    display: none !important;
+}
+
+html.catalog-gsap-off .gsap-reveal__media img,
+html.catalog-gsap-off .pre-reveal__media img {
+    transform: none !important;
+    will-change: auto;
+}
+
+html.catalog-gsap-off .gsap-gauge {
+    clip-path: none !important;
+    will-change: auto;
+}

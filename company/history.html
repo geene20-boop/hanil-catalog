@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title data-i18n="meta.page.history">연혁 | (주)한일씨앤에스</title>
+        <meta name="description" data-i18n-content="meta.description" content="1999년 설립 이래 26년간 토양개량제를 전문 제조해온 한일씨앤에스(HANIL C&S)의 전자카탈로그입니다.">
+        <meta name="robots" content="index, follow">
+        <link rel="canonical" href="/company/history.html">
+        <meta property="og:url" content="/company/history.html">
+        <link rel="icon" href="../assets/img/favicon.ico" type="image/x-icon">
+
+        <script src="../assets/js/tailwindcss.local.js"></script>
+        <link rel="stylesheet" href="../assets/css/pretendardvariable.css">
+        <link rel="stylesheet" href="../assets/css/main.css">
+        <link rel="stylesheet" href="../assets/css/header.css">
+        <link rel="stylesheet" href="../assets/css/catalog-gsap.css">
+        <style>
+            .history-timeline {
+                --history-accent: #22703C;
+                --history-accent-dark: #0C5625;
+                --history-muted: #6c6c6c;
+                --history-line: #C5D4C8;
+                --history-line-active: #22703C;
+            }
+            .history-timeline {
+                position: relative;
+                --history-rail-x: calc(88px + 16px + 15px);
+            }
+            @media (max-width: 768px) {
+                .history-timeline {
+                    --history-rail-x: calc(64px + 10px + 13px);
+                }
+            }
+            .history-rail-stack {
+                position: absolute;
+                z-index: 0;
+                left: var(--history-rail-x);
+                top: 7px;
+                bottom: 7px;
+                width: 2px;
+                pointer-events: none;
+            }
+            .history-rail-track {
+                position: absolute;
+                inset: 0;
+                background: #C5D4C8;
+                border-radius: 1px;
+            }
+            .history-rail-progress {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 0;
+                background: var(--history-accent);
+                border-radius: 1px;
+                will-change: height;
+            }
+            .history-year-num {
+                color: #154624;
+                transition: color 0.35s ease;
+            }
+            .history-marker-dot {
+                position: relative;
+                z-index: 2;
+                box-sizing: border-box;
+                border-radius: 9999px;
+                background: #fff;
+                border: 3px solid #B0C45F;
+                transition: background-color 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
+            }
+            .history-year-block.is-rail-active .history-year-num {
+                color: var(--history-accent);
+            }
+            .history-year-block.is-rail-active .history-marker-dot {
+                background: var(--history-accent);
+                border-color: var(--history-accent);
+                box-shadow: 0 0 0 4px rgba(34, 112, 60, 0.12);
+            }
+            .history-event-copy {
+                color: #154624;
+            }
+        </style>
+    </head>
+    <body class="min-h-screen bg-[#E6E6DC] text-[#154624] antialiased overflow-x-hidden">
+        <div class="catalog-app flex min-h-screen bg-[#E6E6DC]">
+            <script src="../assets/js/include-header.js"></script>
+
+            <main class="relative flex flex-col w-full pt-[150px] pb-[120px] max-lg:pt-[110px] max-md:pt-[88px] max-md:pb-[140px]">
+                <div class="boundary w-[90%] max-md:w-[94%] max-w-[960px] mx-auto mb-[48px] max-md:mb-[32px] text-center">
+                    <h3 class="text-base max-md:text-sm text-[#22703C] font-semibold mb-[8px]" data-gsap-fade data-i18n="history.eyebrow">History</h3>
+                    <h2 class="text-5xl max-xl:text-4xl max-lg:text-3xl max-md:text-2xl font-bold text-[#0C5625] mb-[12px]" data-gsap-fade data-i18n="history.title">연혁</h2>
+                    <p class="text-lg max-md:text-base text-[#154624] font-medium" data-gsap-fade data-i18n="history.desc">1999년 한일석회 설립부터, 토양개량제 전문기업 한일씨앤에스로 이어온 발자취입니다.</p>
+                </div>
+
+                <div class="boundary w-[90%] max-md:w-[94%] max-w-[960px] mx-auto history-timeline" data-history-timeline aria-label="Company history timeline">
+                    <div class="history-rail-stack" aria-hidden="true">
+                        <div class="history-rail-track"></div>
+                        <div class="history-rail-progress" data-history-rail-progress></div>
+                    </div>
+                    <!-- 2026 (latest) -->
+                    <article class="history-year-block relative z-[1] is-latest grid grid-cols-[88px_32px_1fr] max-md:grid-cols-[64px_28px_1fr] gap-x-[16px] max-md:gap-x-[10px] pb-[48px] max-md:pb-[36px]" data-gsap-history-year>
+                        <div class="history-year-num text-4xl max-md:text-3xl font-extrabold leading-none pt-[4px]">2026</div>
+                        <div class="relative flex flex-col items-center">
+                            <span class="history-marker-dot w-[14px] h-[14px] shrink-0" data-gsap-history-marker aria-hidden="true"></span>
+                        </div>
+                        <div class="space-y-[20px] pt-[2px]">
+                            <div class="history-event-row" data-gsap-history-event>
+                                <p class="history-event-copy text-lg max-md:text-base leading-[1.65] font-medium" data-i18n="history.2026.2">벤처기업 재확인 (혁신성장유형)</p>
+                            </div>
+                            <div class="history-event-row" data-gsap-history-event>
+                                <p class="history-event-copy text-lg max-md:text-base leading-[1.65] font-medium" data-i18n="history.2026.1">카복시메틸셀룰로스 호화방법 및 이를 위한 장치 특허 등록(특허 제 10-2982907호)</p>
+                            </div>
+                        </div>
+                    </article>
+                    <!-- 2025 -->
+                    <article class="history-year-block relative z-[1] grid grid-cols-[88px_32px_1fr] max-md:grid-cols-[64px_28px_1fr] gap-x-[16px] max-md:gap-x-[10px] pb-[48px] max-md:pb-[36px]" data-gsap-history-year>
+                        <div class="history-year-num text-4xl max-md:text-3xl font-extrabold leading-none pt-[4px]">2025</div>
+                        <div class="relative flex flex-col items-center">
+                            <span class="history-marker-dot w-[14px] h-[14px] shrink-0 z-[2]" data-gsap-history-marker aria-hidden="true"></span>
+                        </div>
+                        <div class="space-y-[20px] pt-[2px]">
+                            <div class="history-event-row" data-gsap-history-event>
+                                <p class="history-event-copy text-lg max-md:text-base leading-[1.65] font-medium" data-i18n="history.2025.2">생생황마그유황칼슘 유기농업자재 공시(공시번호 : 제 공시-3-3-729호)</p>
+                            </div>
+                            <div class="history-event-row" data-gsap-history-event>
+                                <p class="history-event-copy text-lg max-md:text-base leading-[1.65] font-medium" data-i18n="history.2025.1">미량요소복합(생생비타40) 비료생산업 등록(제 경북 경주003-가-10804호)</p>
+                            </div>
+                        </div>
+                    </article>
+                    <!-- 2023 -->
+                    <article class="history-year-block relative z-[1] grid grid-cols-[88px_32px_1fr] max-md:grid-cols-[64px_28px_1fr] gap-x-[16px] max-md:gap-x-[10px] pb-[48px] max-md:pb-[36px]" data-gsap-history-year>
+                        <div class="history-year-num text-4xl max-md:text-3xl font-extrabold leading-none pt-[4px]">2023</div>
+                        <div class="relative flex flex-col items-center">
+                            <span class="history-marker-dot w-[14px] h-[14px] shrink-0 z-[2]" data-gsap-history-marker aria-hidden="true"></span>
+                        </div>
+                        <div class="space-y-[20px] pt-[2px]">
+                            <div class="history-event-row" data-gsap-history-event>
+                                <p class="history-event-copy text-lg max-md:text-base leading-[1.65] font-medium" data-i18n="history.2023.1">벤처기업 확인 (혁신성장유형)</p>
+                            </div>
+                            <div class="history-event-row" data-gsap-history-event>
+                                <p class="history-event-copy text-lg max-md:text-base leading-[1.65] font-medium" data-i18n="history.2023.2">연구개발전담부서 신설</p>
+                            </div>
+                            <div class="history-event-row" data-gsap-history-event>
+                                <p class="history-event-copy text-lg max-md:text-base leading-[1.65] font-medium" data-i18n="history.2023.3">유기농업자재 생생바이오차 분말 등록</p>
+                            </div>
+                            <div class="history-event-row" data-gsap-history-event>
+                                <p class="history-event-copy text-lg max-md:text-base leading-[1.65] font-medium" data-i18n="history.2023.4">중국 농업국 중량원소 비료 등록증 발급</p>
+                            </div>
+                        </div>
+                    </article>
+                    <!-- 2022 -->
+                    <article class="history-year-block relative z-[1] grid grid-cols-[88px_32px_1fr] max-md:grid-cols-[64px_28px_1fr] gap-x-[16px] max-md:gap-x-[10px] pb-[48px] max-md:pb-[36px]" data-gsap-history-year>
+                        <div class="history-year-num text-4xl max-md:text-3xl font-extrabold leading-none pt-[4px]">2022</div>
+                        <div class="relative flex flex-col items-center">
+                            <span class="history-marker-dot w-[14px] h-[14px] shrink-0 z-[2]" data-gsap-history-marker aria-hidden="true"></span>
+                        </div>
+                        <div class="space-y-[20px] pt-[2px]">
+                            <div class="history-event-row" data-gsap-history-event>
+                                <p class="history-event-copy text-lg max-md:text-base leading-[1.65] font-medium" data-i18n="history.2022.1">중국 및 동남아 수출</p>
+                            </div>
+                        </div>
+                    </article>
+                    <!-- 2020 -->
+                    <article class="history-year-block relative z-[1] grid grid-cols-[88px_32px_1fr] max-md:grid-cols-[64px_28px_1fr] gap-x-[16px] max-md:gap-x-[10px] pb-[48px] max-md:pb-[36px]" data-gsap-history-year>
+                        <div class="history-year-num text-4xl max-md:text-3xl font-extrabold leading-none pt-[4px]">2020</div>
+                        <div class="relative flex flex-col items-center">
+                            <span class="history-marker-dot w-[14px] h-[14px] shrink-0 z-[2]" data-gsap-history-marker aria-hidden="true"></span>
+                        </div>
+                        <div class="space-y-[20px] pt-[2px]">
+                            <div class="history-event-row" data-gsap-history-event>
+                                <p class="history-event-copy text-lg max-md:text-base leading-[1.65] font-medium" data-i18n="history.2020.1">유기농업자재 생생나라 바이오차 등록</p>
+                            </div>
+                        </div>
+                    </article>
+                    <!-- 2019 -->
+                    <article class="history-year-block relative z-[1] grid grid-cols-[88px_32px_1fr] max-md:grid-cols-[64px_28px_1fr] gap-x-[16px] max-md:gap-x-[10px] pb-[48px] max-md:pb-[36px]" data-gsap-history-year>
+                        <div class="history-year-num text-4xl max-md:text-3xl font-extrabold leading-none pt-[4px]">2019</div>
+                        <div class="relative flex flex-col items-center">
+                            <span class="history-marker-dot w-[14px] h-[14px] shrink-0 z-[2]" data-gsap-history-marker aria-hidden="true"></span>
+                        </div>
+                        <div class="space-y-[20px] pt-[2px]">
+                            <div class="history-event-row" data-gsap-history-event>
+                                <p class="history-event-copy text-lg max-md:text-base leading-[1.65] font-medium" data-i18n="history.2019.1">생생나라 상표권 등록</p>
+                            </div>
+                            <div class="history-event-row" data-gsap-history-event>
+                                <p class="history-event-copy text-lg max-md:text-base leading-[1.65] font-medium" data-i18n="history.2019.2">본점을 경북 경주시 안강읍 두류길 76으로 이전</p>
+                            </div>
+                        </div>
+                    </article>
+                    <!-- 2018 -->
+                    <article class="history-year-block relative z-[1] grid grid-cols-[88px_32px_1fr] max-md:grid-cols-[64px_28px_1fr] gap-x-[16px] max-md:gap-x-[10px] pb-[48px] max-md:pb-[36px]" data-gsap-history-year>
+                        <div class="history-year-num text-4xl max-md:text-3xl font-extrabold leading-none pt-[4px]">2018</div>
+                        <div class="relative flex flex-col items-center">
+                            <span class="history-marker-dot w-[14px] h-[14px] shrink-0 z-[2]" data-gsap-history-marker aria-hidden="true"></span>
+                        </div>
+                        <div class="space-y-[20px] pt-[2px]">
+                            <div class="history-event-row" data-gsap-history-event>
+                                <p class="history-event-copy text-lg max-md:text-base leading-[1.65] font-medium" data-i18n="history.2018.1">유기농업자재 규산질비료, 석회고토 비료등록</p>
+                            </div>
+                        </div>
+                    </article>
+                    <!-- 2016 -->
+                    <article class="history-year-block relative z-[1] grid grid-cols-[88px_32px_1fr] max-md:grid-cols-[64px_28px_1fr] gap-x-[16px] max-md:gap-x-[10px] pb-[48px] max-md:pb-[36px]" data-gsap-history-year>
+                        <div class="history-year-num text-4xl max-md:text-3xl font-extrabold leading-none pt-[4px]">2016</div>
+                        <div class="relative flex flex-col items-center">
+                            <span class="history-marker-dot w-[14px] h-[14px] shrink-0 z-[2]" data-gsap-history-marker aria-hidden="true"></span>
+                        </div>
+                        <div class="space-y-[20px] pt-[2px]">
+                            <div class="history-event-row" data-gsap-history-event>
+                                <p class="history-event-copy text-lg max-md:text-base leading-[1.65] font-medium" data-i18n="history.2016.1">농림축산식품부장관 친환경농업기여 표창장 수여</p>
+                            </div>
+                        </div>
+                    </article>
+                    <!-- 2012 -->
+                    <article class="history-year-block relative z-[1] grid grid-cols-[88px_32px_1fr] max-md:grid-cols-[64px_28px_1fr] gap-x-[16px] max-md:gap-x-[10px] pb-[48px] max-md:pb-[36px]" data-gsap-history-year>
+                        <div class="history-year-num text-4xl max-md:text-3xl font-extrabold leading-none pt-[4px]">2012</div>
+                        <div class="relative flex flex-col items-center">
+                            <span class="history-marker-dot w-[14px] h-[14px] shrink-0 z-[2]" data-gsap-history-marker aria-hidden="true"></span>
+                        </div>
+                        <div class="space-y-[20px] pt-[2px]">
+                            <div class="history-event-row" data-gsap-history-event>
+                                <p class="history-event-copy text-lg max-md:text-base leading-[1.65] font-medium" data-i18n="history.2012.1">비료생산라인 증설 및 유기질비료 생산/판매</p>
+                            </div>
+                        </div>
+                    </article>
+                    <!-- 2005 -->
+                    <article class="history-year-block relative z-[1] grid grid-cols-[88px_32px_1fr] max-md:grid-cols-[64px_28px_1fr] gap-x-[16px] max-md:gap-x-[10px] pb-[48px] max-md:pb-[36px]" data-gsap-history-year>
+                        <div class="history-year-num text-4xl max-md:text-3xl font-extrabold leading-none pt-[4px]">2005</div>
+                        <div class="relative flex flex-col items-center">
+                            <span class="history-marker-dot w-[14px] h-[14px] shrink-0 z-[2]" data-gsap-history-marker aria-hidden="true"></span>
+                        </div>
+                        <div class="space-y-[20px] pt-[2px]">
+                            <div class="history-event-row" data-gsap-history-event>
+                                <p class="history-event-copy text-lg max-md:text-base leading-[1.65] font-medium" data-i18n="history.2005.1">공장설비 증설 및 확충</p>
+                            </div>
+                            <div class="history-event-row" data-gsap-history-event>
+                                <p class="history-event-copy text-lg max-md:text-base leading-[1.65] font-medium" data-i18n="history.2005.2">한일석회에서 (주)한일씨앤에스로 상호변경</p>
+                            </div>
+                            <div class="history-event-row" data-gsap-history-event>
+                                <p class="history-event-copy text-lg max-md:text-base leading-[1.65] font-medium" data-i18n="history.2005.3">석회질비료(입상고토) 우수단체 표준제품 인증</p>
+                            </div>
+                        </div>
+                    </article>
+                    <!-- 2002 -->
+                    <article class="history-year-block relative z-[1] grid grid-cols-[88px_32px_1fr] max-md:grid-cols-[64px_28px_1fr] gap-x-[16px] max-md:gap-x-[10px] pb-[48px] max-md:pb-[36px]" data-gsap-history-year>
+                        <div class="history-year-num text-4xl max-md:text-3xl font-extrabold leading-none pt-[4px]">2002</div>
+                        <div class="relative flex flex-col items-center">
+                            <span class="history-marker-dot w-[14px] h-[14px] shrink-0 z-[2]" data-gsap-history-marker aria-hidden="true"></span>
+                        </div>
+                        <div class="space-y-[20px] pt-[2px]">
+                            <div class="history-event-row" data-gsap-history-event>
+                                <p class="history-event-copy text-lg max-md:text-base leading-[1.65] font-medium" data-i18n="history.2002.1">㈜한일씨앤에스 법인 전환</p>
+                            </div>
+                        </div>
+                    </article>
+                    <!-- 1999 -->
+                    <article class="history-year-block relative z-[1] grid grid-cols-[88px_32px_1fr] max-md:grid-cols-[64px_28px_1fr] gap-x-[16px] max-md:gap-x-[10px] pb-0" data-gsap-history-year>
+                        <div class="history-year-num text-4xl max-md:text-3xl font-extrabold leading-none pt-[4px]">1999</div>
+                        <div class="relative flex flex-col items-center">
+                            <span class="history-marker-dot w-[14px] h-[14px] shrink-0 z-[2]" data-gsap-history-marker aria-hidden="true"></span>
+                        </div>
+                        <div class="space-y-[20px] pt-[2px]">
+                            <div class="history-event-row" data-gsap-history-event>
+                                <p class="history-event-copy text-lg max-md:text-base leading-[1.65] font-medium" data-i18n="history.1999.1">한일석회 설립</p>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </main>
+        </div>
+    </body>
+</html>
