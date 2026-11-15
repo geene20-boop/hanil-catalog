@@ -30,6 +30,22 @@
 python3 -m http.server 8000
 ```
 
-## 공개 배포
+## 공개 배포 (Cloudflare Pages, 무료)
 
-공개 사이트는 회사 명의 cafe24 호스팅에 올립니다. 이 저장소는 비공개로 유지합니다.
+- 이 저장소는 비공개로 유지하고, 공개 사이트는 Cloudflare Pages가 이 저장소를 읽어 배포합니다.
+- `main` 분기에 저장하면 1~2분 안에 공개 사이트가 자동으로 갱신됩니다.
+- 다른 분기에 저장하면 공개 사이트는 그대로 두고 확인용 미리보기 주소만 따로 만들어집니다.
+- 기본 주소: `https://hanil-catalog.pages.dev` (회사 도메인 연결 시 예: `https://catalog.hanilcns.com`)
+
+### Cloudflare Pages 설정값
+
+| 항목 | 값 |
+|---|---|
+| Production branch | `main` |
+| Framework preset | `None` |
+| Build command | 비워 둠 |
+| Build output directory | `/` |
+
+### 응답 헤더
+
+`_headers` 파일은 Cloudflare가 배포할 때 읽는 설정 파일입니다(공개되지 않음). 보안 헤더와 이미지·영상·글꼴의 브라우저 저장 기간(30일)을 정합니다. JS, CSS, HTML은 저장 기간을 두지 않아 수정 사항이 배포 직후 바로 보입니다.

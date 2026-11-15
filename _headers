@@ -1,0 +1,18 @@
+# Cloudflare Pages response headers.
+# Cloudflare reads this file at deploy time and does not publish it.
+# Other hosts ignore it.
+
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=()
+
+# Images, video and fonts rarely change: let browsers keep them for 30 days.
+# JS, CSS, HTML and MSDS PDFs keep Cloudflare's default (revalidate on each visit),
+# so text and product fixes show up right after a deploy.
+/assets/img/*
+  Cache-Control: public, max-age=2592000
+/assets/video/*
+  Cache-Control: public, max-age=2592000
+/assets/font/*
+  Cache-Control: public, max-age=2592000
