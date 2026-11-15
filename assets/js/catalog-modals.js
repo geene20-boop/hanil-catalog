@@ -32,6 +32,12 @@
         return (window.CatalogLang && CatalogLang.get && CatalogLang.get()) === 'en';
     }
 
+    /* Any non-Korean view (English, Chinese): m², USD, English MSDS */
+    function isCatalogIntl() {
+        var lang = (window.CatalogLang && CatalogLang.get && CatalogLang.get()) || 'ko';
+        return lang !== 'ko';
+    }
+
     function getLocalizedProduct(id) {
         var pack = window.CatalogModalI18n && CatalogModalI18n.products && CatalogModalI18n.products[id];
         if (!pack) return {};
@@ -46,7 +52,8 @@
     }
 
     function localeTag() {
-        return ((window.CatalogLang && CatalogLang.get && CatalogLang.get()) === 'en') ? 'en-US' : 'ko-KR';
+        var lang = (window.CatalogLang && CatalogLang.get && CatalogLang.get()) || 'ko';
+        return lang === 'en' ? 'en-US' : (lang === 'zh' ? 'zh-CN' : 'ko-KR');
     }
 
     var CROP_CARD_BASE = 'relative flex flex-col items-center gap-1 min-h-[118px] px-2 pt-[14px] pb-3 rounded-[16px] bg-white cursor-pointer text-center transition-all duration-200 hover:border-[#B7D4BE]';
@@ -69,7 +76,7 @@
     function buildFarmFertilizerHtml() {
         var unitPyeong = tUi('unitPyeong');
         var lang = (window.CatalogLang && CatalogLang.get && CatalogLang.get()) || 'ko';
-        var defaultUnit = lang === 'en' ? 'm2' : 'pyeong';
+        var defaultUnit = lang === 'ko' ? 'pyeong' : 'm2';
         function unitOpt(value, label) {
             return '<option value="' + value + '"' + (value === defaultUnit ? ' selected' : '') + '>' + label + '</option>';
         }
@@ -272,7 +279,7 @@
         var meta = VITA_PRODUCT_META[productKey] || VITA_PRODUCT_META.vita40;
         var productName = tUi(meta.nameKey);
         var nameTight = String(productName || '').replace(/\s+/g, '');
-        var msdsHref = encodeAssetUrl(isCatalogEn() && meta.msdsEn ? meta.msdsEn : meta.msds);
+        var msdsHref = encodeAssetUrl(isCatalogIntl() && meta.msdsEn ? meta.msdsEn : meta.msds);
         var dilutionCtaHtml = meta.showDilutionCta
             ? '\
     <div class="vita-cta-wrap">\
@@ -922,7 +929,7 @@
     function buildVitaGoldProductDetailHtml() {
         var meta = VITA_PRODUCT_META.vitaGold;
         var productName = tUi(meta.nameKey);
-        var msdsHref = encodeAssetUrl(isCatalogEn() && meta.msdsEn ? meta.msdsEn : meta.msds);
+        var msdsHref = encodeAssetUrl(isCatalogIntl() && meta.msdsEn ? meta.msdsEn : meta.msds);
         var rootClass = 'space-y-9 vita-gold-detail' + (isCatalogEn() ? ' vita-gold-detail--en' : '');
         return '' +
             '<div class="' + rootClass + '">' +
@@ -1287,7 +1294,7 @@
     var orchardAreaLang = 'ko';
 
     function isUsdMode() {
-        return (window.CatalogLang && CatalogLang.get && CatalogLang.get()) === 'en';
+        return isCatalogIntl();
     }
 
     function getPriceMax() {

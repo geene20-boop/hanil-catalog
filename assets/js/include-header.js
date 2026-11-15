@@ -132,6 +132,7 @@
         <div data-lang-switch data-lang-theme="header" role="group" aria-label="언어 선택" class="inline-flex items-center gap-[2px] p-[3px] rounded-full bg-[#F0F5ED] border border-[#154624]/10">\
             <button type="button" data-lang="ko" aria-pressed="true" class="min-w-[36px] h-[28px] px-[10px] rounded-full text-xs font-semibold tracking-wide transition-colors duration-200 bg-[#0C5625] text-white">KO</button>\
             <button type="button" data-lang="en" aria-pressed="false" class="min-w-[36px] h-[28px] px-[10px] rounded-full text-xs font-semibold tracking-wide transition-colors duration-200 text-gray-400 hover:text-[#0C5625]">EN</button>\
+            <button type="button" data-lang="zh" lang="zh-CN" aria-pressed="false" class="min-w-[36px] h-[28px] px-[10px] rounded-full text-xs font-semibold tracking-wide transition-colors duration-200 text-gray-400 hover:text-[#0C5625]">中文</button>\
         </div>\
         <a href="tel:0547629691" class="header-tool-btn lg:hidden" aria-label="전화 걸기 054-762-9691" title="054-762-9691" data-i18n-href="nav.phoneHref" data-i18n-aria="nav.phoneAria" data-i18n-title="nav.phone">\
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 12 12" fill="currentColor" aria-hidden="true" class="w-[16px] h-[16px]"><path d="M11.3 12C9.91111 12 8.53889 11.6972 7.18333 11.0917C5.82778 10.4861 4.59444 9.62778 3.48333 8.51667C2.37222 7.40556 1.51389 6.17222 0.908333 4.81667C0.302778 3.46111 0 2.08889 0 0.7C0 0.5 0.0666667 0.333333 0.2 0.2C0.333333 0.0666667 0.5 0 0.7 0H3.4C3.55556 0 3.69444 0.0527778 3.81667 0.158333C3.93889 0.263889 4.01111 0.388889 4.03333 0.533333L4.46667 2.86667C4.48889 3.04444 4.48333 3.19444 4.45 3.31667C4.41667 3.43889 4.35556 3.54444 4.26667 3.63333L2.65 5.26667C2.87222 5.67778 3.13611 6.075 3.44167 6.45833C3.74722 6.84167 4.08333 7.21111 4.45 7.56667C4.79444 7.91111 5.15556 8.23056 5.53333 8.525C5.91111 8.81944 6.31111 9.08889 6.73333 9.33333L8.3 7.76667C8.4 7.66667 8.53056 7.59167 8.69167 7.54167C8.85278 7.49167 9.01111 7.47778 9.16667 7.5L11.4667 7.96667C11.6222 8.01111 11.75 8.09167 11.85 8.20833C11.95 8.325 12 8.45556 12 8.6V11.3C12 11.5 11.9333 11.6667 11.8 11.8C11.6667 11.9333 11.5 12 11.3 12Z"/></svg>\
@@ -147,7 +148,7 @@
         </a>\
     </div>\
 </header>\
-<nav class="catalog-calc-nav" id="catalog-calc-nav" aria-label="계산기 메뉴">\
+<nav class="catalog-calc-nav" id="catalog-calc-nav" aria-label="계산기 메뉴" data-i18n-aria="nav.calcMenuAria">\
     <a href="#" class="catalog-calc-btn" data-catalog-modal="farm-fertilizer" title="내 농가 맞춤 시비량 자동 계산기" aria-label="내 농가 맞춤 시비량 자동 계산기" data-i18n-title="nav.calcFarm" data-i18n-aria="nav.calcFarm">\
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="16" height="20" x="4" y="2" rx="2"/><line x1="8" x2="16" y1="6" y2="6"/><line x1="16" x2="16" y1="14" y2="18"/><path d="M16 10h.01"/><path d="M12 10h.01"/><path d="M8 10h.01"/><path d="M12 14h.01"/><path d="M8 14h.01"/><path d="M12 18h.01"/><path d="M8 18h.01"/></svg>\
         <span class="catalog-calc-label" data-i18n="nav.calcFarm">내 농가 맞춤 시비량 자동 계산기</span>\
@@ -165,7 +166,7 @@
     <div class="catalog-subnav swiper" id="catalog-subnav" hidden>\
         <div class="swiper-wrapper" id="catalog-subnav-track"></div>\
     </div>\
-    <nav class="catalog-tabbar" id="catalog-tabbar" aria-label="하단 메뉴">\
+    <nav class="catalog-tabbar" id="catalog-tabbar" aria-label="하단 메뉴" data-i18n-aria="nav.tabbarAria">\
         <button type="button" class="catalog-tab" data-tab="company">\
             <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 3 4 9v12h5v-6h6v6h5V9l-8-6z"/></svg>\
             <span data-i18n="nav.tabCompany">회사</span>\

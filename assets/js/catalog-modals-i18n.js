@@ -1120,8 +1120,858 @@
         }
     };
 
+    /* ── Simplified Chinese ─────────────────────────────────────── */
+    var uiZh = {
+        "closeAria": "关闭",
+        "farmTitle": "<span class=\"text-2xl max-lg:text-xl max-md:text-lg font-extrabold\">农户施肥量计算器</span>",
+        "farmCropPrompt": "请选择作物类型。",
+        "cropFoodName": "粮食作物",
+        "cropFoodDesc": "水稻 / 大麦 / 玉米",
+        "cropVegName": "蔬菜类",
+        "cropVegDesc": "辣椒 / 生菜 / 大白菜 / 大蒜",
+        "cropFruitName": "果树类",
+        "cropFruitDesc": "苹果 / 梨 / 桃 / 番茄",
+        "cropGreenName": "其他",
+        "cropGreenDesc": "草坪 / 高尔夫球场 / 牧草地",
+        "farmAreaPrompt": "请输入种植面积。",
+        "farmAreaPlaceholder": "请输入面积",
+        "farmAreaAria": "种植面积",
+        "farmAreaResetAria": "重置面积",
+        "farmUnitAria": "面积单位",
+        "unitPyeong": "坪",
+        "unitM2": "㎡",
+        "unitHa": "公顷",
+        "farmAreaLimit": "最多可计算到 100,000。",
+        "resultTitle": "计算结果",
+        "farmBagsProductLine": "颗粒硅肥 · 20kg/袋",
+        "farmBagsUnit": "袋",
+        "farmBagsImgAlt": "颗粒硅肥",
+        "farmVitaLine": "Saengsaeng Vita 40 · 稀释灌根/叶面喷施",
+        "farmVitaDilutionTip": "建议稀释 500~1,000 倍",
+        "farmVitaImgAlt": "Saengsaeng Vita 40",
+        "orchardTitle": "<span class=\"text-2xl max-lg:text-xl max-md:text-lg font-extrabold\">基于<span class=\"text-[#2D8A3E]\">Inhoe农场</span>案例的果园收益估算器</span>",
+        "orchardAreaPrompt": "请输入果园面积。<span class=\"text-base max-md:text-sm font-semibold text-[#9CA3AF]\">（㎡）</span>",
+        "orchardAreaPlaceholder": "请输入面积",
+        "orchardAreaAria": "果园面积（㎡）",
+        "orchardAreaResetAria": "重置面积",
+        "orchardAreaLimit": "最多可计算到 {n}。",
+        "orchardPricePrompt": "请输入常年每箱价格。<span class=\"text-base max-md:text-sm font-semibold text-[#9CA3AF]\">（4kg / 美元）</span>",
+        "orchardPricePlaceholder": "请输入价格",
+        "orchardPriceAria": "每箱价格（美元）",
+        "orchardPriceResetAria": "重置价格",
+        "orchardPriceLimit": "最多可计算到 1,000。",
+        "orchardQuick1man": "+10美元",
+        "orchardQuick10man": "+100美元",
+        "orchardBoxesLabel": "减少落果后预计保留的箱数",
+        "orchardNote": "此为根据 Inhoe 农场访谈推算的数值（每坪约0.27箱，1坪约3.3㎡）计算的参考估计，不保证实际结果。",
+        "orchardBoxesUnit": "箱",
+        "orchardProfitLabel": "糖度溢价 + 产量的预计收益",
+        "orchardWonUnit": "美元",
+        "vitaCalcTitle": "<span class=\"text-2xl max-lg:text-xl max-md:text-lg font-extrabold\"><span class=\"text-[#2D8A3E]\">Saengsaeng Vita 40</span> 田间稀释量自动计算器</span>",
+        "vitaWaterPrompt": "请输入用水量。<span class=\"text-base max-md:text-sm font-semibold text-[#9CA3AF]\">（升）</span>",
+        "vitaWaterPlaceholder": "请输入用水量",
+        "vitaWaterAria": "用水量",
+        "vitaWaterResetAria": "重置用水量",
+        "vitaWaterLimit": "最多可计算到 100,000。",
+        "vitaQuickLiter": "升",
+        "vitaDilutionPrompt": "请选择目标稀释倍数。",
+        "vitaDilutionAria": "目标稀释倍数",
+        "vitaOpt500": "500倍（果树高浓度）",
+        "vitaOpt700": "700倍",
+        "vitaOpt1000": "1,000倍（一般推荐）",
+        "vitaResultLabel": "Saengsaeng Vita 40 需加入量",
+        "hintEmpty": "输入用水量和稀释倍数后即可计算加入量。",
+        "hintWithLiters": "约 {l} 升 · 按 {n} 倍稀释计算",
+        "hintDilutionOnly": "按 {n} 倍稀释计算",
+        "vitaResultImgAlt": "Saengsaeng Vita 40",
+        "msdsDownload": "下载 MSDS",
+        "sectionSpec": "规格",
+        "sectionUsage": "主要用途",
+        "sectionBenefits": "功效",
+        "sectionTiming": "施用时期",
+        "sectionTimingDef": "施用时期 · 缺素症状",
+        "sectionMethod": "施用方法",
+        "sectionFeatures": "产品特点",
+        "sectionPrecautionStorage": "使用及储存注意事项",
+        "sectionOrganicListing": "有机投入品标示事项",
+        "sectionStdDose": "推荐用量 1,000㎡（约1.5亩）",
+        "sectionRecommend": "推荐对象",
+        "sectionFaq": "常见问题",
+        "warning": "注意",
+        "imageSoon": "产品图片即将上线",
+        "ctaFarmCalc": "计算我的施肥量",
+        "ctaHeukdoram": "Heuktoram（韩国土壤信息系统）",
+        "ctaVitaDilution": "计算田间稀释量",
+        "sampleAltSuffix": " 样品",
+        "vita40Name": "Saengsaeng Vita 40",
+        "vitaGoldName": "Saengsaeng Vita Gold",
+        "vita40SpecLine": "N-P-K 3-1-1 · 氨基酸 20% · 有机质 25%",
+        "vita40Desc": "高浓度含有17种植物源氨基酸、有机质和必需微量元素，用于生长期营养补充及果实膨大·着色期的营养管理。",
+        "vitaGoldSpecLine": "N-P-K 2-1-2 · 植物源氨基酸 15% · 有机质 25%",
+        "vitaGoldDesc": "采用发酵工艺，通过灌根和叶面喷施提供均衡营养，帮助根系活力和土壤微生物活性。",
+        "vitaGoldWhyTitle": "领先农户为什么选择 Saengsaeng Vita？",
+        "vitaGoldWhyItems": [
+            "采用促进作物生长和根系活力的发酵工艺开发。通过灌根和叶面喷施，帮助作物吸收均衡营养，增强自身健康生长的能力。",
+            "促进根系发育和作物生长，活化土壤微生物，提高养分吸收。"
+        ],
+        "vitaGoldKeysTitle": "Saengsaeng Vita 的核心优势",
+        "vitaGoldKey1Title": "优质氨基酸",
+        "vitaGoldKey1Items": [
+            "吸收快，效果最大化",
+            "缓解环境胁迫",
+            "改善品质（糖度、色泽、风味）",
+            "增强土壤肥力",
+            "最大化微量元素供给效果"
+        ],
+        "vitaGoldKey2Title": "丰富的蛋白质和有机质",
+        "vitaGoldKey2Parts": [
+            {
+                "label": "蛋白质：",
+                "text": "作为氮源，帮助作物细胞生长和组织形成。"
+            },
+            {
+                "label": "有机质：",
+                "text": "活化土壤微生物，改善土壤理化性质，帮助作物吸收养分。"
+            }
+        ],
+        "vitaGoldKey3Title": "17种植物源氨基酸",
+        "vitaGoldKey3Lines": [
+            "作物易于吸收的游离氨基酸，有助于作物生长活跃。",
+            "尤其能增强根系发育、光合作用、着色和糖度积累等整体生长活力。"
+        ],
+        "vitaGoldKey4Title": "微生物活化",
+        "vitaGoldKey4Items": [
+            "促进有机质分解，提高作物养分吸收。",
+            "营造健康土壤，为作物提供更好的生长环境。"
+        ],
+        "vitaGoldCompositionTitle": "Saengsaeng Vita – 主要成分（%）",
+        "vitaGoldCompColNpk": "N-P-K",
+        "vitaGoldCompColAmino": "植物源氨基酸",
+        "vitaGoldCompColOrganic": "有机质",
+        "vitaGoldCompColMicro": "微量元素",
+        "vitaGoldCompNpk": "2-1-2",
+        "vitaGoldCompAmino": "15",
+        "vitaGoldCompOrganic": "25",
+        "vitaGoldCompMicro": "硼、钼、锌、水溶性硫、水溶性镁",
+        "vitaGoldCompColFunc": "功能性物质",
+        "vitaGoldCompFunc": "腐植酸、黄腐酸、植酸",
+        "vitaGoldCompGuarantee": "保证成分：水溶性硼（B）≥ 0.05%，水溶性钼（Mo）≥ 0.0005%",
+        "vitaGoldDoseTitle": "Saengsaeng Vita Gold – 推荐用量（示例）",
+        "vitaGoldDoseH1": "适用作物",
+        "vitaGoldDoseH2": "使用时期",
+        "vitaGoldDoseH3": "使用方法",
+        "vitaGoldDoseH4": "稀释倍数",
+        "vitaGoldDoseH5": "兑水用量",
+        "vitaGoldDoseH6": "每500㎡（约0.75亩）",
+        "vitaGoldDoseCrop": "所有作物",
+        "vitaGoldDoseSeason": "生长期",
+        "vitaGoldDoseMethodDrench": "灌根",
+        "vitaGoldDoseMethodFoliar": "叶面喷施",
+        "vitaGoldDoseRatio500Mid": "500倍（生长中后期）",
+        "vitaGoldDoseRatio1000Early": "1,000倍（生长初期）",
+        "vitaGoldDoseMix500DrenchMid": "每吨水2升，每2吨水4升",
+        "vitaGoldDoseMix1000DrenchEarly": "每吨水1升，每2吨水2升",
+        "vitaGoldDoseArea500DrenchMid": "每500㎡ 2~4升",
+        "vitaGoldDoseArea1000DrenchEarly": "每500㎡ 1~2升",
+        "vitaGoldDoseMix500FoliarMid": "每吨水2升，每500升水1升",
+        "vitaGoldDoseMix1000FoliarEarly": "每吨水1升，每500升水0.5升",
+        "vitaGoldDoseNote": "请根据作物种类和生长阶段调整用量。",
+        "vitaGoldDoseHaNote": "每公顷灌根参考用量：500倍 40~80升，1,000倍 20~40升",
+        "vitaGoldTipsTitle": "Saengsaeng Vita Gold – 提高吸收率的田间使用方法",
+        "vitaGoldTipsItems": [
+            "喷施时间：请在气孔吸收良好的清晨或傍晚喷施。",
+            "喷施部位：充分喷施，使药液均匀覆盖气孔较多的叶片背面。",
+            "喷施间隔：生长旺盛期每隔7~10天连续灌根或喷施2~3次。"
+        ],
+        "vitaGoldCropTableTitle": "Saengsaeng Vita Gold – 适用作物及使用方法",
+        "vitaGoldCropColCrop": "作物",
+        "vitaGoldCropColTiming": "使用时期",
+        "vitaGoldCropColFreq": "使用次数",
+        "vitaGoldCropColEffect": "效果",
+        "vitaGoldCropGroups": [
+            {
+                "crop": "果树（苹果、梨、葡萄、柑橘、桃）",
+                "entries": [
+                    {
+                        "timing": "开花前、落花后2周",
+                        "freq": "1~2次",
+                        "effect": "减轻冷害，预防畸形果"
+                    },
+                    {
+                        "timing": "幼果膨大期",
+                        "freq": "2~3次（间隔7天）",
+                        "effect": "幼果膨大"
+                    },
+                    {
+                        "timing": "开始着色期",
+                        "freq": "间隔7天，3~4次",
+                        "effect": "提高品质，增加产量"
+                    }
+                ]
+            },
+            {
+                "crop": "蔬菜（甜瓜、辣椒、西瓜、番茄、南瓜、草莓、大白菜、萝卜）",
+                "entries": [
+                    {
+                        "timing": "育苗期",
+                        "freq": "育苗期每7~10天灌根、喷施",
+                        "effect": "培育壮苗，坐果与膨大，增加产量"
+                    },
+                    {
+                        "timing": "生长初期至生长旺盛期",
+                        "freq": "每月2~3次，间隔10天灌根、喷施",
+                        "effect": "提高品质，抵御低温，增加产量"
+                    }
+                ]
+            },
+            {
+                "crop": "水稻",
+                "entries": [
+                    {
+                        "timing": "全生育期",
+                        "freq": "喷施3~4次",
+                        "effect": "提高品质，增加产量"
+                    }
+                ]
+            },
+            {
+                "crop": "特用作物（人参、沙参）",
+                "entries": [
+                    {
+                        "timing": "生长初期至中期",
+                        "freq": "每月2~3次，间隔7天喷施",
+                        "effect": "提高品质，增加产量"
+                    }
+                ]
+            },
+            {
+                "crop": "马铃薯、甘薯",
+                "entries": [
+                    {
+                        "timing": "生长初期至中期",
+                        "freq": "喷施3~4次",
+                        "effect": "提高品质，增加产量"
+                    }
+                ]
+            }
+        ],
+        "magSulfurTabOverview": "产品概要",
+        "magSulfurTabFeatures": "核心特点",
+        "magSulfurTabUsage": "使用方法",
+        "magSulfurTabRecommend": "推荐 · 常见问题",
+        "magSulfurTabPrecaution": "注意事项",
+        "magSulfurLabelListing": "公示号",
+        "magSulfurLabelNetWeight": "规格",
+        "magSulfurOverviewIntroTitle": "一句话介绍",
+        "magSulfurRawTitle": "主要原料",
+        "magSulfurUsageTitle": "主要用途",
+        "magSulfurCompPctTitle": "主要成分（%）",
+        "magSulfurFeatureColTitle": "项目",
+        "magSulfurFeatureColDesc": "内容",
+        "magSulfurCropTableTitle": "各作物推荐用量（示例，以1,000㎡计，约1.5亩）",
+        "magSulfurCropColCrop": "作物",
+        "magSulfurCropColBags": "施用量",
+        "magSulfurCropColAmount": "用量",
+        "magSulfurCropColMethod": "施用方法",
+        "magSulfurRecommendTitle": "推荐给以下用户",
+        "magSulfurFaqTitle": "常见问题",
+        "magSulfurListingTitle": "有机投入品标示事项",
+        "magSulfurListingColItem": "项目",
+        "magSulfurListingColDetail": "内容",
+        "vitaGoldPrecautionTitle": "Saengsaeng Vita Gold 使用及储存注意事项",
+        "vitaGoldPrecautionItems": [
+            "过量施用反而可能伤害作物，请遵守推荐用量。",
+            "本品含有有机质，产品内部微生物自然繁殖时可能产生少量气体，导致容器膨胀。这是产品特性带来的正常现象，对产品品质和效果没有明显影响。",
+            "请勿使用原液，务必按规定比例兑水稀释后使用。",
+            "请勿与石硫合剂、波尔多液、液体硅酸等强碱性物料混用。",
+            "高温期请避免在正午喷施，并比标准浓度多稀释约20%。",
+            "因高温或干旱导致土壤干燥时，请避免使用。",
+            "流通过程中低温可能产生沉淀，充分摇匀后使用，不影响产品效果。",
+            "与农药混用时，请先确认能否混用后再喷施。",
+            "开封后请尽快使用，剩余产品请密封存放于阴凉处。"
+        ],
+        "compareTitleTpl": "{name} 农户使用案例：使用前后对比",
+        "compareBefore": "使用前",
+        "compareAfter": "使用后",
+        "sugarRate": "糖度提高率（农户实测）",
+        "sugarNote": "使用前 14.0 → 使用后 18.0 Brix · 1户农户实测",
+        "dropRate": "落果减少率（根据访谈推算）",
+        "dropNote": "约为常年的1/3 · 根据农户访谈推算",
+        "aiImageBadge": "AI生成图片",
+        "compareAiNote": "图片为便于理解而由AI生成。糖度数值（使用前14.0 → 使用后18.0 Brix）为农户实际测量值。",
+        "caseNote": "此为1户农户的使用案例，不保证效果。结果可能因天气、土壤和栽培管理而异。",
+        "featuresTitle": "产品特点",
+        "feature1Title": "核心成分",
+        "feature1Desc": "17种植物源氨基酸 + 必需微量元素",
+        "feature2Title": "施用方式",
+        "feature2Desc": "叶面喷施、灌根均可",
+        "feature3Title": "混用前确认",
+        "feature3Desc": "与农药混用时，请先少量试混确认",
+        "feature4Title": "田间案例",
+        "feature4Desc": "桃园使用案例（Inhoe农场）",
+        "feature5Title": "生长期营养补充",
+        "feature5Desc": "在生长期补充氨基酸和微量元素",
+        "feature6Title": "低温·高温期使用",
+        "feature6Desc": "用于生长环境不利时期的营养管理",
+        "feature7Title": "初次使用时",
+        "feature7Desc": "先在部分区域喷施，确认作物反应后再扩大使用",
+        "methodTitleTpl": "{name} 推荐施用方法",
+        "method1Title": "树皮施肥（主干·主枝）",
+        "method1Dose": "每500升水 500毫升",
+        "method1Note": "开花前1~2次",
+        "method2Title": "叶面喷施",
+        "method2Dose": "每500升水 500~600毫升",
+        "method2Note": "间隔10~14天 · 与农药混用前先确认",
+        "method3Title": "土壤灌根",
+        "method3Dose": "每1,000㎡（约1.5亩）700毫升~1升",
+        "method3Note": "每月1~2次",
+        "interviewTitle": "Inhoe农场主访谈摘要",
+        "interviewFarmName": "Inhoe农场",
+        "interviewFarmMeta": "桃园 · 田间反馈",
+        "interviewStarAria": "5星评价",
+        "interviewQ1": "几乎没有落果！",
+        "interviewA1": "落果减少到常年的<span class=\"font-bold text-[#2D8A3E]\">约1/3</span>，对产量的担心少了很多。",
+        "interviewQ2": "糖度达到<span class=\"text-[#2D8A3E]\">18 Brix</span>",
+        "interviewA2": "糖度达到18 Brix，商品性明显提高。",
+        "interviewNote": "此为1户农户个人使用体验的访谈摘要，不保证效果。",
+        "interviewQ3": "也没有出现药害",
+        "interviewA3": "与其他药剂一起喷施也没有出现黄绿色药害，叶片保持健康。"
+    };
+
+    var productsZh = {
+        "silicate": {
+            "제품명": "颗粒硅肥",
+            "카테고리": "SOIL CONDITIONER 01",
+            "서브타이틀": "强化茎叶细胞壁，减少倒伏，帮助作物健壮生长。",
+            "규격": [
+                {
+                    "label": "可溶性硅（SiO₂）",
+                    "value": "25%"
+                },
+                {
+                    "label": "碱分",
+                    "value": "40%"
+                },
+                {
+                    "label": "枸溶性氧化镁（C-MgO）",
+                    "value": "2%"
+                }
+            ],
+            "규격_보충설명": "促进土壤中微生物的分解活动。",
+            "주요사용처": [
+                {
+                    "label": "水稻",
+                    "detail": "典型的喜硅作物",
+                    "icon": "grass"
+                },
+                {
+                    "label": "大麦",
+                    "detail": "吸收硅，抗倒伏、促生长",
+                    "icon": "agriculture"
+                },
+                {
+                    "label": "玉米",
+                    "detail": "强化茎叶组织",
+                    "icon": "nutrition"
+                },
+                {
+                    "label": "草坪",
+                    "detail": "叶片挺立坚实",
+                    "icon": "yard"
+                },
+                {
+                    "label": "牧草",
+                    "detail": "提高抗旱及抗逆性",
+                    "icon": "eco"
+                },
+                {
+                    "label": "竹子",
+                    "detail": "高吸硅作物",
+                    "icon": "forest"
+                },
+                {
+                    "label": "竹笋",
+                    "detail": "高吸硅作物",
+                    "icon": "spa"
+                }
+            ],
+            "효능": [
+                {
+                    "headline": "养分吸收均衡",
+                    "desc": "含可溶性硅25%、碱分40%、枸溶性氧化镁2%，有助于抑制氮的过量吸收，并帮助磷的吸收。"
+                },
+                {
+                    "headline": "保持土壤水分",
+                    "desc": "减少土壤中的水分蒸发。"
+                },
+                {
+                    "headline": "抗环境胁迫",
+                    "desc": "使叶片挺直、坚韧，增强作物抵御干旱等环境胁迫的能力。"
+                },
+                {
+                    "headline": "光合作用·倒伏·霜害",
+                    "desc": "提高光合作用，防止倒伏，减轻霜害。"
+                },
+                {
+                    "headline": "强化组织",
+                    "desc": "硅使叶片和茎的表皮组织更加坚实，帮助作物健康生长。"
+                },
+                {
+                    "headline": "防倒伏·同化作用",
+                    "desc": "叶和茎变得挺实，防止倒伏，下部叶片也能接受阳光，促进碳同化作用。"
+                }
+            ],
+            "사용시기": [
+                "施用时期对效果影响不大，可在春季或秋季耕地时施用，插秧后15天内作追肥，或抽穗前30天作穗肥施用。",
+                "硅不溶于水，而是溶解于根系、微生物及有机质分解所产生的酸中。"
+            ],
+            "사용방법": [
+                "一般每1,000㎡（约1.5亩）施用200~300kg（10~15袋）。",
+                "有效硅每缺少1ppm，每1,000㎡约需硅肥3.8kg（产品实物量）。",
+                "尤其适合水稻、大麦、玉米、草坪、牧草、竹子、竹笋等吸硅量大的作物。"
+            ]
+        },
+        "limestone": {
+            "제품명": "颗粒石灰镁肥",
+            "카테고리": "SOIL CONDITIONER 02",
+            "서브타이틀": "将酸性土壤改良至中性，补充钙和镁，有助于叶绿素形成和根系活力。",
+            "규격": [
+                {
+                    "label": "碱分",
+                    "value": "51%"
+                },
+                {
+                    "label": "可溶性氧化镁（MgO）",
+                    "value": "14%"
+                }
+            ],
+            "주요사용처": [
+                {
+                    "label": "果园",
+                    "detail": "改良酸性土壤，提高果实品质",
+                    "icon": "park"
+                },
+                {
+                    "label": "旱地作物",
+                    "detail": "调节蔬菜、豆类等的土壤pH",
+                    "icon": "spa"
+                }
+            ],
+            "효능": [
+                {
+                    "headline": "中和土壤酸性",
+                    "desc": "将酸性土壤改良至中性，促进有益微生物活动。"
+                },
+                {
+                    "headline": "促进叶绿素与蛋白质合成",
+                    "desc": "镁（Mg）有助于新陈代谢及蛋白质、磷酸的吸收。"
+                },
+                {
+                    "headline": "糖度与耐储性",
+                    "desc": "提高果实糖度，延长储藏期。"
+                },
+                {
+                    "headline": "改善土壤结构",
+                    "desc": "溶解率高，效果优于普通粉状产品，改善土壤透水性和通气性。"
+                },
+                {
+                    "headline": "抑制重金属吸收",
+                    "desc": "使土壤趋于中性，有助于抑制作物吸收重金属。"
+                }
+            ],
+            "사용시기_결핍진단": [
+                "缺镁：叶片发白发黄、整株黄化、生长明显衰弱时施用。",
+                "缺钙：白菜类和芹菜出现心腐，辣椒·番茄出现脐腐，黄瓜·柑橘出现果皮障碍时施用。",
+                "施用量因土壤类型、作物和气候而异。"
+            ],
+            "사용방법": [
+                "适用于pH 6.5以下的农田。对大麦、大豆、菠菜、白菜、辣椒、洋葱、大蒜、香瓜等蔬菜和果树效果尤为明显。",
+                "施用一次效果可持续约3年。（每10,000㎡ 5~10袋 / 100~200kg）",
+                "本品为碱性肥料，请避免与硫酸铵、硝酸铵·过磷酸钙混合物、钙镁磷肥、人粪尿、鸡粪等酸性物料同时施用，应比这些产品提前约2周施用。",
+                "最好在播种或定植前1~2周施用。",
+                "与有机肥配合施用，可加快有机质分解。"
+            ],
+            "주의사항_경고배지": "请勿与未腐熟堆肥或氮肥、磷肥同时施用。为减少养分损失和气体危害，请先撒施本品并旋耕，至少2周后再施用堆肥或其他肥料。"
+        },
+        "calciumSulfur": {
+            "제품명": "钙硫肥",
+            "카테고리": "SOIL CONDITIONER 03",
+            "서브타이틀": "可作基肥或追肥补充钙和硫，对土壤pH的影响较小。",
+            "규격": [
+                {
+                    "label": "钙（石灰，CaO）",
+                    "value": "26%"
+                },
+                {
+                    "label": "硫（SO₃）",
+                    "value": "32%"
+                }
+            ],
+            "주요사용처": [
+                {
+                    "label": "预防缺钙",
+                    "detail": "西瓜、番茄、辣椒等",
+                    "icon": "health_and_safety"
+                },
+                {
+                    "label": "提高糖度",
+                    "detail": "西瓜、甜瓜、苹果、番茄、草莓、柑橘等",
+                    "icon": "nutrition"
+                },
+                {
+                    "label": "萝卜与白菜",
+                    "detail": "结球饱满，提高商品产量",
+                    "icon": "spa"
+                },
+                {
+                    "label": "调味作物",
+                    "detail": "大蒜、洋葱、辣椒等",
+                    "icon": "local_florist"
+                },
+                {
+                    "label": "根菜类",
+                    "detail": "花生、山药、牛蒡、胡萝卜等",
+                    "icon": "park"
+                },
+                {
+                    "label": "助力增产",
+                    "detail": "马铃薯、玉米、大葱、芥菜等",
+                    "icon": "trending_up"
+                },
+                {
+                    "label": "坡地",
+                    "detail": "易受侵蚀的农田、果园和林地",
+                    "icon": "landscape"
+                },
+                {
+                    "label": "围垦地",
+                    "detail": "高盐分围垦土壤及高酸度设施土壤",
+                    "icon": "water_drop"
+                }
+            ],
+            "효능": [
+                {
+                    "headline": "钙·硫同时补充",
+                    "desc": "适用于旱地作物、果园和园艺作物。"
+                },
+                {
+                    "headline": "作物健康生长",
+                    "desc": "同时补充钙和硫，帮助马铃薯、玉米等作物健康生长。"
+                },
+                {
+                    "headline": "糖度·香气·色泽",
+                    "desc": "提高糖度、香气和色泽，助力园艺作物产量。"
+                },
+                {
+                    "headline": "围垦地土壤改良",
+                    "desc": "其中的钙可用于改良钠含量高的围垦地土壤。"
+                },
+                {
+                    "headline": "改善土壤结构",
+                    "desc": "改善通气性和渗透条件，有助于减少养分流失和土壤侵蚀。"
+                }
+            ],
+            "표준시비량": "每1,000㎡（约1.5亩）施用100~200kg（5~10袋），请根据土壤和作物状况调整。",
+            "주의사항_경고배지": "施用后请与土壤充分混合，使产品充分拌入土中。"
+        },
+        "organicSilicate": {
+            "제품명": "Saengsaengnara 颗粒硅肥（有机）",
+            "공시번호": "公示号 第2-3-453号",
+            "서브타이틀": "适用于环保认证农户的有机投入品，强化茎叶细胞壁，减少倒伏，帮助作物健壮生长。",
+            "규격": [
+                {
+                    "label": "可溶性硅（SiO₂）",
+                    "value": "25%"
+                },
+                {
+                    "label": "碱分",
+                    "value": "40%"
+                },
+                {
+                    "label": "枸溶性氧化镁（C-MgO）",
+                    "value": "2%"
+                }
+            ],
+            "주요사용처": [
+                {
+                    "label": "环保认证农户",
+                    "detail": "水稻、小麦、辣椒等",
+                    "icon": "eco"
+                },
+                {
+                    "label": "水稻",
+                    "detail": "防倒伏，提高米质",
+                    "icon": "grass"
+                },
+                {
+                    "label": "小麦",
+                    "detail": "适用于环保认证生产",
+                    "icon": "agriculture"
+                },
+                {
+                    "label": "辣椒",
+                    "detail": "适用于环保认证生产",
+                    "icon": "local_florist"
+                }
+            ],
+            "효능": [
+                {
+                    "headline": "抗环境胁迫",
+                    "desc": "使叶片挺直、坚韧，提高抵御干旱等环境胁迫的能力。"
+                },
+                {
+                    "headline": "光合作用·倒伏·霜害",
+                    "desc": "提高光合作用，防止倒伏，减轻霜害。"
+                },
+                {
+                    "headline": "中和酸性土壤",
+                    "desc": "有助于中和酸性土壤，并可减少氮肥用量。"
+                },
+                {
+                    "headline": "产量与米质",
+                    "desc": "有助于提高水稻产量，改善米质和口感。"
+                },
+                {
+                    "headline": "强化组织",
+                    "desc": "硅使叶片和茎的表皮组织更加坚实，帮助作物健康生长。"
+                },
+                {
+                    "headline": "环保型有机投入品",
+                    "desc": "过量施肥风险低的有机型投入品；碱分（硅、石灰、镁）也有助于提高磷肥效果。"
+                }
+            ],
+            "사용시기": [
+                "施用时期对效果影响不大，可在春季或秋季耕地时施用，插秧后15天内作追肥，或抽穗前30天作穗肥施用。",
+                "硅不溶于水，而是溶解于根系、微生物及有机质分解所产生的酸中。"
+            ],
+            "사용방법": [
+                "一般每1,000㎡（约1.5亩）施用200~300kg（10~15袋）。",
+                "有效硅每缺少1ppm，每1,000㎡约需硅肥3.8kg（产品实物量）。",
+                "尤其适合水稻、大麦、玉米、草坪、牧草、竹子、竹笋等吸硅量大的作物。"
+            ]
+        },
+        "organicLimestone": {
+            "제품명": "Saengsaengnara 石灰镁肥",
+            "공시번호": "公示号 第2-3-454号",
+            "카테고리": "ORGANIC INPUT 02",
+            "서브타이틀": "适用于环保认证农户的有机投入品，将酸性土壤改良至中性，补充钙和镁，有助于叶绿素形成和根系活力。",
+            "규격": [
+                {
+                    "label": "碱分",
+                    "value": "51%"
+                },
+                {
+                    "label": "可溶性氧化镁（MgO）",
+                    "value": "14%"
+                }
+            ],
+            "주요사용처": [
+                {
+                    "label": "环保认证农户",
+                    "detail": "果园及旱地作物",
+                    "icon": "eco"
+                },
+                {
+                    "label": "果园",
+                    "detail": "改良酸性土壤，提高果实品质",
+                    "icon": "park"
+                },
+                {
+                    "label": "旱地作物",
+                    "detail": "大麦、大豆、菠菜、白菜、辣椒、洋葱、大蒜、香瓜等",
+                    "icon": "spa"
+                }
+            ],
+            "효능": [
+                {
+                    "headline": "中和酸性土壤",
+                    "desc": "将酸性土壤改良至中性，帮助养分吸收并抑制重金属吸收。"
+                },
+                {
+                    "headline": "根茎更强壮",
+                    "desc": "促进碳水化合物运输，使根和茎更加健壮。"
+                },
+                {
+                    "headline": "土壤微生物",
+                    "desc": "帮助土壤微生物活动，营造更健康的土壤环境。"
+                },
+                {
+                    "headline": "改善土壤结构",
+                    "desc": "改善通气和透水性，并有助于调节磷的吸收。"
+                },
+                {
+                    "headline": "全面补充养分",
+                    "desc": "可补充钙、石灰、镁、硫等多种成分的综合性土壤肥料。"
+                },
+                {
+                    "headline": "产量与品质",
+                    "desc": "有助于提高大豆、油菜和果实的含油量与产量，改善果实糖度、色泽和外观。"
+                },
+                {
+                    "headline": "叶绿素与氮吸收",
+                    "desc": "镁是叶绿素的组成成分，还有助于硝态氮的吸收和团粒结构的形成。"
+                },
+                {
+                    "headline": "有机质与氮肥效果",
+                    "desc": "作为环保型有机投入品，可增加有机质，促进微生物分解，提高氮肥效果。"
+                }
+            ],
+            "사용시기": [
+                "出现缺镁症状（叶片发白·扭曲或整株黄化、生长明显衰弱）时施用。",
+                "出现缺钙症状（白菜类和芹菜心腐、洋葱鳞片水渍状、辣椒·番茄脐腐、黄瓜果皮障碍等）时施用效果明显。",
+                "施用量因土壤类型、作物和气候而异。",
+                "氮素过量时，施用石灰有助于抑制氮的吸收。"
+            ],
+            "사용방법": [
+                "适用于pH 6.5以下的农田。对大麦、大豆、菠菜、白菜、辣椒、洋葱、大蒜、香瓜等蔬菜和果树效果尤为明显。",
+                "施用一次效果可持续约3年。（每10,000㎡ 5~10袋 / 100~200kg）",
+                "本品为碱性肥料，与硫酸铵、硝酸铵·过磷酸钙混合物、钙镁磷肥、人粪尿、鸡粪等酸性物料接触会降低效果，应比这些产品提前约2周施用。",
+                "最好在播种或定植前1~2周混入耕作层。",
+                "与有机肥配合施用，可加快有机质分解。"
+            ]
+        },
+        "organicMagSulfur": {
+            "제품명": "Saengsaenghwang 镁硫钙",
+            "공시번호": "公示号 第3-379号",
+            "카테고리": "ORGANIC INPUT 03",
+            "서브타이틀": "融合钙、镁、硫和膨润土的优质有机投入品，在改良土壤、帮助作物生长的同时减少土壤酸化的顾虑。经韩国国立农产品质量管理院审查公示（公示号第3-379号）。",
+            "규격": [
+                {
+                    "label": "碱分",
+                    "value": "45.3%"
+                },
+                {
+                    "label": "全硫（S）",
+                    "value": "16%"
+                },
+                {
+                    "label": "CaO",
+                    "value": "22%"
+                },
+                {
+                    "label": "可溶性氧化镁（MgO）",
+                    "value": "9.8%"
+                }
+            ],
+            "규격_보충설명": "主要原料：超高纯度硫（99.5%以上）、石灰质镁矿石、膨润土 · 原料配比：白云石76%、糖蜜4%、膨润土2%、硫18% · 净重20kg · 保质期3年",
+            "주요사용처": [
+                {
+                    "label": "有机投入品公示",
+                    "detail": "根菜、粮食、叶菜、果菜、果园、花卉",
+                    "icon": "eco"
+                },
+                {
+                    "label": "叶菜类",
+                    "detail": "示例：每1,000㎡ 2袋（40kg）",
+                    "icon": "spa"
+                },
+                {
+                    "label": "根菜·粮食作物",
+                    "detail": "示例：每1,000㎡ 3袋（60kg）",
+                    "icon": "grass"
+                },
+                {
+                    "label": "果菜·豆类",
+                    "detail": "示例：每1,000㎡ 2袋（40kg）",
+                    "icon": "local_florist"
+                },
+                {
+                    "label": "果园",
+                    "detail": "在树冠周围均匀撒施",
+                    "icon": "park"
+                },
+                {
+                    "label": "花卉·设施栽培",
+                    "detail": "单独施用，与堆肥或复合肥间隔2周以上",
+                    "icon": "nutrition"
+                }
+            ],
+            "효능": [
+                {
+                    "headline": "有机投入品公示",
+                    "desc": "已公示的有机投入品，环保认证农户可放心使用。"
+                },
+                {
+                    "headline": "土壤结构与吸收",
+                    "desc": "膨润土和白云石帮助改善土壤结构，使复合养分更有效地被吸收。"
+                },
+                {
+                    "headline": "钙·镁·硫均衡",
+                    "desc": "帮助根茎更强壮，提高坐果率和耐储性。"
+                },
+                {
+                    "headline": "风味与口感",
+                    "desc": "适合追求更高糖度、脆度和食味品质的生产。"
+                },
+                {
+                    "headline": "减轻酸化压力",
+                    "desc": "帮助土壤pH保持在利于养分利用的范围内。"
+                },
+                {
+                    "headline": "生长基础",
+                    "desc": "帮助根系活力和土壤微生物活性，促进健康生长。"
+                }
+            ],
+            "사용시기": [
+                "最佳施用时期为秋季至早春；错过该时期也可全年使用。",
+                "具体用量请参照当地土壤检测建议。",
+                "设施栽培时，请比复合肥或堆肥提前至少2周施用。"
+            ],
+            "사용방법": [
+                "叶菜类：每1,000㎡ 2袋（40kg）；定植前7~10天作基肥，深翻混入土壤。",
+                "根菜类：每1,000㎡ 3袋（60kg）；在根系分布区均匀施用。",
+                "粮食作物（水稻、大麦、大豆等）：每1,000㎡ 3袋（60kg）；播种或定植前作基肥，深翻混入土壤。",
+                "果菜类：每1,000㎡ 2袋（40kg）；定植前7~10天作基肥，深翻混入土壤。",
+                "果园·豆类：每1,000㎡ 2袋（40kg）；根据土壤情况调整，在树冠周围均匀撒施。",
+                "标示用量：每1,000㎡ 60kg，定植前混入土壤。请避免随意与其他产品混用。"
+            ],
+            "표준시비량": [
+                "每1,000㎡（约1.5亩）示例：叶菜·果菜类 2袋（40kg），根菜·粮食作物 3袋（60kg），果园·豆类 2袋（40kg）。",
+                "按作物：叶菜 2袋/40kg · 根菜·粮食 3袋/60kg · 果菜·果园 2袋/40kg，于定植或播种前7~10天混入土壤。",
+                "请根据土壤、作物和气候调整，优先参照土壤检测结果。"
+            ],
+            "추천_목록": [
+                "需要均衡补充钙、镁、硫的有机认证或环保农户",
+                "担心土壤酸化的农田、果园或设施苗床",
+                "注重果蔬食味、糖度和耐储性的生产",
+                "希望与复合肥分开、单独作基肥施用时"
+            ],
+            "FAQ_목록": [
+                {
+                    "q": "什么时候施用？可以和复合肥混用吗？",
+                    "a": "请在定植或播种前施用。可以与堆肥混用，复合肥请间隔1~2周后施用。"
+                },
+                {
+                    "q": "可以叶面喷施或随水滴灌吗？",
+                    "a": "建议拌土或作基肥施用。本品为颗粒产品，叶面喷施和滴灌效果较差，并可能堵塞滴头，不建议使用。"
+                }
+            ],
+            "주의사항_목록": [
+                "请在通风良好的地方使用，避免吸入粉尘和皮肤接触。",
+                "开封后请尽快使用，剩余产品请密封保存。",
+                "使用时请佩戴手套、口罩等防护用品，使用后彻底清洗。",
+                "设施栽培中与复合肥或未腐熟堆肥混用可能产生气体，请在定植或播种前作基肥施用。",
+                "请存放于阴凉干燥处，避免阳光直射和受潮。不使用时请盖紧容器。"
+            ],
+            "유기농업자재표시사항": [
+                "公示号 第3-379号 · 名称·商标：石灰苦土+黏土矿物+硫（Saengsaenghwang 镁硫钙）",
+                "类别：土壤改良及作物生长用 · 净重20kg",
+                "主要成分：全硫16%，碱分45.3%，CaO 22%，可溶性氧化镁9.8%",
+                "原料：白云石76%，糖蜜4%，膨润土2%，硫18%",
+                "生产日期：另标于包装正面 · 保质期3年",
+                "用法：定植前每1,000㎡ 60kg · HANIL C&S，韩国庆州市安康邑斗留路76号 · +82-54-762-9691~2",
+                "公示仅确认该产品可用于有机农产品生产，不保证其效果和养分含量。",
+                "试验作物：辣椒、大白菜、生菜、黄瓜、番茄"
+            ]
+        }
+    };
+
+    Object.keys(productsZh).forEach(function (id) {
+        if (products[id]) products[id].zh = productsZh[id];
+    });
+
     window.CatalogModalI18n = {
-        ui: { ko: uiKo, en: uiEn },
+        ui: { ko: uiKo, en: uiEn, zh: uiZh },
         products: products
     };
 })();

@@ -243,6 +243,12 @@ body {
     max-width: 100%;
 }
 
+/* Simplified Chinese: Pretendard has no Han glyphs, so fall back to the system's Chinese fonts */
+html:lang(zh) body {
+    font-family: 'Pretendard Variable', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Noto Sans SC', 'Noto Sans CJK SC', 'Source Han Sans SC', sans-serif;
+    letter-spacing: 0;
+}
+
 .sidebar {
     position: relative;
     z-index: 9996;
