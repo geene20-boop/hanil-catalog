@@ -51,6 +51,22 @@
                     </div>
 
                 </div>
+                <div class='boundary w-[90%] max-md:w-[94%] max-w-[1200px] mx-auto mb-[40px]'>
+                    <section class="company-film" aria-labelledby="film-title">
+                        <div>
+                            <p class="company-film__ey" data-i18n="film.eyebrow">홍보영상</p>
+                            <h3 class="company-film__title" id="film-title" data-i18n="film.title">한일씨앤에스 품질관리 현장</h3>
+                            <p class="company-film__desc" data-i18n="film.desc">실험실에서 입도를 분석하고 성분을 적정하는 장면을 영상으로 확인하세요.</p>
+                            <span class="company-film__chip" data-i18n="film.chip">영어 음성 · 중국어 자막</span>
+                            <p class="company-film__cn" data-i18n="film.cnNote"></p>
+                        </div>
+                        <button type="button" class="company-film__player" data-yt="GE6VB1g_OU8" aria-label="홍보영상 재생 (YouTube)" data-i18n-aria="film.playAria">
+                            <img src="../assets/img/company-film.jpg" alt="" loading="lazy" width="1280" height="720">
+                            <span class="company-film__shade" aria-hidden="true"><span class="company-film__btn"><svg viewBox="0 0 24 24" fill="#fff"><path d="M7 4v16l13-8z"/></svg></span></span>
+                            <span class="company-film__cap" aria-hidden="true" data-i18n="film.play">영상 보기</span>
+                        </button>
+                    </section>
+                </div>
                 <div class='boundary w-[90%] max-md:w-[94%] max-w-[1600px] min-[1921px]:max-w-[2000px] mx-auto mb-[30px]'>
                     <div class="gsap-hide flex flex-nowrap justify-center gap-[10px] max-md:gap-[6px] bg-white w-fit max-w-full mx-auto rounded-full p-[5px] max-md:overflow-x-auto" data-gsap-fade>
                         <div class="faq-tab shrink-0 whitespace-nowrap px-[20px] max-md:px-[14px] py-[8px] rounded-full bg-[#123E21] text-white text-base max-md:text-sm font-bold cursor-pointer" onclick="faqFilter(this, '전체')" data-i18n="globalExport.tabAll">전체 (8)</div>
@@ -295,6 +311,7 @@
             </main>
         </div> 
     </body>
+    <script src="../assets/js/catalog-video.js"></script>
     <script>
         function faqToggle(el) {
             var answer = el.nextElementSibling;
