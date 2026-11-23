@@ -1940,6 +1940,27 @@
         bar.appendChild(msg);
         bodyEl.insertBefore(bar, bodyEl.firstChild);
 
+        /* 관련 '흙 이야기' 쇼츠 1편 (한국어 화면, 맞는 편이 있을 때만 보임) */
+        var SHORT_TAGS = {
+            'silicate-fertilizer': ['규산', '규산이 하는 일, 1분 영상'],
+            'organic-silicate': ['규산', '규산이 하는 일, 1분 영상'],
+            'limestone-fertilizer': ['산성 석회', '왜 석회로 산도를 맞출까?'],
+            'organic-limestone': ['산성 석회', '왜 석회로 산도를 맞출까?'],
+            'calcium-sulfur-fertilizer': ['칼슘', '칼슘이 흙에 붙는 원리, 1분 영상'],
+            'organic-mag-sulfur': ['칼슘', '칼슘이 흙에 붙는 원리, 1분 영상']
+        };
+        if (SHORT_TAGS[id] && !bodyEl.querySelector('[data-shorts-related]')) {
+            var slot = document.createElement('div');
+            slot.className = 'shorts-related-wrap';
+            slot.setAttribute('data-shorts-related', '');
+            slot.setAttribute('data-tags', SHORT_TAGS[id][0]);
+            slot.setAttribute('data-label', SHORT_TAGS[id][1]);
+            var endEl = bodyEl.querySelector('.vita-product-modal-end');
+            if (endEl && endEl.parentNode) endEl.parentNode.insertBefore(slot, endEl);
+            else bodyEl.appendChild(slot);
+            if (window.CatalogShorts) window.CatalogShorts.scan(slot);
+        }
+
         var note = document.createElement('p');
         note.className = 'catalog-legal-note';
         note.textContent = tUi('legalNotice');

@@ -19,6 +19,11 @@
         'organic-silicate': 'organic', 'organic-limestone': 'organic', 'organic-mag-sulfur': 'organic',
         'vita-40': 'vita', 'vita-gold': 'vita'
     };
+    var PRODUCT_SHORT_TAGS = {
+        'silicate-fertilizer': '규산', 'organic-silicate': '규산',
+        'limestone-fertilizer': '산성 석회', 'organic-limestone': '산성 석회',
+        'calcium-sulfur-fertilizer': '칼슘', 'organic-mag-sulfur': '칼슘'
+    };
     var MAX_PHOTOS = 3;
 
     var $ = function (sel) { return root.querySelector(sel); };
@@ -90,6 +95,8 @@
         var prod = '';
         if (a.product && PRODUCT_PAGE[a.product.id]) {
             prod = '<dt>관련 제품</dt><dd><a class="qna-prod" href="../products/' + PRODUCT_PAGE[a.product.id] + '.html#' + esc(a.product.id) + '"><i>한일</i>' + esc(a.product.name) + ' <span>상세 보기 →</span></a></dd>';
+            var st = PRODUCT_SHORT_TAGS[a.product.id];
+            if (st) prod += '<dt>1분 영상</dt><dd><div class="shorts-related-wrap" data-shorts-related data-tags="' + st + '" data-label="관련 흙 이야기"></div></dd>';
         }
         var photos = (it.photos || []).length
             ? '<dt>상담 사진</dt><dd><div class="qna-photos">' + it.photos.map(function (id) {

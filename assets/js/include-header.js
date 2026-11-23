@@ -585,6 +585,12 @@
         );
     }
     bindMobileLangMenu();
+    if (!document.querySelector('script[src*="catalog-shorts.js"]')) {
+        var shortsJs = document.createElement('script');
+        shortsJs.src = R + 'assets/js/catalog-shorts.js';
+        shortsJs.async = true;
+        document.head.appendChild(shortsJs);
+    }
     scheduleCatalogModalsPreload();
     if (!window.CATALOG_GSAP_DISABLED) {
         ensureCatalogGsapAssets();

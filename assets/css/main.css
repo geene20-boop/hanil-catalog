@@ -1320,3 +1320,8 @@ html.shorts-open, html.shorts-open body { overflow: hidden; }
     .shorts-rail { grid-auto-columns: 42%; gap: 10px; }
 }
 @media (prefers-reduced-motion: reduce) { .shorts-card__th img { transition: none; } }
+[data-shorts-related]:empty { display: none; }
+html:not([lang="ko"]) [data-shorts-related] { display: none !important; }
+.shorts-related-wrap--page { max-width: 780px; margin-top: 18px; }
+.shorts-related-wrap--page .shorts-related { margin-top: 0; }
+.qna-rx .shorts-related { margin-top: 0; background: #fff; }

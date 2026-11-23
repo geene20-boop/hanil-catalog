@@ -6,6 +6,7 @@
  */
 (function () {
     'use strict';
+    if (window.CatalogShorts) return;
 
     var API = '/api/shorts';
     var CHANNEL = 'https://www.youtube.com/@hanilcns';
@@ -179,19 +180,58 @@
             // 같은 편이 이미 보이면 그대로 둡니다(입력칸을 벗어나며 누를 때 버튼이 바뀌어 눌리지 않는 문제 방지).
             if (slot.getAttribute('data-id') === it.id) return;
             slot.setAttribute('data-id', it.id);
-            slot.innerHTML =
-                '<button type="button" class="shorts-related">' +
-                '<span class="shorts-related__th"><img src="' + esc(thumb(it.id)) + '" alt="" loading="lazy" width="270" height="480"><span class="shorts-card__play">' + playIcon() + '</span></span>' +
-                '<span class="shorts-related__txt"><b>산성 흙이 왜 문제일까?</b><small>흙 이야기' + (it.ep ? ' ' + esc(it.ep) + '편' : '') + ' · ' + esc(it.title) + '</small></span>' +
-                '<span class="shorts-related__go">1분 영상 ▶</span></button>';
+            slot.innerHTML = relatedHtml(it, '산성 흙이 왜 문제일까?');
             slot.querySelector('button').addEventListener('click', function () { open([it], 0); });
         });
     }
     document.addEventListener('catalog:govresult', onGovResult);
 
+    /* ── 관련 1편: [data-shorts-related data-tags="산성 석회" data-label="..."] 자리에 채움 ──
+     * 처방 페이지, 제품 상세 창, Q&A 답변 등. 나중에 생기는 자리도 자동으로 채웁니다.
+     * 태그가 맞는 편이 없으면 아무것도 보이지 않습니다. */
+    function pickByTags(arr, tags) {
+        for (var t = 0; t < tags.length; t++) {
+            var re = new RegExp('(^|\\s)' + tags[t] + '(\\s|$)');
+            var hit = arr.filter(function (it) { return re.test(it.tags || ''); });
+            if (hit.length) return hit[hit.length - 1];
+        }
+        return null;
+    }
+    function relatedHtml(it, label) {
+        return '<button type="button" class="shorts-related">' +
+            '<span class="shorts-related__th"><img src="' + esc(thumb(it.id)) + '" alt="" loading="lazy" width="270" height="480"><span class="shorts-card__play">' + playIcon() + '</span></span>' +
+            '<span class="shorts-related__txt"><b>' + esc(label || '1분 흙 이야기') + '</b><small>흙 이야기' + (it.ep ? ' ' + esc(it.ep) + '편' : '') + ' · ' + esc(it.title) + '</small></span>' +
+            '<span class="shorts-related__go">1분 영상 ▶</span></button>';
+    }
+    function fillRelated(slot) {
+        if (slot.getAttribute('data-filled')) return;
+        slot.setAttribute('data-filled', '1');
+        var tags = (slot.getAttribute('data-tags') || '').split(/\s+/).filter(function (t) { return /^[0-9A-Za-z가-힣_]+$/.test(t); });
+        if (!tags.length) return;
+        load().then(function (arr) {
+            var it = pickByTags(arr, tags);
+            if (!it) { slot.innerHTML = ''; return; }
+            slot.innerHTML = relatedHtml(it, slot.getAttribute('data-label'));
+            slot.querySelector('button').addEventListener('click', function () { open([it], 0); });
+        });
+    }
+    function scan(root) {
+        if (!root || !root.querySelectorAll) return;
+        if (root.matches && root.matches('[data-shorts-related]')) fillRelated(root);
+        Array.prototype.forEach.call(root.querySelectorAll('[data-shorts-related]'), fillRelated);
+    }
+
+    window.CatalogShorts = { scan: scan };
+
     function start() {
         Array.prototype.forEach.call(document.querySelectorAll('[data-shorts-section]'), renderRail);
         Array.prototype.forEach.call(document.querySelectorAll('[data-shorts-channel]'), function (a) { a.href = CHANNEL; });
+        scan(document.body);
+        if (window.MutationObserver) {
+            new MutationObserver(function (list) {
+                list.forEach(function (m) { Array.prototype.forEach.call(m.addedNodes, function (n) { if (n.nodeType === 1) scan(n); }); });
+            }).observe(document.body, { childList: true, subtree: true });
+        }
     }
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start);
     else start();

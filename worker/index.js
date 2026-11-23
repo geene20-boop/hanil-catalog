@@ -371,6 +371,13 @@ const SHORTS_CHANNEL = 'UCN6ewIFjigwPr7zp9ULdttQ';
 const SHORTS_REFRESH_MS = 3600_000;
 const SHORTS_RECHECK_MS = 24 * 3600_000;
 // RSS를 읽지 못해도 보이도록 이미 확인한 편을 기본값으로 둡니다.
+// 영상 설명란에 주제 해시태그가 없어도 카다록 관련 영상에 쓰도록, 편별 주제를 여기서 더합니다.
+// 앞으로 올리는 편은 설명란에 #산성 #석회 #칼슘 #질소 #규산 을 넣으면 자동으로 연결됩니다.
+const SHORTS_TAGS = {
+  '23azP97Xx5o': '칼슘',          // 2편: (+)양분 칼슘·칼륨·마그네슘
+  'PclltFTvR0w': '질소',          // 3편: 질산태 질소 유실
+  '7PGBfMsHCxk': '산성 석회'      // 4편: 산성 흙의 알루미늄
+};
 const SHORTS_SEED = [
   ['w0IBg_rxswc', '흙에도 할아버지가 있다고?! 흙의 족보 대공개', 1, ''],
   ['23azP97Xx5o', '흙은 여자, 양분은 남자?! 밭속 자석 연애 이야기', 2, ''],
@@ -397,6 +404,10 @@ async function listShorts(env, ctx) {
   const { results } = await db.prepare(
     'SELECT id, title, ep, tags, published FROM shorts WHERE alive = 1 ORDER BY ep IS NULL, ep ASC, published ASC LIMIT 200'
   ).all();
+  results.forEach(r => {
+    const extra = SHORTS_TAGS[r.id];
+    if (extra) r.tags = Array.from(new Set(((r.tags || '') + ' ' + extra).split(/\s+/).filter(Boolean))).join(' ');
+  });
   return json({ channel: 'https://www.youtube.com/@hanilcns', items: results }, 200, { 'Cache-Control': 'public, max-age=300' });
 }
 
@@ -427,10 +438,15 @@ async function refreshShorts(env) {
   }
   if (stmts.length) await db.batch(stmts);
 
-  // 목록에서 사라진 오래된 영상은 공개 상태인지 하루에 한 번 확인 (한 번에 최대 10개)
+  // 목록에 없는 영상이 아직 공개인지 확인 (한 번에 최대 10개)
+  // - 최근 편인데 목록에서 빠졌으면(비공개·삭제 의심) 바로 확인
+  // - 오래돼서 목록 밖으로 밀려난 편은 하루에 한 번 확인
+  const pubs = entries.map(e => (e.match(/<published>([^<]+)<\/published>/) || [])[1]).filter(Boolean).sort();
+  const oldest = pubs.length >= 15 ? pubs[0] : '0000';
   const { results } = await db.prepare(
-    `SELECT id FROM shorts WHERE alive = 1 AND checked_at < ? ${seen.length ? `AND id NOT IN (${seen.map(() => '?').join(',')})` : ''} LIMIT 10`
-  ).bind(Date.now() - SHORTS_RECHECK_MS, ...seen).all();
+    `SELECT id FROM shorts WHERE alive = 1 AND (checked_at < ? OR published >= ?)
+     ${seen.length ? `AND id NOT IN (${seen.map(() => '?').join(',')})` : ''} ORDER BY checked_at ASC LIMIT 10`
+  ).bind(Date.now() - SHORTS_RECHECK_MS, oldest, ...seen).all();
   for (const r of results) {
     const o = await fetch(`https://www.youtube.com/oembed?format=json&url=${encodeURIComponent('https://www.youtube.com/shorts/' + r.id)}`);
     const alive = o.ok ? 1 : (o.status === 401 || o.status === 403 || o.status === 404 ? 0 : 1);
