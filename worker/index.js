@@ -47,7 +47,7 @@ export default {
     try {
       if (!env.DB) return json({ error: '상담 게시판 저장소가 아직 연결되지 않았습니다.' }, 503);
       await ensureSchema(env.DB);
-      return await route(request, env, url);
+      return await route(request, env, url, ctx);
     } catch (err) {
       if (err instanceof HttpError) return json({ error: err.message }, err.status);
       console.error('qna error', err && err.stack || err);
@@ -60,10 +60,13 @@ class HttpError extends Error {
   constructor(status, message) { super(message); this.status = status; }
 }
 
-async function route(request, env, url) {
+async function route(request, env, url, ctx) {
   const p = url.pathname.replace(/\/+$/, '');
   const m = request.method;
 
+  if (p === '/api/shorts' && m === 'GET') return listShorts(env, ctx);
+  let ms = p.match(/^\/api\/shorts\/thumb\/([A-Za-z0-9_-]{6,20})$/);
+  if (ms && m === 'GET') return shortsThumb(ms[1], ctx);
   if (p === '/api/qna' && m === 'GET') return listPublic(env, url);
   if (p === '/api/qna' && m === 'POST') return createQuestion(request, env);
   let mm = p.match(/^\/api\/qna\/photo\/(\d+)$/);
@@ -127,7 +130,17 @@ async function ensureSchema(db) {
       at INTEGER NOT NULL
     )`),
     db.prepare('CREATE INDEX IF NOT EXISTS idx_q_created ON questions(created_at)'),
-    db.prepare('CREATE INDEX IF NOT EXISTS idx_p_qid ON photos(qid)')
+    db.prepare('CREATE INDEX IF NOT EXISTS idx_p_qid ON photos(qid)'),
+    db.prepare(`CREATE TABLE IF NOT EXISTS shorts (
+      id TEXT PRIMARY KEY,
+      title TEXT NOT NULL,
+      ep INTEGER,
+      tags TEXT,
+      published TEXT,
+      alive INTEGER NOT NULL DEFAULT 1,
+      checked_at INTEGER NOT NULL DEFAULT 0
+    )`),
+    db.prepare(`CREATE TABLE IF NOT EXISTS kv (k TEXT PRIMARY KEY, v TEXT)`)
   ]);
   schemaReady = true;
 }
@@ -349,6 +362,109 @@ async function adminPhoto(env, id) {
   const row = await env.DB.prepare('SELECT mime, data FROM photos WHERE id = ?').bind(id).first();
   if (!row) throw new HttpError(404, '사진이 없습니다.');
   return photoResponse(row, 'private, no-store');
+}
+
+/* ───────── 회사 YouTube 쇼츠 (사용 가이드 '흙 이야기') ───────── */
+// 채널의 새 영상 목록(RSS)을 1시간마다 확인해 저장합니다. RSS에는 최근 15개만 나오므로
+// 한 번 본 영상은 DB에 남겨 두고, 비공개·삭제된 영상은 하루 한 번 확인해 목록에서 뺍니다.
+const SHORTS_CHANNEL = 'UCN6ewIFjigwPr7zp9ULdttQ';
+const SHORTS_REFRESH_MS = 3600_000;
+const SHORTS_RECHECK_MS = 24 * 3600_000;
+// RSS를 읽지 못해도 보이도록 이미 확인한 편을 기본값으로 둡니다.
+const SHORTS_SEED = [
+  ['w0IBg_rxswc', '흙에도 할아버지가 있다고?! 흙의 족보 대공개', 1, ''],
+  ['23azP97Xx5o', '흙은 여자, 양분은 남자?! 밭속 자석 연애 이야기', 2, ''],
+  ['PclltFTvR0w', '비료에도 암수가 있다! 비 오면 도망가는 질소', 3, ''],
+  ['7PGBfMsHCxk', '흙 속에 깡패가 산다?! 뿌리 괴롭히는 범인 검거', 4, '산성 석회']
+];
+
+async function listShorts(env, ctx) {
+  const db = env.DB;
+  const seeded = await db.prepare("SELECT v FROM kv WHERE k = 'shorts_seeded'").first();
+  if (!seeded) {
+    await db.batch(SHORTS_SEED.map(([id, title, ep, tags]) =>
+      db.prepare('INSERT OR IGNORE INTO shorts (id, title, ep, tags, published, alive, checked_at) VALUES (?, ?, ?, ?, ?, 1, 0)')
+        .bind(id, title, ep, tags, null)).concat([
+      db.prepare("INSERT OR REPLACE INTO kv (k, v) VALUES ('shorts_seeded', '1')")
+    ]));
+  }
+  const last = await db.prepare("SELECT v FROM kv WHERE k = 'shorts_refreshed'").first();
+  if (!last || Date.now() - Number(last.v) > SHORTS_REFRESH_MS) {
+    await db.prepare("INSERT OR REPLACE INTO kv (k, v) VALUES ('shorts_refreshed', ?)").bind(String(Date.now())).run();
+    const job = refreshShorts(env).catch(err => console.error('shorts refresh', err && err.message));
+    if (ctx && ctx.waitUntil) ctx.waitUntil(job); else await job;
+  }
+  const { results } = await db.prepare(
+    'SELECT id, title, ep, tags, published FROM shorts WHERE alive = 1 ORDER BY ep IS NULL, ep ASC, published ASC LIMIT 200'
+  ).all();
+  return json({ channel: 'https://www.youtube.com/@hanilcns', items: results }, 200, { 'Cache-Control': 'public, max-age=300' });
+}
+
+async function refreshShorts(env) {
+  const db = env.DB;
+  const url = env.SHORTS_FEED_URL || `https://www.youtube.com/feeds/videos.xml?channel_id=${SHORTS_CHANNEL}`;
+  const res = await fetch(url, { headers: { 'User-Agent': 'hanil-catalog' } });
+  if (!res.ok) throw new Error('feed ' + res.status);
+  const xml = await res.text();
+  const entries = xml.split('<entry>').slice(1);
+  const seen = [];
+  const stmts = [];
+  for (const e of entries) {
+    const id = (e.match(/<yt:videoId>([A-Za-z0-9_-]{6,20})<\/yt:videoId>/) || [])[1];
+    const rawTitle = unescapeXml((e.match(/<title>([^<]*)<\/title>/) || [])[1] || '');
+    const desc = unescapeXml((e.match(/<media:description>([\s\S]*?)<\/media:description>/) || [])[1] || '');
+    const published = (e.match(/<published>([^<]+)<\/published>/) || [])[1] || null;
+    if (!id || !/#shorts/i.test(rawTitle + ' ' + desc)) continue;
+    const ep = Number((rawTitle.match(/(\d+)\s*편/) || [])[1]) || null;
+    const title = cleanShortTitle(rawTitle);
+    const tags = Array.from(new Set((desc.match(/#([0-9A-Za-z가-힣_]+)/g) || []).map(t => t.slice(1)))).join(' ');
+    seen.push(id);
+    stmts.push(db.prepare(
+      `INSERT INTO shorts (id, title, ep, tags, published, alive, checked_at) VALUES (?, ?, ?, ?, ?, 1, ?)
+       ON CONFLICT(id) DO UPDATE SET title = excluded.title, ep = excluded.ep, tags = excluded.tags,
+       published = excluded.published, alive = 1, checked_at = excluded.checked_at`
+    ).bind(id, title, ep, tags, published, Date.now()));
+  }
+  if (stmts.length) await db.batch(stmts);
+
+  // 목록에서 사라진 오래된 영상은 공개 상태인지 하루에 한 번 확인 (한 번에 최대 10개)
+  const { results } = await db.prepare(
+    `SELECT id FROM shorts WHERE alive = 1 AND checked_at < ? ${seen.length ? `AND id NOT IN (${seen.map(() => '?').join(',')})` : ''} LIMIT 10`
+  ).bind(Date.now() - SHORTS_RECHECK_MS, ...seen).all();
+  for (const r of results) {
+    const o = await fetch(`https://www.youtube.com/oembed?format=json&url=${encodeURIComponent('https://www.youtube.com/shorts/' + r.id)}`);
+    const alive = o.ok ? 1 : (o.status === 401 || o.status === 403 || o.status === 404 ? 0 : 1);
+    await db.prepare('UPDATE shorts SET alive = ?, checked_at = ? WHERE id = ?').bind(alive, Date.now(), r.id).run();
+  }
+}
+
+function cleanShortTitle(t) {
+  return t.replace(/#shorts/ig, '').replace(/\|\s*흙\s*이야기\s*\d+\s*편/g, '').replace(/\s{2,}/g, ' ').replace(/[\s|]+$/, '').trim();
+}
+
+function unescapeXml(s) {
+  return s.replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"').replace(/&#39;/g, "'").replace(/&amp;/g, '&');
+}
+
+async function shortsThumb(id, ctx) {
+  // 썸네일을 카다록 서버를 거쳐 보여줘, 누르기 전에는 방문자 정보가 YouTube로 가지 않게 합니다.
+  const cache = caches.default;
+  const key = new Request(`https://thumb.cache/${id}`);
+  const hit = await cache.match(key);
+  if (hit) return hit;
+  let res;
+  try {
+    res = await fetch(`https://i.ytimg.com/vi/${id}/oar2.jpg`);
+    if (!res.ok) res = await fetch(`https://i.ytimg.com/vi/${id}/hqdefault.jpg`);
+  } catch (e) {
+    throw new HttpError(502, '썸네일을 불러오지 못했습니다.');
+  }
+  if (!res.ok) throw new HttpError(404, '썸네일이 없습니다.');
+  const out = new Response(res.body, {
+    headers: { 'Content-Type': 'image/jpeg', 'Cache-Control': 'public, max-age=86400', 'X-Content-Type-Options': 'nosniff' }
+  });
+  if (ctx && ctx.waitUntil) ctx.waitUntil(cache.put(key, out.clone()));
+  return out;
 }
 
 /* ───────── 도움 함수 ───────── */

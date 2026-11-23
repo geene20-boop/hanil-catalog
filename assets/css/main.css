@@ -1267,3 +1267,56 @@ video:-webkit-full-screen::backdrop,
     .company-film__btn { width: 60px; height: 60px; }
 }
 @media (prefers-reduced-motion: reduce) { .company-film__player img, .company-film__btn { transition: none; } }
+
+/* 흙 이야기 쇼츠 (사용 가이드, 정부지원) — 쇼츠가 한국어라 한국어 화면에서만 */
+html:not([lang="ko"]) [data-shorts-section],
+html:not([lang="ko"]) [data-gov-short] { display: none !important; }
+.shorts-section { background: #fff; border-radius: 24px; padding: 26px 28px; color: #154624; }
+.shorts-section[hidden] { display: none; }
+.shorts-section__head { display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; flex-wrap: wrap; margin-bottom: 18px; }
+.shorts-section__ey { margin: 0; font-size: 13px; font-weight: 800; letter-spacing: 0.12em; color: #208E45; }
+.shorts-section__title { margin: 4px 0 0; font-size: 28px; font-weight: 800; color: #154624; line-height: 1.3; }
+.shorts-section__desc { margin: 6px 0 0; font-size: 15px; color: #4E5968; }
+.shorts-section__sub { display: inline-flex; align-items: center; gap: 7px; background: #C4302B; color: #fff; border-radius: 999px; padding: 9px 16px; font-size: 14px; font-weight: 800; text-decoration: none; white-space: nowrap; }
+.shorts-section__sub:hover { background: #a82722; }
+.shorts-section__src { margin: 14px 0 0; font-size: 12px; color: #6c6c6c; }
+.shorts-rail { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(150px, 200px); gap: 14px; overflow-x: auto; padding-bottom: 8px; scroll-snap-type: x mandatory; overscroll-behavior-x: contain; }
+.shorts-card { all: unset; box-sizing: border-box; cursor: pointer; display: grid; gap: 8px; scroll-snap-align: start; }
+.shorts-card:focus-visible { outline: 3px solid #208E45; outline-offset: 3px; border-radius: 14px; }
+.shorts-card__th { position: relative; display: block; aspect-ratio: 9 / 16; border-radius: 14px; overflow: hidden; background: #F1EFE6; }
+.shorts-card__th img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.3s ease; }
+.shorts-card:hover .shorts-card__th img { transform: scale(1.03); }
+.shorts-card__ep { position: absolute; left: 8px; top: 8px; background: rgba(12, 86, 37, 0.92); color: #fff; font-size: 11px; font-weight: 800; border-radius: 999px; padding: 2px 9px; }
+.shorts-card__new { position: absolute; right: 8px; top: 8px; background: #C4302B; color: #fff; font-size: 10px; font-weight: 800; border-radius: 999px; padding: 2px 8px; letter-spacing: 0.04em; }
+.shorts-card__play { position: absolute; right: 8px; bottom: 8px; width: 34px; height: 34px; border-radius: 50%; background: rgba(0, 0, 0, 0.55); display: grid; place-items: center; }
+.shorts-card__play svg { width: 14px; height: 14px; margin-left: 2px; }
+.shorts-card__title { font-size: 14px; font-weight: 700; color: #18211A; line-height: 1.4; }
+.shorts-related-wrap:empty { display: none; }
+.shorts-related { all: unset; box-sizing: border-box; cursor: pointer; display: flex; align-items: center; gap: 12px; width: 100%; margin-top: 10px; background: #FBF6EC; border: 1px solid #EADFCB; border-radius: 14px; padding: 10px; }
+.shorts-related:focus-visible { outline: 3px solid #208E45; outline-offset: 2px; }
+.shorts-related__th { position: relative; width: 62px; flex: none; aspect-ratio: 9 / 16; border-radius: 10px; overflow: hidden; display: block; }
+.shorts-related__th img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.shorts-related__th .shorts-card__play { width: 24px; height: 24px; right: 4px; bottom: 4px; }
+.shorts-related__th .shorts-card__play svg { width: 10px; height: 10px; }
+.shorts-related__txt { min-width: 0; }
+.shorts-related__txt b { display: block; font-size: 14px; color: #18211A; }
+.shorts-related__txt small { display: block; font-size: 12px; color: #6c6c6c; margin-top: 2px; }
+.shorts-related__go { margin-left: auto; font-size: 13px; font-weight: 800; color: #C4302B; white-space: nowrap; }
+.shorts-modal { position: fixed; inset: 0; z-index: 100000; background: rgba(10, 20, 12, 0.8); display: grid; place-items: center; padding: max(16px, env(safe-area-inset-top, 0px)) 16px max(16px, env(safe-area-inset-bottom, 0px)); }
+.shorts-modal[hidden] { display: none; }
+.shorts-modal__box { width: min(360px, 100%, calc((100dvh - 150px) * 9 / 16)); display: grid; gap: 10px; }
+.shorts-modal__frame { aspect-ratio: 9 / 16; border-radius: 18px; overflow: hidden; background: #000; }
+.shorts-modal__frame iframe { width: 100%; height: 100%; border: 0; display: block; }
+.shorts-modal__title { margin: 0; color: #fff; font-size: 14px; font-weight: 700; line-height: 1.4; }
+.shorts-modal__row { display: flex; gap: 8px; flex-wrap: wrap; }
+.shorts-modal__row button { font: inherit; font-size: 13px; font-weight: 800; border: 0; border-radius: 999px; padding: 8px 14px; background: rgba(255, 255, 255, 0.18); color: #fff; cursor: pointer; }
+.shorts-modal__row button[hidden] { display: none; }
+.shorts-modal__close { margin-left: auto; background: #fff !important; color: #0C5625 !important; }
+.shorts-modal__yt { color: #fff; font-size: 13px; font-weight: 700; opacity: 0.85; }
+html.shorts-open, html.shorts-open body { overflow: hidden; }
+@media (max-width: 767px) {
+    .shorts-section { padding: 18px 16px; border-radius: 16px; }
+    .shorts-section__title { font-size: 22px; }
+    .shorts-rail { grid-auto-columns: 42%; gap: 10px; }
+}
+@media (prefers-reduced-motion: reduce) { .shorts-card__th img { transition: none; } }

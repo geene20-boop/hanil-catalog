@@ -130,6 +130,7 @@
         <div class="contact_us flex items-center gap-[6px] max-lg:hidden text-[#154624]">\
             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 12 12" fill="currentColor" aria-hidden="true" class="w-[14px] h-[14px] shrink-0"><path d="M11.3 12C9.91111 12 8.53889 11.6972 7.18333 11.0917C5.82778 10.4861 4.59444 9.62778 3.48333 8.51667C2.37222 7.40556 1.51389 6.17222 0.908333 4.81667C0.302778 3.46111 0 2.08889 0 0.7C0 0.5 0.0666667 0.333333 0.2 0.2C0.333333 0.0666667 0.5 0 0.7 0H3.4C3.55556 0 3.69444 0.0527778 3.81667 0.158333C3.93889 0.263889 4.01111 0.388889 4.03333 0.533333L4.46667 2.86667C4.48889 3.04444 4.48333 3.19444 4.45 3.31667C4.41667 3.43889 4.35556 3.54444 4.26667 3.63333L2.65 5.26667C2.87222 5.67778 3.13611 6.075 3.44167 6.45833C3.74722 6.84167 4.08333 7.21111 4.45 7.56667C4.79444 7.91111 5.15556 8.23056 5.53333 8.525C5.91111 8.81944 6.31111 9.08889 6.73333 9.33333L8.3 7.76667C8.4 7.66667 8.53056 7.59167 8.69167 7.54167C8.85278 7.49167 9.01111 7.47778 9.16667 7.5L11.4667 7.96667C11.6222 8.01111 11.75 8.09167 11.85 8.20833C11.95 8.325 12 8.45556 12 8.6V11.3C12 11.5 11.9333 11.6667 11.8 11.8C11.6667 11.9333 11.5 12 11.3 12Z"/></svg>\
             <a href="tel:0547629691" class="text-sm text-[#154624] font-semibold leading-none whitespace-nowrap" data-i18n="nav.phone" data-i18n-href="nav.phoneHref">054 -762 -9691</a>\
+            <a href="https://www.youtube.com/@hanilcns" target="_blank" rel="noopener" class="yt-channel-btn" aria-label="한일씨앤에스 YouTube 채널 (새 창)" data-i18n-aria="nav.youtubeAria"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M23 7.2a3 3 0 0 0-2.1-2.1C19 4.6 12 4.6 12 4.6s-7 0-8.9.5A3 3 0 0 0 1 7.2 31 31 0 0 0 .5 12a31 31 0 0 0 .5 4.8 3 3 0 0 0 2.1 2.1c1.9.5 8.9.5 8.9.5s7 0 8.9-.5a3 3 0 0 0 2.1-2.1 31 31 0 0 0 .5-4.8 31 31 0 0 0-.5-4.8zM9.7 15.1V8.9l5.8 3.1z"/></svg>흙 이야기</a>\
         </div>\
         <div data-lang-switch data-lang-theme="header" role="group" aria-label="언어 선택" class="inline-flex items-center gap-[2px] p-[3px] rounded-full bg-[#F0F5ED] border border-[#154624]/10">\
             <button type="button" data-lang="ko" aria-pressed="true" class="min-w-[36px] h-[28px] px-[10px] rounded-full text-xs font-semibold tracking-wide transition-colors duration-200 bg-[#0C5625] text-white">KO</button>\
@@ -228,7 +229,8 @@
                 { href: R + 'technical/prescription-01.html', page: 'prescription-01.html', i18n: 'nav.prescription01', label: '수도작 핵심처방' },
                 { href: R + 'technical/prescription-02.html', page: 'prescription-02.html', i18n: 'nav.prescription02', label: '밭작물 맞춤 처방' },
                 { href: R + 'technical/prescription-03.html', page: 'prescription-03.html', i18n: 'nav.prescription03', label: '과수·시설재배 전용' },
-                { href: R + 'technical/government.html', page: 'government.html', i18n: 'nav.government', label: '정부지원' }
+                { href: R + 'technical/government.html', page: 'government.html', i18n: 'nav.government', label: '정부지원' },
+                { href: 'https://www.youtube.com/@hanilcns', external: true, i18n: 'nav.youtube', label: '흙 이야기 영상' }
             ]
         },
         business: {
@@ -760,6 +762,7 @@
             var current = isCurrent ? ' is-current' : '';
             return '<div class="swiper-slide catalog-subnav__slide">' +
                 '<a href="' + item.href + '" class="catalog-subnav__link' + current + '"' +
+                (item.external ? ' target="_blank" rel="noopener"' : '') +
                 (item.page ? ' data-page="' + item.page + '"' : '') + '>' +
                 t(item.i18n, item.label) + '</a>' +
                 '</div>';

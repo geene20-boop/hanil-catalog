@@ -198,6 +198,9 @@
         if (r.length) { out.className = 'gov-check__out is-yes'; out.textContent = r.join(' '); }
         else if (ph === null && si === null) { out.className = 'gov-check__out'; out.textContent = tx('govEmpty'); }
         else { out.className = 'gov-check__out is-no'; out.textContent = tx('govNo'); }
+        try {
+            box.dispatchEvent(new CustomEvent('catalog:govresult', { bubbles: true, detail: { acid: ph !== null && ph < 6.5 } }));
+        } catch (e) { /* 이전 브라우저: 관련 영상만 생략 */ }
     }
     function bindGovCheck() {
         Array.prototype.forEach.call(document.querySelectorAll('[data-gov-check]'), function (box) {

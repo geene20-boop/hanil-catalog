@@ -361,3 +361,22 @@ header {
         font-size: 14px !important;
     }
 }
+
+/* 회사 YouTube 채널 버튼 (한국어 화면에서만, 데스크톱 상단 전화번호 옆) */
+.yt-channel-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    margin-left: 6px;
+    padding: 5px 10px;
+    border-radius: 9999px;
+    background: #C4302B;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1;
+    text-decoration: none;
+    white-space: nowrap;
+}
+.yt-channel-btn:hover { background: #a82722; }
+html:not([lang="ko"]) .yt-channel-btn { display: none; }
