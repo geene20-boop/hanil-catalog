@@ -380,3 +380,34 @@ header {
 }
 .yt-channel-btn:hover { background: #a82722; }
 html:not([lang="ko"]) .yt-channel-btn { display: none; }
+
+/* 휴대폰: 언어 버튼을 현재 언어 하나로 접기 (누르면 아래로 펼침) */
+.lang-wrap { position: relative; flex-shrink: 0; }
+@media (max-width: 767.98px) {
+    .lang-wrap [data-lang-switch] { position: relative; }
+    .lang-wrap:not(.is-open) [data-lang-switch] [data-lang][aria-pressed="false"] { display: none; }
+    .lang-wrap [data-lang-switch] [data-lang][aria-pressed="true"]::after {
+        content: "";
+        display: inline-block;
+        width: 6px;
+        height: 6px;
+        margin-left: 5px;
+        border-right: 1.6px solid currentColor;
+        border-bottom: 1.6px solid currentColor;
+        transform: translateY(-2px) rotate(45deg);
+    }
+    .lang-wrap.is-open [data-lang-switch] [data-lang][aria-pressed="true"]::after { transform: translateY(1px) rotate(-135deg); }
+    .lang-wrap.is-open [data-lang-switch] {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 10001;
+        flex-direction: column;
+        align-items: stretch;
+        border-radius: 18px;
+        background: #fff;
+        box-shadow: 0 10px 28px -10px rgba(0, 0, 0, 0.35);
+    }
+    .lang-wrap.is-open [data-lang-switch] [data-lang] { justify-content: flex-start; text-align: left; height: 34px; }
+    .lang-wrap [data-lang-switch] [data-lang] { display: inline-flex; align-items: center; justify-content: center; }
+}
