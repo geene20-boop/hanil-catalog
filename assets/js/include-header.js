@@ -585,6 +585,12 @@
         );
     }
     bindMobileLangMenu();
+    if (!document.querySelector('script[src*="catalog-helper.js"]')) {
+        var helperJs = document.createElement('script');
+        helperJs.src = R + 'assets/js/catalog-helper.js';
+        helperJs.async = true;
+        document.head.appendChild(helperJs);
+    }
     if (!document.querySelector('script[src*="catalog-shorts.js"]')) {
         var shortsJs = document.createElement('script');
         shortsJs.src = R + 'assets/js/catalog-shorts.js';

@@ -1,0 +1,120 @@
+/* 흙 상담 도우미 (catalog-helper.js) */
+.soil-helper-fab {
+    position: fixed;
+    left: 34px;
+    bottom: 34px;
+    z-index: 10040;
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    padding: 9px 18px 9px 9px;
+    border: 0;
+    border-radius: 999px;
+    background: #0C5625;
+    color: #fff;
+    font: 800 15px/1 'Pretendard Variable', 'Segoe UI', Arial, sans-serif;
+    box-shadow: 0 12px 30px -12px rgba(0, 0, 0, 0.55);
+    cursor: pointer;
+    transition: transform 0.2s ease, background 0.2s ease;
+}
+.soil-helper-fab:hover { background: #0a4a20; transform: translateY(-2px); }
+.soil-helper-fab:focus-visible { outline: 3px solid #B0C45F; outline-offset: 3px; }
+.soil-helper-fab__ic { width: 34px; height: 34px; border-radius: 50%; background: #B0C45F; color: #133E20; display: grid; place-items: center; flex: none; }
+.soil-helper-fab__ic svg { width: 20px; height: 20px; }
+html.soil-helper-open .soil-helper-fab { display: none; }
+
+.soil-helper {
+    position: fixed;
+    left: 34px;
+    bottom: 34px;
+    z-index: 10060;
+    width: 390px;
+    max-width: calc(100vw - 68px);
+    height: min(660px, calc(100vh - 140px));
+    display: flex;
+    flex-direction: column;
+    background: #FBFAF5;
+    color: #18211A;
+    border: 1px solid #D6D3C4;
+    border-radius: 22px;
+    overflow: hidden;
+    box-shadow: 0 24px 60px -24px rgba(0, 0, 0, 0.5);
+    font: 400 14px/1.6 'Pretendard Variable', 'Segoe UI', Arial, sans-serif;
+}
+.soil-helper[hidden] { display: none; }
+.soil-helper *, .soil-helper *::before, .soil-helper *::after { box-sizing: border-box; }
+.soil-helper button, .soil-helper input, .soil-helper select { font: inherit; }
+.soil-helper :focus-visible { outline: 2px solid #208E45; outline-offset: 2px; }
+.soil-helper__head { display: flex; align-items: center; gap: 10px; padding: 14px 14px 14px 16px; background: #0C5625; color: #fff; }
+.soil-helper__head b { display: block; font-size: 16px; color: #fff; line-height: 1.3; }
+.soil-helper__head small { display: block; font-size: 12px; color: rgba(255, 255, 255, 0.8); line-height: 1.4; }
+.soil-helper__ava { width: 38px; height: 38px; border-radius: 12px; background: #B0C45F; color: #133E20; display: grid; place-items: center; flex: none; }
+.soil-helper__ava svg { width: 22px; height: 22px; }
+.soil-helper__btn { margin-left: auto; width: 32px; height: 32px; border-radius: 50%; border: 0; background: rgba(255, 255, 255, 0.15); color: #fff; cursor: pointer; font-size: 15px; flex: none; }
+.soil-helper__btn + .soil-helper__btn { margin-left: 4px; }
+.soil-helper__btn:hover { background: rgba(255, 255, 255, 0.28); }
+.soil-helper__head, .soil-helper__quick, .soil-helper__foot { flex: none; }
+.soil-helper__log > * { flex-shrink: 0; }
+.soil-helper__log { flex: 1 1 auto; min-height: 0; overflow-y: auto; padding: 14px; display: flex; flex-direction: column; gap: 10px; overscroll-behavior: contain; }
+.soil-helper__msg { align-self: flex-start; max-width: 94%; background: #F1EFE6; border: 1px solid #D6D3C4; border-radius: 4px 16px 16px 16px; padding: 10px 13px; }
+.soil-helper__msg b { color: #0C5625; }
+.soil-helper__msg--me { align-self: flex-end; background: #0C5625; border-color: #0C5625; color: #fff; border-radius: 16px 4px 16px 16px; font-weight: 700; padding: 8px 13px; }
+.soil-helper__opts { display: flex; flex-wrap: wrap; gap: 6px; }
+.soil-helper__opt { display: inline-flex; align-items: center; gap: 6px; border: 1px solid #0C5625; background: #fff; color: #0C5625; border-radius: 999px; padding: 7px 13px; font-size: 13px; font-weight: 700; cursor: pointer; text-align: left; }
+.soil-helper__opt:hover:not([disabled]) { background: #E1ECDC; }
+.soil-helper__opt[disabled] { opacity: 0.45; cursor: default; }
+.soil-helper__opt svg { width: 18px; height: 18px; flex: none; }
+.soil-helper__opt.is-ghost { border-color: #C9C5B2; color: #5C6459; }
+.soil-helper__crops { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; }
+.soil-helper__crop { display: grid; justify-items: center; gap: 2px; border: 1px solid #D6D3C4; background: #fff; border-radius: 12px; padding: 9px 4px; cursor: pointer; text-align: center; line-height: 1.3; color: #18211A; }
+.soil-helper__crop:hover:not([disabled]) { border-color: #0C5625; }
+.soil-helper__crop[disabled] { opacity: 0.5; cursor: default; }
+.soil-helper__crop svg { width: 26px; height: 26px; color: #0C5625; }
+.soil-helper__crop b { font-size: 12.5px; }
+.soil-helper__crop small { font-size: 11px; color: #5C6459; }
+.soil-helper__card { background: #fff; border: 1px solid #D6D3C4; border-radius: 16px; overflow: hidden; }
+.soil-helper__card-h { display: flex; gap: 10px; align-items: center; padding: 11px 13px; border-bottom: 1px dashed #C9C5B2; }
+.soil-helper__card-h i { width: 36px; height: 36px; border-radius: 10px; background: #0C5625; color: #fff; display: grid; place-items: center; font-style: normal; font-size: 9px; font-weight: 800; letter-spacing: 0.04em; flex: none; }
+.soil-helper__card-h b { display: block; font-size: 14.5px; line-height: 1.35; }
+.soil-helper__card-h small { display: block; font-size: 12px; color: #5C6459; line-height: 1.4; }
+.soil-helper__role { margin-left: auto; font-size: 11px; font-weight: 800; border-radius: 999px; padding: 2px 8px; background: #E1ECDC; color: #0C5625; white-space: nowrap; }
+.soil-helper__role.is-sub { background: #F1EFE6; color: #5C6459; border: 1px solid #D6D3C4; }
+.soil-helper__card dl { margin: 0; padding: 10px 13px; display: grid; grid-template-columns: 64px minmax(0, 1fr); gap: 5px 10px; font-size: 13px; }
+.soil-helper__card dt { font-weight: 800; color: #0C5625; font-size: 12px; padding-top: 1px; }
+.soil-helper__card dd { margin: 0; }
+.soil-helper__card > .soil-helper__link { display: block; text-align: center; border-top: 1px solid #D6D3C4; padding: 9px; }
+.soil-helper__link { font-weight: 800; color: #0C5625; text-decoration: none; }
+.soil-helper__link:hover { text-decoration: underline; }
+.soil-helper__tasks { display: grid; gap: 6px; }
+.soil-helper__tasks > div { background: #fff; border: 1px solid #D6D3C4; border-radius: 12px; padding: 9px 12px; font-size: 13px; }
+.soil-helper__tasks b { display: block; font-size: 12px; color: #0C5625; }
+.soil-helper__tasks small { display: block; color: #5C6459; margin-top: 2px; }
+.soil-helper__gov { background: #fff; border: 1px solid #D6D3C4; border-radius: 14px; padding: 11px; display: grid; gap: 7px; }
+.soil-helper__row { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+.soil-helper__gov select, .soil-helper__gov input, .soil-helper__search input { width: 100%; font-size: 14px; color: #18211A; background: #F1EFE6; border: 1px solid #D6D3C4; border-radius: 10px; padding: 9px 11px; }
+.soil-helper__gov-out { font-size: 13px; border-radius: 10px; padding: 8px 11px; background: #F1EFE6; }
+.soil-helper__gov-out.is-yes { background: #E1ECDC; color: #0C5625; font-weight: 700; }
+.soil-helper__gov small { font-size: 11.5px; color: #5C6459; }
+.soil-helper__search { display: flex; gap: 6px; }
+.soil-helper__search button { border: 0; background: #0C5625; color: #fff; border-radius: 10px; padding: 0 14px; font-weight: 800; cursor: pointer; white-space: nowrap; }
+.soil-helper__search button[disabled] { opacity: 0.5; }
+.soil-helper__qa { background: #fff; border: 1px solid #D6D3C4; border-radius: 14px; padding: 10px 12px; font-size: 13px; display: grid; gap: 3px; }
+.soil-helper__qa span { color: #5C6459; }
+.soil-helper__short .shorts-related { margin-top: 0; background: #fff; }
+.soil-helper__short:has(> [data-shorts-related]:empty) { display: none; }
+.soil-helper__tel { display: inline-block; margin-top: 6px; font-weight: 800; color: #0C5625; font-size: 15px; }
+.soil-helper__quick { display: flex; gap: 6px; padding: 9px 12px; border-top: 1px solid #D6D3C4; flex-wrap: wrap; background: #FBFAF5; }
+.soil-helper__quick button { border: 1px solid #C9C5B2; background: #fff; color: #18211A; border-radius: 999px; padding: 5px 11px; font-size: 12px; font-weight: 700; cursor: pointer; }
+.soil-helper__foot { margin: 0; border-top: 1px solid #D6D3C4; padding: 8px 13px; font-size: 11px; line-height: 1.5; color: #5C6459; background: #F1EFE6; }
+
+/* 휴대폰·태블릿: 하단 메뉴 위에 버튼, 도우미는 화면 대부분을 쓰는 시트 */
+@media (max-width: 1023px) {
+    .soil-helper-fab { left: 12px; bottom: calc(132px + env(safe-area-inset-bottom, 0px)); padding: 7px 14px 7px 7px; font-size: 13.5px; }
+    .soil-helper-fab__ic { width: 30px; height: 30px; }
+    .soil-helper { left: 8px; right: 8px; bottom: calc(8px + env(safe-area-inset-bottom, 0px)); top: calc(70px + env(safe-area-inset-top, 0px)); width: auto; max-width: none; height: auto; border-radius: 20px; }
+    html.soil-helper-open .catalog-mobile-nav { visibility: hidden; }
+}
+@media (max-width: 380px) {
+    .soil-helper__crops { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (prefers-reduced-motion: reduce) { .soil-helper-fab { transition: none; } }

@@ -225,6 +225,22 @@
         }
     }
 
+    /* 흙 상담 도우미 등 다른 기능이 같은 내용을 쓰도록 공개합니다 */
+    function govJudge(type, ph, si) {
+        var r = [];
+        if (type === 'paddy' && si !== null && si < 157) r.push(tx('govSi', { v: si }));
+        if (ph !== null && ph < 6.5 && type === 'field') r.push(tx('govPhField', { v: ph }));
+        if (ph !== null && ph < 6.5 && type === 'paddy') r.push(tx('govPhPaddy', { v: ph }));
+        if (r.length) return { state: 'yes', text: r.join(' '), acid: ph !== null && ph < 6.5 };
+        if (ph === null && si === null) return { state: 'empty', text: tx('govEmpty'), acid: false };
+        return { state: 'no', text: tx('govNo'), acid: false };
+    }
+    window.CatalogExtras = {
+        season: function () { var m = month(); var d = (SEASON[lang()] || SEASON.ko)[m]; return { month: m, title: d[0], tasks: d[1], eyebrow: tx('seasonEyebrow') }; },
+        govJudge: govJudge,
+        num: num
+    };
+
     function start() {
         var tries = 0;
         (function wait() {

@@ -348,6 +348,19 @@
             .then(check);
     });
 
+    /* 흙 상담 도우미에서 넘어올 때: ?crop=고추&q=질문 으로 미리 채우기 */
+    (function prefill() {
+        var qs;
+        try { qs = new URLSearchParams(location.search); } catch (e) { return; }
+        var crop = qs.get('crop'), q = qs.get('q');
+        if (crop && CROPS.some(function (c) { return c[0] === crop; })) {
+            state.picked = crop;
+            Array.prototype.forEach.call(mini.children, function (x) { x.setAttribute('aria-pressed', String(x.dataset.v === crop)); });
+        }
+        if (q) $('#qna-body').value = q.slice(0, 2000);
+        if (crop || q) { check(); setTimeout(function () { var f = $('[data-qna-form]'); if (f && f.scrollIntoView) f.scrollIntoView({ block: 'start' }); }, 400); }
+    })();
+
     syncLang();
     if (window.CatalogLang) syncLang();
     else window.addEventListener('load', syncLang);
