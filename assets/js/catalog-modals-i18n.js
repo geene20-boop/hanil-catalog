@@ -98,11 +98,11 @@
         sampleAltSuffix: ' 샘플',
 
         vita40Name: '생생비타 40',
-        vitaGoldName: '생생비타 골드',
+        vitaGoldName: '생생비타 올인원',
         vita40SpecLine: 'N-P-K 3-1-1 · 아미노산 20% · 유기물 25%',
         vita40Desc: '식물성 아미노산 17종과 유기물·필수 미량원소를 고농축으로 담아, 생육기 영양 보충과 과실 비대·착색기 영양 관리에 도움을 줍니다.',
-        vitaGoldSpecLine: 'N-P-K 2-1-2 · 식물성 아미노산 15% · 유기물 25%',
-        vitaGoldDesc: '작물의 생장과 뿌리 활력을 돕는 발효 공법 제품으로, 토양관주·엽면시비를 통해 균형 영양 흡수와 토양 미생물 활성화를 지원합니다.',
+        vitaGoldSpecLine: 'N-P-K 2-1-2 · 식물성 아미노산 15% · 유기물 25% · 10kg',
+        vitaGoldDesc: '식물성 아미노산 17종에 미생물·유기물·질소·인산·칼리·미량요소·유황·마그네슘·휴믹산·풀빅산·피친산을 한 통에 담은 올인원 영양제입니다. 토양관주와 엽면시비로 작물의 활력을 높이고 영양 흡수를 도와 품질과 수확량을 높여줍니다.',
         vitaGoldWhyTitle: '왜 선도적인 농가에서 생생비타를 선택할까요?',
         vitaGoldWhyItems: [
             '작물의 생장과 뿌리의 활력을 증진시키는 발효 공법으로 개발한 제품으로 토양관주와 엽면시비를 하면 균형된 영양을 흡수하여 작물 스스로 건강해지는 힘을 키워줍니다.',
@@ -144,7 +144,7 @@
         vitaGoldCompColFunc: '기능성 물질',
         vitaGoldCompFunc: '휴믹산, 풀빅산, 피트산',
         vitaGoldCompGuarantee: '공정규격 보증성분: 수용성 붕소(B) 0.05% 이상, 수용성 몰리브덴(Mo) 0.0005% 이상',
-        vitaGoldDoseTitle: '생생비타골드 – 권장 시비량(예시)',
+        vitaGoldDoseTitle: '생생비타 올인원 – 권장 시비량(예시)',
         vitaGoldDoseH1: '대상작물',
         vitaGoldDoseH2: '사용시기',
         vitaGoldDoseH3: '사용방법',
@@ -165,13 +165,13 @@
         vitaGoldDoseMix1000FoliarEarly: '1리터/물 50말(1톤), 0.5리터/물 25말(500리터)',
         vitaGoldDoseNote: '작물 종류와 생육 단계에 따라 사용량을 조절하여 사용하십시오.',
         vitaGoldDoseHaNote: '1ha(약 3,000평) 기준 관주 참고 사용량: 500배 40~80L, 1,000배 20~40L',
-        vitaGoldTipsTitle: '생생비타골드 – 흡수율을 높이는 현장 사용법',
+        vitaGoldTipsTitle: '생생비타 올인원 – 흡수율을 높이는 현장 사용법',
         vitaGoldTipsItems: [
             '살포 시간: 기공 흡수가 잘 되는 이른 아침이나 해 질 무렵에 살포하십시오.',
             '살포 부위: 기공이 많은 잎 뒷면까지 골고루 묻도록 충분히 살포하십시오.',
             '살포 간격: 생육 최성기에는 7~10일 간격으로 2~3회 연속 관주 또는 살포하십시오.'
         ],
-        vitaGoldCropTableTitle: '생생비타골드 – 적용작물 및 사용방법',
+        vitaGoldCropTableTitle: '생생비타 올인원 – 적용작물 및 사용방법',
         vitaGoldCropColCrop: '작물명',
         vitaGoldCropColTiming: '사용시기',
         vitaGoldCropColFreq: '사용횟수',
@@ -235,7 +235,7 @@
         magSulfurListingColItem: '항목',
         magSulfurListingColDetail: '내용',
 
-        vitaGoldPrecautionTitle: '생생비타골드 사용 및 보관시 주의사항',
+        vitaGoldPrecautionTitle: '생생비타 올인원 사용 및 보관시 주의사항',
         vitaGoldPrecautionItems: [
             '과다 시비는 오히려 작물에 해로울 수 있으니 권장량 준수해 주십시오.',
             '유기물을 함유하여 제품 내부에 미생물이 자연적으로 증식할 경우 미량의 가스가 발생할 수 있습니다. 이로 인해 용기가 부풀어 오르는 현상이 나타날 수 있습니다. 이러한 현상은 제품의 특성상 자연스러운 현상으로 제품의 품질과 효능에는 큰 영향을 미치지 않습니다.',
@@ -388,11 +388,11 @@
         sampleAltSuffix: ' sample',
 
         vita40Name: 'Saengsaeng Vita 40',
-        vitaGoldName: 'Saengsaeng Vita Gold',
+        vitaGoldName: 'Saengsaeng Vita All in One',
         vita40SpecLine: 'N-P-K 3-1-1 · Amino acids 20% · Organic matter 25%',
         vita40Desc: 'A high-concentrate blend of 17 plant amino acids plus organic matter and essential micronutrients to supply nutrients during growth and support fruit sizing and coloring.',
-        vitaGoldSpecLine: 'N-P-K 2-1-2 · Plant amino acids 15% · Organic matter 25%',
-        vitaGoldDesc: 'A fermentation-process product that supports balanced nutrition through soil drench and foliar feeding, helping root vitality and soil microbial activity.',
+        vitaGoldSpecLine: 'N-P-K 2-1-2 · Plant amino acids 15% · Organic matter 25% · 10 kg',
+        vitaGoldDesc: 'An all-in-one nutrient combining 17 plant amino acids with microbes, organic matter, N-P-K, micronutrients, sulfur, magnesium, humic acid, fulvic acid and phytic acid. Applied by soil drench or foliar spray, it boosts crop vitality, improves nutrient uptake, and raises quality and yield.',
         vitaGoldWhyTitle: 'Why leading farms choose Saengsaeng Vita',
         vitaGoldWhyItems: [
             'Developed with a fermentation process that promotes crop growth and root vitality. Soil drench and foliar feeding help crops absorb balanced nutrition and build their own resilience.',
@@ -664,8 +664,7 @@
             이미지: {
                 package_shot: 'assets/img/product-line-01-01.png',
                 sample_shot: 'assets/img/product-line-01-01-sample.png'
-            },
-            MSDS: 'assets/msds/20260130 MSDS-입상규산질(★) Rev.2 (최종).pdf'
+            }
         },
 
         limestone: {
@@ -738,8 +737,7 @@
             이미지: {
                 package_shot: 'assets/img/product-line-01-02.png',
                 sample_shot: 'assets/img/product-line-01-02-sample.jpg'
-            },
-            MSDS: 'assets/msds/20260130 MSDS-입상석회고토(★) Rev.5 (최종).pdf'
+            }
         },
 
         calciumSulfur: {
@@ -1125,8 +1123,7 @@
             이미지: {
                 package_shot: 'assets/img/mag-01.png',
                 sample_shot: 'assets/img/mag-01-sample.png'
-            },
-            MSDS: 'assets/msds/생생황 마그유황칼슘 MSDS 국문.pdf'
+            }
         }
     };
 
@@ -1219,11 +1216,11 @@
         "ctaVitaDilution": "计算田间稀释量",
         "sampleAltSuffix": " 样品",
         "vita40Name": "Saengsaeng Vita 40",
-        "vitaGoldName": "Saengsaeng Vita Gold",
+        "vitaGoldName": "Saengsaeng Vita All in One",
         "vita40SpecLine": "N-P-K 3-1-1 · 氨基酸 20% · 有机质 25%",
         "vita40Desc": "高浓度含有17种植物源氨基酸、有机质和必需微量元素，用于生长期营养补充及果实膨大·着色期的营养管理。",
-        "vitaGoldSpecLine": "N-P-K 2-1-2 · 植物源氨基酸 15% · 有机质 25%",
-        "vitaGoldDesc": "采用发酵工艺，通过灌根和叶面喷施提供均衡营养，帮助根系活力和土壤微生物活性。",
+        "vitaGoldSpecLine": "N-P-K 2-1-2 · 植物源氨基酸 15% · 有机质 25% · 10kg",
+        "vitaGoldDesc": "将17种植物源氨基酸与微生物、有机质、氮磷钾、微量元素、硫、镁、腐植酸、黄腐酸、植酸集于一桶的全效营养肥。通过灌根和叶面喷施增强作物活力、促进养分吸收，提高品质和产量。",
         "vitaGoldWhyTitle": "领先农户为什么选择 Saengsaeng Vita？",
         "vitaGoldWhyItems": [
             "采用促进作物生长和根系活力的发酵工艺开发。通过灌根和叶面喷施，帮助作物吸收均衡营养，增强自身健康生长的能力。",
@@ -1271,7 +1268,7 @@
         "vitaGoldCompColFunc": "功能性物质",
         "vitaGoldCompFunc": "腐植酸、黄腐酸、植酸",
         "vitaGoldCompGuarantee": "保证成分：水溶性硼（B）≥ 0.05%，水溶性钼（Mo）≥ 0.0005%",
-        "vitaGoldDoseTitle": "Saengsaeng Vita Gold – 推荐用量（示例）",
+        "vitaGoldDoseTitle": "Saengsaeng Vita All in One – 推荐用量（示例）",
         "vitaGoldDoseH1": "适用作物",
         "vitaGoldDoseH2": "使用时期",
         "vitaGoldDoseH3": "使用方法",
@@ -1292,13 +1289,13 @@
         "vitaGoldDoseMix1000FoliarEarly": "每吨水1升，每500升水0.5升",
         "vitaGoldDoseNote": "请根据作物种类和生长阶段调整用量。",
         "vitaGoldDoseHaNote": "每公顷灌根参考用量：500倍 40~80升，1,000倍 20~40升",
-        "vitaGoldTipsTitle": "Saengsaeng Vita Gold – 提高吸收率的田间使用方法",
+        "vitaGoldTipsTitle": "Saengsaeng Vita All in One – 提高吸收率的田间使用方法",
         "vitaGoldTipsItems": [
             "喷施时间：请在气孔吸收良好的清晨或傍晚喷施。",
             "喷施部位：充分喷施，使药液均匀覆盖气孔较多的叶片背面。",
             "喷施间隔：生长旺盛期每隔7~10天连续灌根或喷施2~3次。"
         ],
-        "vitaGoldCropTableTitle": "Saengsaeng Vita Gold – 适用作物及使用方法",
+        "vitaGoldCropTableTitle": "Saengsaeng Vita All in One – 适用作物及使用方法",
         "vitaGoldCropColCrop": "作物",
         "vitaGoldCropColTiming": "使用时期",
         "vitaGoldCropColFreq": "使用次数",
@@ -1393,7 +1390,7 @@
         "magSulfurListingTitle": "有机投入品标示事项",
         "magSulfurListingColItem": "项目",
         "magSulfurListingColDetail": "内容",
-        "vitaGoldPrecautionTitle": "Saengsaeng Vita Gold 使用及储存注意事项",
+        "vitaGoldPrecautionTitle": "Saengsaeng Vita All in One 使用及储存注意事项",
         "vitaGoldPrecautionItems": [
             "过量施用反而可能伤害作物，请遵守推荐用量。",
             "本品含有有机质，产品内部微生物自然繁殖时可能产生少量气体，导致容器膨胀。这是产品特性带来的正常现象，对产品品质和效果没有明显影响。",
@@ -2073,11 +2070,11 @@
         "ctaVitaDilution": "Tính lượng pha loãng tại ruộng",
         "sampleAltSuffix": " (mẫu)",
         "vita40Name": "Saengsaeng Vita 40",
-        "vitaGoldName": "Saengsaeng Vita Gold",
+        "vitaGoldName": "Saengsaeng Vita All in One",
         "vita40SpecLine": "N-P-K 3-1-1 · Axit amin 20% · Chất hữu cơ 25%",
         "vita40Desc": "Chứa đậm đặc 17 loại axit amin thực vật, chất hữu cơ và vi lượng thiết yếu, dùng để bổ sung dinh dưỡng trong thời kỳ sinh trưởng và giai đoạn lớn quả · lên màu.",
-        "vitaGoldSpecLine": "N-P-K 2-1-2 · Axit amin thực vật 15% · Chất hữu cơ 25%",
-        "vitaGoldDesc": "Sản phẩm sản xuất bằng công nghệ lên men, cung cấp dinh dưỡng cân đối qua tưới gốc và phun lá, hỗ trợ sức sống của rễ và hoạt động của vi sinh vật đất.",
+        "vitaGoldSpecLine": "N-P-K 2-1-2 · Axit amin thực vật 15% · Chất hữu cơ 25% · 10 kg",
+        "vitaGoldDesc": "Dinh dưỡng toàn diện kết hợp 17 loại axit amin thực vật với vi sinh vật, chất hữu cơ, N-P-K, vi lượng, lưu huỳnh, magie, axit humic, axit fulvic và axit phytic. Dùng tưới gốc hoặc phun lá giúp tăng sức sống cây trồng, cải thiện hấp thu dinh dưỡng, nâng cao chất lượng và năng suất.",
         "vitaGoldWhyTitle": "Vì sao các nông trại tiên tiến chọn Saengsaeng Vita?",
         "vitaGoldWhyItems": [
             "Được phát triển bằng công nghệ lên men thúc đẩy sinh trưởng và sức sống của rễ. Tưới gốc và phun lá giúp cây hấp thu dinh dưỡng cân đối và tăng khả năng tự phát triển khỏe mạnh.",
@@ -2125,7 +2122,7 @@
         "vitaGoldCompColFunc": "Hoạt chất chức năng",
         "vitaGoldCompFunc": "Axit humic, axit fulvic, axit phytic",
         "vitaGoldCompGuarantee": "Thành phần bảo đảm: Bo hòa tan (B) ≥ 0,05%, molypden hòa tan (Mo) ≥ 0,0005%",
-        "vitaGoldDoseTitle": "Saengsaeng Vita Gold – Liều khuyến nghị (ví dụ)",
+        "vitaGoldDoseTitle": "Saengsaeng Vita All in One – Liều khuyến nghị (ví dụ)",
         "vitaGoldDoseH1": "Cây trồng",
         "vitaGoldDoseH2": "Thời điểm",
         "vitaGoldDoseH3": "Cách dùng",
@@ -2146,13 +2143,13 @@
         "vitaGoldDoseMix1000FoliarEarly": "1 L cho 1 tấn nước, 0,5 L cho 500 L nước",
         "vitaGoldDoseNote": "Điều chỉnh liều lượng theo loại cây và giai đoạn sinh trưởng.",
         "vitaGoldDoseHaNote": "Liều tưới gốc tham khảo cho 1 ha: 40–80 L ở tỷ lệ 500 lần, 20–40 L ở tỷ lệ 1.000 lần",
-        "vitaGoldTipsTitle": "Saengsaeng Vita Gold – Mẹo sử dụng giúp tăng hấp thu",
+        "vitaGoldTipsTitle": "Saengsaeng Vita All in One – Mẹo sử dụng giúp tăng hấp thu",
         "vitaGoldTipsItems": [
             "Thời gian phun: phun vào sáng sớm hoặc chiều mát, khi khí khổng hấp thu tốt.",
             "Vị trí phun: phun kỹ để dung dịch phủ đều cả mặt dưới lá, nơi có nhiều khí khổng.",
             "Khoảng cách phun: vào thời kỳ sinh trưởng mạnh, tưới gốc hoặc phun liên tục 2–3 lần, cách nhau 7–10 ngày."
         ],
-        "vitaGoldCropTableTitle": "Saengsaeng Vita Gold – Cây trồng và cách dùng",
+        "vitaGoldCropTableTitle": "Saengsaeng Vita All in One – Cây trồng và cách dùng",
         "vitaGoldCropColCrop": "Cây trồng",
         "vitaGoldCropColTiming": "Thời điểm",
         "vitaGoldCropColFreq": "Số lần",
@@ -2247,7 +2244,7 @@
         "magSulfurListingTitle": "Thông tin ghi nhãn vật tư hữu cơ",
         "magSulfurListingColItem": "Hạng mục",
         "magSulfurListingColDetail": "Nội dung",
-        "vitaGoldPrecautionTitle": "Lưu ý khi sử dụng và bảo quản Saengsaeng Vita Gold",
+        "vitaGoldPrecautionTitle": "Lưu ý khi sử dụng và bảo quản Saengsaeng Vita All in One",
         "vitaGoldPrecautionItems": [
             "Bón quá liều có thể gây hại cho cây, hãy tuân thủ liều khuyến nghị.",
             "Sản phẩm chứa chất hữu cơ nên vi sinh vật có thể phát triển tự nhiên và sinh ra một ít khí, làm phồng bình chứa. Đây là hiện tượng bình thường, không ảnh hưởng đáng kể đến chất lượng và hiệu quả.",

@@ -34,7 +34,7 @@
         return lang === 'en' || lang === 'vi';
     }
 
-    /* Any non-Korean view (English, Chinese, Vietnamese): m², USD, English MSDS */
+    /* Any non-Korean view (English, Chinese, Vietnamese): m², USD */
     function isCatalogIntl() {
         var lang = (window.CatalogLang && CatalogLang.get && CatalogLang.get()) || 'ko';
         return lang !== 'ko';
@@ -48,7 +48,6 @@
         var out = {};
         Object.keys(copy).forEach(function (k) { out[k] = copy[k]; });
         if (pack.이미지) out.이미지 = pack.이미지;
-        if (pack.MSDS) out.MSDS = pack.MSDS;
         if (pack.카테고리) out.카테고리 = pack.카테고리;
         return out;
     }
@@ -262,17 +261,13 @@
             specKey: 'vita40SpecLine',
             descKey: 'vita40Desc',
             packageImage: 'assets/img/vita-40.png',
-            msds: 'assets/msds/MSDS 생생비타 국문(KOR)-2026.05.pdf',
-            msdsEn: 'assets/msds/MSDS SaengSaeng Vita (ENG)-2025.03.pdf',
             showDilutionCta: true
         },
         vitaGold: {
             nameKey: 'vitaGoldName',
             specKey: 'vitaGoldSpecLine',
             descKey: 'vitaGoldDesc',
-            packageImage: 'assets/img/vita-01.png',
-            msds: 'assets/msds/MSDS 생생비타 국문(KOR)-2026.05.pdf',
-            msdsEn: 'assets/msds/MSDS SaengSaeng Vita (ENG)-2025.03.pdf',
+            packageImage: 'assets/img/vita-allinone.png',
             showDilutionCta: false
         }
     };
@@ -281,7 +276,6 @@
         var meta = VITA_PRODUCT_META[productKey] || VITA_PRODUCT_META.vita40;
         var productName = tUi(meta.nameKey);
         var nameTight = String(productName || '').replace(/\s+/g, '');
-        var msdsHref = encodeAssetUrl(isCatalogIntl() && meta.msdsEn ? meta.msdsEn : meta.msds);
         var dilutionCtaHtml = meta.showDilutionCta
             ? '\
     <div class="vita-cta-wrap">\
@@ -295,10 +289,6 @@
         <div class="flex-1 min-w-0 pt-1">\
             <p class="m-0 text-[14px] font-semibold text-[#8B95A1]">' + tUi(meta.specKey) + '</p>\
             <p class="mt-4 text-[17px] font-medium leading-relaxed text-[#4E5968]">' + tUi(meta.descKey) + '</p>\
-            <a href="' + msdsHref + '" target="_blank" rel="noopener noreferrer" class="mt-5 inline-flex items-center gap-2 h-11 px-4 rounded-[12px] bg-[#191F28] text-white text-[14px] font-bold no-underline transition-colors hover:bg-[#111111]">\
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>\
-                ' + tUi('msdsDownload') + '\
-            </a>\
         </div>\
         <div class="w-full sm:w-[188px] shrink-0 rounded-[16px] bg-[#F2F4F6] p-5 box-border">\
             <img src="' + R + meta.packageImage + '" alt="' + productName + '" class="w-full h-auto object-contain mx-auto max-h-[200px]">\
@@ -931,7 +921,6 @@
     function buildVitaGoldProductDetailHtml() {
         var meta = VITA_PRODUCT_META.vitaGold;
         var productName = tUi(meta.nameKey);
-        var msdsHref = encodeAssetUrl(isCatalogIntl() && meta.msdsEn ? meta.msdsEn : meta.msds);
         var rootClass = 'space-y-9 vita-gold-detail' + (isCatalogLatin() ? ' vita-gold-detail--en' : '');
         return '' +
             '<div class="' + rootClass + '">' +
@@ -939,10 +928,6 @@
                     '<div class="flex-1 min-w-0 pt-1">' +
                         '<p class="m-0 text-[14px] font-semibold text-[#8B95A1]">' + tUi(meta.specKey) + '</p>' +
                         '<p class="mt-4 text-[17px] font-medium leading-relaxed text-[#4E5968]">' + tUi(meta.descKey) + '</p>' +
-                        '<a href="' + msdsHref + '" target="_blank" rel="noopener noreferrer" class="mt-5 inline-flex items-center gap-2 h-11 px-4 rounded-[12px] bg-[#191F28] text-white text-[14px] font-bold no-underline transition-colors hover:bg-[#111111]">' +
-                            '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>' +
-                            tUi('msdsDownload') +
-                        '</a>' +
                     '</div>' +
                     '<div class="w-full sm:w-[188px] shrink-0 rounded-[16px] bg-[#F2F4F6] p-5 box-border">' +
                         '<img src="' + R + meta.packageImage + '" alt="' + escapeHtml(productName) + '" class="w-full h-auto object-contain mx-auto max-h-[200px]">' +
@@ -994,7 +979,6 @@
         var specs = Array.isArray(data.규격) ? data.규격 : [];
         var packageShot = data.이미지 && data.이미지.package_shot ? R + data.이미지.package_shot : '';
         var sampleShot = data.이미지 && data.이미지.sample_shot ? R + data.이미지.sample_shot : '';
-        var msdsHref = data.MSDS ? encodeAssetUrl(data.MSDS) : '';
         var specCols = specs.length === 2
             ? 'grid-cols-1 sm:grid-cols-2'
             : (specs.length >= 4
@@ -1033,12 +1017,6 @@
             ? '<img src="' + sampleShot + '" alt="' + escapeHtml(data.제품명) + escapeHtml(tUi('sampleAltSuffix')) + '" class="soil-sample-shot">'
             : '';
 
-        var msdsButton = msdsHref
-            ? '<a href="' + msdsHref + '" target="_blank" rel="noopener noreferrer" class="mt-5 inline-flex items-center gap-2 h-11 px-4 rounded-[12px] bg-[#191F28] text-white text-[14px] font-bold no-underline transition-colors hover:bg-[#111111]">' +
-                '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>' +
-                tUi('msdsDownload') +
-              '</a>'
-            : '';
 
         return '' +
             '<div class="space-y-9">' +
@@ -1048,7 +1026,6 @@
                         (data.공시번호
                             ? '<p class="m-0 mt-3 text-[15px] font-bold text-[#154624]">' + escapeHtml(data.공시번호) + '</p>'
                             : '') +
-                        msdsButton +
                     '</div>' +
                     '<div class="soil-package-wrap relative w-full sm:w-[188px] shrink-0 rounded-[16px] bg-[#F2F4F6] p-5 box-border">' +
                         packageBlock +

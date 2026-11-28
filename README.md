@@ -13,7 +13,6 @@
 | `export/` | 글로벌 수출 제품 |
 | `contactus/` | 상담문의 |
 | `assets/js/` | 언어 전환(`catalog-lang.js`), 상세 창과 계산기(`catalog-modals.js`, `catalog-modals-i18n.js`) |
-| `assets/msds/` | 제품별 MSDS(물질안전보건자료) PDF |
 | `assets/img/`, `assets/video/` | 이미지와 인트로 영상 |
 
 ## 문구 수정 위치

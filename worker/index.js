@@ -26,7 +26,7 @@ const PRODUCTS = {
   'organic-limestone': '생생나라 석회고토',
   'organic-mag-sulfur': '생생황 마그유황칼슘',
   'vita-40': '생생비타 40',
-  'vita-gold': '생생비타 골드'
+  'vita-gold': '생생비타 올인원'
 };
 // 비료관리법상 비료 광고에 쓸 수 없는 표현 (답변 게시 전 차단)
 const BANNED = ['방제', '예방', '치료', '살균', '살충', '특효', '완치', '100%'];
