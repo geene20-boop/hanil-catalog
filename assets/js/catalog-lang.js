@@ -386,7 +386,7 @@
 
             /* ── Facility ───────────────────────────────────────────── */
             'facility.eyebrow': 'Manufacturing Facility',
-            'facility.title': '최첨단 원스톱 비료 생산 설비 현장',
+            'facility.title': '원스톱 비료 생산 설비 현장',
             'facility.desc': '원료 입고 사일로, 배합 호퍼, <br> 과립 성형 드럼 및 자동 로봇 적재 포장기까지 전 과정을 자동화하였습니다.',
             'facility.item1Tag': '01 원료 사일로',
             'facility.item1Title': '대용량 원료 저장 사일로 및 이송 라인',
@@ -846,7 +846,7 @@
 
             /* ── Facility ───────────────────────────────────────────── */
             'facility.eyebrow': 'Manufacturing Facility',
-            'facility.title': 'A state-of-the-art, <br> one-stop fertilizer production site',
+            'facility.title': 'A one-stop <br> fertilizer production site',
             'facility.desc': 'Every step is automated, from intake silos and blending hoppers to granulating drums and automatic robot palletizing.',
             'facility.item1Tag': '01 Raw material silo',
             'facility.item1Title': 'High-capacity raw material silos and transfer lines',
@@ -1273,7 +1273,7 @@
             "guide.tip4Title": "土壤检测",
             "guide.tip4Desc": "过量施用可能导致微量元素 <br> 缺乏和<b>拮抗作用</b>",
             "facility.eyebrow": "Manufacturing Facility",
-            "facility.title": "先进的 <br> 一站式肥料生产现场",
+            "facility.title": "一站式 <br> 肥料生产现场",
             "facility.desc": "从原料入库筒仓、配料料斗、造粒转鼓到机器人自动码垛包装，全过程实现自动化。",
             "facility.item1Tag": "01 原料筒仓",
             "facility.item1Title": "大容量原料储存筒仓及输送线",
@@ -1690,7 +1690,7 @@
             "guide.tip4Title": "Phân tích đất",
             "guide.tip4Desc": "Bón quá liều có thể gây thiếu vi lượng <br> và <b>hiện tượng đối kháng</b>",
             "facility.eyebrow": "Manufacturing Facility",
-            "facility.title": "Nhà máy sản xuất phân bón <br> khép kín hiện đại",
+            "facility.title": "Nhà máy sản xuất phân bón <br> khép kín",
             "facility.desc": "Toàn bộ quy trình từ silo tiếp nhận nguyên liệu, phễu định lượng, trống tạo hạt đến xếp pallet bằng robot và đóng gói đều được tự động hóa.",
             "facility.item1Tag": "01 Silo nguyên liệu",
             "facility.item1Title": "Silo chứa nguyên liệu dung tích lớn và tuyến vận chuyển",
