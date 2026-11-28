@@ -16,6 +16,33 @@
         <link rel="stylesheet" href="../assets/css/header.css">
         <link rel="stylesheet" href="../assets/css/catalog-gsap.css">
         <style>
+            /* 공장 전경 사진: 원본 크기(640px)보다 크게 늘리지 않아 흐려지지 않게 표시 */
+            .pre-reveal__media img.greeting-photo {
+                position: absolute;
+                top: 150px;
+                left: 40px;
+                right: 90px;
+                margin: 0 auto;
+                width: calc(100% - 130px);
+                max-width: 640px;
+                height: auto;
+                object-fit: contain;
+                border-radius: 20px;
+                box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
+            }
+            @media (max-width: 767px) {
+                .pre-reveal__media img.greeting-photo {
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    width: 100%;
+                    max-width: none;
+                    height: 100%;
+                    object-fit: cover;
+                    border-radius: 0;
+                    box-shadow: none;
+                }
+            }
             .greeting-letter ::selection {
                 background: #B0C45F;
                 color: #133E20;
@@ -81,7 +108,7 @@
                     </div>
                     <div class="pre-reveal col-span-1 relative min-h-screen max-md:min-h-0 max-md:h-auto max-md:aspect-video max-md:w-full max-md:order-1" data-gsap-reveal>
                         <div class="pre-reveal__media absolute inset-0" data-gsap-reveal-media>
-                            <img src="../assets/img/company-factory.jpg" alt="(주)한일씨앤에스 공장 전경" class="absolute inset-0 w-full h-full object-cover object-[68%_center]">
+                            <img src="../assets/img/company-factory.jpg" alt="(주)한일씨앤에스 공장 전경" class="greeting-photo">
                         </div>
                         <div class="pre-reveal__curtain" data-gsap-reveal-curtain aria-hidden="true" style="background:#133E20;"></div>
                     </div>
