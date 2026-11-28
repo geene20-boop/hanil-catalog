@@ -54,6 +54,21 @@
                     </div>
                 </div>
                 <div class='boundary w-[90%] max-md:w-[94%] max-w-[1600px] min-[1921px]:max-w-[2000px] mx-auto mb-[50px]'>
+                    <section class="company-film gsap-hide" data-gsap-fade aria-labelledby="plant-film-title">
+                        <div>
+                            <p class="company-film__ey" data-i18n="plantFilm.eyebrow">생산 현장 영상</p>
+                            <h3 class="company-film__title" id="plant-film-title" data-i18n="plantFilm.title">포장부터 출하까지, 한일씨앤에스 생산 현장</h3>
+                            <p class="company-film__desc" data-i18n="plantFilm.desc">자동 포장라인에서 포장된 제품이 적재되고, 트럭에 실려 농가로 출하되는 과정을 영상으로 확인하세요.</p>
+                            <span class="company-film__chip" data-i18n="plantFilm.chip">15초 영상</span>
+                        </div>
+                        <button type="button" class="company-film__player" data-film-src="../assets/video/plant-film.mp4" aria-label="생산 현장 영상 재생" data-i18n-aria="plantFilm.playAria">
+                            <img src="../assets/img/plant-film.jpg" alt="" loading="lazy" width="1280" height="720">
+                            <span class="company-film__shade" aria-hidden="true"><span class="company-film__btn"><svg viewBox="0 0 24 24" fill="#fff"><path d="M7 4v16l13-8z"/></svg></span></span>
+                            <span class="company-film__cap" aria-hidden="true" data-i18n="film.play">영상 보기</span>
+                        </button>
+                    </section>
+                </div>
+                <div class='boundary w-[90%] max-md:w-[94%] max-w-[1600px] min-[1921px]:max-w-[2000px] mx-auto mb-[50px]'>
                     <div class='grid grid-cols-3 max-[1360px]:grid-cols-2 max-md:grid-cols-1 w-full gap-[30px]'>
                         <div class='gsap-hide col-span-1 bg-white rounded-[20px] overflow-hidden p-[10px] grid grid-cols-2 max-md:grid-cols-1' data-gsap-card>
                             <div class='img-wrap rounded-[10px] overflow-hidden max-md:aspect-[4/3]'>
@@ -143,6 +158,7 @@
                 </div>    
             </main>
         </div>
+        <script src="../assets/js/catalog-video.js"></script>
     </body>
 </html>
 
